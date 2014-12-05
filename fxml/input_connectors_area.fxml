@@ -1,0 +1,54 @@
+<?import vbb.digital_trainer.ConnectorControl?>
+<?import vbb.digital_trainer.SwitchControl?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<HBox xmlns:fx="http://javafx.com/javafx" spacing="14">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <VBox spacing="23">
+        <padding>
+            <Insets top="10" right="10" bottom="11" left="10"/>
+        </padding>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+    </VBox>
+    <VBox spacing="23">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+        <SwitchControl/>
+    </VBox>
+</HBox>
+<!--<GridPane xmlns:fx="http://javafx.com/javafx" hgap="34" vgap="23">
+    <ConnectorControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <SwitchControl GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>-->

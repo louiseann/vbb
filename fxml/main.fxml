@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/javafx" minWidth="1280" minHeight="730">
+    <left>
+        <fx:include source="tools.fxml"/>
+    </left>
+    <center>
+        <fx:include source="digital_trainer_board.fxml"/>
+    </center>
+    <right>
+        <fx:include source="truth_table_generator.fxml" />
+    </right>
+</BorderPane>

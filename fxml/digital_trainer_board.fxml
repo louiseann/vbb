@@ -1,0 +1,7 @@
+<?import javafx.scene.layout.HBox?>
+<HBox xmlns:fx="http://javafx.com/javafx"
+      prefWidth="540" prefHeight="730"
+      minWidth="540" minHeight="730"
+      maxWidth="540" maxHeight="730">
+
+</HBox>

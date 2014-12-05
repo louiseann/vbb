@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.Button?>
+
+<VBox id="tools_area"
+      fx:controller="vbb.digital_trainer.ToolsController"
+      xmlns:fx="http://javafx.com/fxml"
+      snapToPixel="true"
+      prefWidth="120" prefHeight="730"
+      minWidth="120"
+      alignment="CENTER"
+      styleClass="vbox">
+
+    <ImageView id="tools_topBar">
+        <image>
+            <Image url="/vbb/images/bars.png"/>
+        </image>
+    </ImageView>
+
+    <GridPane snapToPixel="true"
+              hgap="10" vgap="2"
+              alignment="CENTER">
+
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="0" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="3" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="3" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="4" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="5" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="5" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="6" GridPane.columnIndex="0">
+            <Label text="AND" />
+            <Label text="7408" />
+        </VBox>
+        <Button styleClass="chip"
+                prefHeight="69" minHeight="69" maxHeight="69"
+                prefWidth="49" minWidth="49" maxWidth="49"
+                GridPane.rowIndex="6" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/images/chip.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+    </GridPane>
+
+    <Rectangle width="90" height="1"/>
+
+    <Button styleClass="tool"
+            prefHeight="35" minHeight="35" maxHeight="35"
+            prefWidth="45" minWidth="45" maxWidth="45">
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="@/vbb/images/wire.png"/>
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <GridPane hgap="3" vgap="3" alignment="CENTER" fx:id="a">
+        <Rectangle width="25" height="25" fill="#ff0000"
+                   GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="25" height="25" fill="#00ffff"
+                   GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Rectangle width="25" height="25" fill="#006a25"
+                   GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Rectangle width="25" height="25" fill="#e8641b"
+                   GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Rectangle width="25" height="25" fill="#ffff00"
+                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Rectangle width="25" height="25" fill="#0000ff"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Rectangle width="25" height="25" fill="#e10052"
+                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Rectangle width="25" height="25" fill="#5b3715"
+                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Rectangle width="25" height="25" fill="#00ff00"
+                   GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Rectangle width="25" height="25" fill="#ff00ff"
+                   GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <Rectangle width="25" height="25" fill="#00a49d"
+                   GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <Rectangle width="25" height="25" fill="#67087b"
+                   GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+    </GridPane>
+
+    <stylesheets>
+        <URL value="@/vbb/css/tools_style.css"/>
+    </stylesheets>
+
+</VBox>

@@ -1,0 +1,26 @@
+<?import javafx.scene.layout.GridPane?>
+<?import vbb.digital_trainer.ConnectorControl?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns:fx="http://javafx.com/javafx" hgap="34" vgap="13">
+    <padding>
+        <Insets top="10" right="30" bottom="10" left="45"/>
+    </padding>
+
+    <ConnectorControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <ConnectorControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <Circle radius="10" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>
