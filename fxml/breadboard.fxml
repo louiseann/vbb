@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.shape.Rectangle?>
-<HBox xmlns:fx="http://javafx.com.javafx"
-      fx:controller="vbb.digital_trainer.BreadboardController"
+
+<fx:root type="javafx.scene.layout.HBox"
+         xmlns:fx="http://javafx.com.javafx"
       prefWidth="250" prefHeight="682"
       minWidth="250" minHeight="682"
       maxWidth="250" maxHeight="682">
@@ -12,6 +12,8 @@
     <GridPane fx:id="colConnectedLeftGroup"
               hgap="5" vgap="4"
               alignment="CENTER">
+        <!--<Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
     </GridPane>
 
     <Rectangle width="2" height="682"/>
@@ -19,6 +21,11 @@
     <GridPane fx:id="rowConnectedLeftGroup"
               hgap="5" vgap="4"
               alignment="CENTER">
+        <!--<Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="4"/>-->
     </GridPane>
 
     <Rectangle width="9" height="682" fill="aqua"/>
@@ -26,6 +33,11 @@
     <GridPane fx:id="rowConnectedRightGroup"
               hgap="5" vgap="4"
               alignment="CENTER">
+        <!--<Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="4"/>-->
     </GridPane>
 
     <Rectangle width="2" height="682"/>
@@ -33,5 +45,7 @@
     <GridPane fx:id="colConnectedRightGroup"
               hgap="5" vgap="4"
               alignment="CENTER">
+        <!--<Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
     </GridPane>
-</HBox>
+</fx:root>

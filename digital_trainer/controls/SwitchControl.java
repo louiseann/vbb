@@ -1,15 +1,10 @@
-package vbb.digital_trainer;
+package vbb.digital_trainer.controls;
 
-import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -23,7 +18,7 @@ public class SwitchControl extends StackPane
 
     public SwitchControl()
     {
-        FXMLLoader switchLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/switch.fxml"));
+        FXMLLoader switchLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/custom_control/switch.fxml"));
         switchLoader.setRoot(this);
         switchLoader.setController(this);
 

@@ -5,17 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import vbb.digital_trainer.BreadboardController;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/output_connectors_area.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/digital_trainer_board.fxml"));
         primaryStage.setTitle("Hello World");
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();

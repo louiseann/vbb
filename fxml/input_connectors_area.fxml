@@ -1,15 +1,20 @@
-<?import vbb.digital_trainer.ConnectorControl?>
-<?import vbb.digital_trainer.SwitchControl?>
+<?import vbb.digital_trainer.controls.ConnectorControl?>
+<?import vbb.digital_trainer.controls.SwitchControl?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-<HBox xmlns:fx="http://javafx.com/javafx" spacing="14">
+
+<HBox xmlns:fx="http://javafx.com/javafx" spacing="19"
+      styleClass="connector_group"
+      stylesheets="/vbb/css/connectors_style.css">
+
     <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
+        <Insets top="10" right="14" bottom="10" left="45"/>
     </padding>
-    <VBox spacing="23">
+
+    <VBox spacing="24">
         <padding>
-            <Insets top="10" right="10" bottom="11" left="10"/>
+            <Insets top="10" bottom="10"/>
         </padding>
         <ConnectorControl/>
         <ConnectorControl/>
@@ -20,9 +25,10 @@
         <ConnectorControl/>
         <ConnectorControl/>
     </VBox>
-    <VBox spacing="23">
+
+    <VBox spacing="24">
         <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
+            <Insets top="10" right="15" bottom="10" left="15"/>
         </padding>
         <SwitchControl/>
         <SwitchControl/>
@@ -33,6 +39,7 @@
         <SwitchControl/>
         <SwitchControl/>
     </VBox>
+
 </HBox>
 <!--<GridPane xmlns:fx="http://javafx.com/javafx" hgap="34" vgap="23">
     <ConnectorControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>

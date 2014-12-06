@@ -1,10 +1,15 @@
 <?import javafx.scene.layout.GridPane?>
-<?import vbb.digital_trainer.ConnectorControl?>
+<?import vbb.digital_trainer.controls.ConnectorControl?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.geometry.Insets?>
-<GridPane xmlns:fx="http://javafx.com/javafx" hgap="34" vgap="13">
+
+<GridPane xmlns:fx="http://javafx.com/javafx"
+          hgap="35" vgap="14"
+          styleClass="connector_group"
+          stylesheets="/vbb/css/connectors_style.css">
+
     <padding>
-        <Insets top="10" right="30" bottom="10" left="45"/>
+        <Insets top="14" right="30" bottom="14" left="45"/>
     </padding>
 
     <ConnectorControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -23,4 +28,5 @@
     <Circle radius="10" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
     <ConnectorControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
     <Circle radius="10" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
 </GridPane>
