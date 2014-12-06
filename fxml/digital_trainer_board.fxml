@@ -1,10 +1,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import vbb.digital_trainer.controllers.BreadboardController?>
 <?import vbb.digital_trainer.controls.BreadboardControl?>
 <HBox xmlns:fx="http://javafx.com/javafx"
-      fx:id="digitalTrainer"
-      fx:controller="vbb.digital_trainer.controllers.DigitalTrainerController"
       prefWidth="540" prefHeight="730"
       minWidth="540" minHeight="730"
       maxWidth="540" maxHeight="730">

@@ -25,11 +25,13 @@ public class BreadboardControl extends HBox
     @FXML
     private GridPane rowConnectedRightGroup;
 
+    private IntegerProperty width = new SimpleIntegerProperty();
+    private IntegerProperty height = new SimpleIntegerProperty();
     private IntegerProperty row = new SimpleIntegerProperty();
 
     public BreadboardControl()
     {
-        FXMLLoader breadboardLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/breadboard.fxml"));
+        FXMLLoader breadboardLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/custom_control/breadboard.fxml"));
         breadboardLoader.setRoot(this);
         breadboardLoader.setController(this);
 
@@ -44,11 +46,6 @@ public class BreadboardControl extends HBox
     private void initialize()
     {
         createSocketHoles();
-    }
-
-    public void setBreadboardSize(int width, int height)
-    {
-        this.setPrefSize(width, height);
     }
 
     public void setRow(int row)
@@ -71,7 +68,7 @@ public class BreadboardControl extends HBox
         addSocketHole(colConnectedLeftGroup, 2);
         addSocketHole(colConnectedRightGroup, 2);
         addSocketHole(rowConnectedLeftGroup, 5);
-        addSocketHole(rowConnectedLeftGroup, 5);
+        addSocketHole(rowConnectedRightGroup, 5);
     }
 
     private void addSocketHole(GridPane socketHolesGroup, int cols)

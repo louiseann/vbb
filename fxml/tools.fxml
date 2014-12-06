@@ -10,7 +10,6 @@
 <?import javafx.scene.control.Button?>
 
 <VBox id="tools_area"
-      fx:controller="vbb.digital_trainer.controllers.ToolsController"
       xmlns:fx="http://javafx.com/fxml"
       snapToPixel="true"
       prefWidth="120" prefHeight="730"

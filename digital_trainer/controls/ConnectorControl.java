@@ -25,7 +25,8 @@ public class ConnectorControl extends StackPane
         }
     }
 
-    @FXML public void handleMouseClick(MouseEvent event)
+    @FXML
+    public void handleMouseClick(MouseEvent event)
     {
         System.out.println("Clicked!");
     }
