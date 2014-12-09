@@ -14,7 +14,6 @@
       snapToPixel="true"
       prefWidth="120" prefHeight="730"
       minWidth="120"
-      alignment="CENTER"
       styleClass="vbox">
 
     <ImageView id="tools_topBar">
@@ -148,7 +147,7 @@
 
     </GridPane>
 
-    <Rectangle width="90" height="1"/>
+    <Rectangle width="90" height="1" styleClass="divider"/>
 
     <Button styleClass="tool"
             prefHeight="35" minHeight="35" maxHeight="35"

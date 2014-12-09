@@ -1,72 +1,58 @@
-.gridpane {
-    -fx-hgap: 10px;
-    -fx-vgap: 10px;
-    -fx-background-color: rgb(242,241,240);
-    -fx-alignment: bottom-center;
-    -fx-padding: 0 15 10 15;
-}
-
-.gridpane .btn {
-    -fx-pref-height: 30;
-    -fx-pref-width: 125;
-}
-
-.grid1 {
+#tt_generator_area {
     -fx-alignment: top-center;
-    -fx-padding: 15 15 15 15;
-    -fx-background-color: rgb(242,241,240);
+    -fx-background-color: #ffffff;
 }
 
-.grid1 .textfield {
-    -fx-pref-height: 50;
-    -fx-pref-width: 400;
+#title_bar {
+    -fx-fill: #525049;
 }
 
-.hbox .btn2 {
-    -fx-pref-height: 30;
-    -fx-pref-width: 57;
+#title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff;
 }
 
-.hbox1 .btn3 {
-    -fx-pref-height: 30;
-    -fx-pref-width: 57;
+.calc_like_interface {
+    -fx-alignment: top-center;
+    -fx-hgap: 9px;
+    -fx-vgap: 8px;
+    -fx-background-color: #f2f1f0;
+    -fx-padding: 12 20 12 20;
 }
 
-.hbox {
-    -fx-alignment: bottom-left;
-    -fx-padding: 0 45 0 0;
+#exp_field {
+    -fx-pref-height: 60px;
+    -fx-background-radius: 0 0 0 0;
+    -fx-border-color: #cecbc8;
+    -fx-border-width: 1px;
 }
 
-.hbox1 {
-    -fx-alignment: bottom-right;
-    -fx-padding: 0 0 0 45;
+#exp_field:focused {
+    -fx-background-insets: 0, 0, 1, 1;
 }
 
-.hbox2 {
-    -fx-alignment: bottom-center;
-    -fx-padding: 0 15 15 15;
-    -fx-background-color: rgb(242,241,240);
-
+.button {
+    -fx-background-color: #f6f5f5;
+    -fx-border-radius: 2 2 2 2;
+    -fx-border-color: #b7b7b7;
+    -fx-border-width: 1px;
 }
 
-.hbox2 .grid {
-    -fx-vgap: 10px;
-    -fx-hgap: 10px;
-    -fx-alignment: bottom-center;
+.button:hover {
+    -fx-border-color: #000000;
 }
 
-.hbox2 .btn {
-    -fx-pref-height: 30;
-    -fx-pref-width: 125;
-    -fx-text-alignment: center;
+.button_op {
+    -fx-pref-width: 125px;
+    -fx-pref-height: 30px;
 }
 
-.hbox2 .grid2 {
-    -fx-padding: 0 0 0 10;
+.button_erase {
+    -fx-pref-width: 57px;
+    -fx-pref-height: 30px;
 }
 
-.grid2 .bigBtn {
-    -fx-alignment: top-right;
-    -fx-pref-width: 125;
-    -fx-pref-height: 70;
+#button_generate {
+    -fx-pref-width: 125px;
+    -fx-pref-height: 70px;
 }

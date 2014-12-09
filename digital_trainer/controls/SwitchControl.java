@@ -16,19 +16,6 @@ public class SwitchControl extends StackPane
     @FXML private Rectangle box;
     @FXML private Rectangle toggle;
 
-    public SwitchControl()
-    {
-        FXMLLoader switchLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/custom_control/switch.fxml"));
-        switchLoader.setRoot(this);
-        switchLoader.setController(this);
-
-        try {
-            switchLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-    }
-
     @FXML
     public void toggleSwitch(MouseEvent event)
     {

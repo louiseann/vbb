@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import vbb.digital_trainer.controls.DataSwitchControl?>
 <HBox xmlns:fx="http://javafx.com/javafx" spacing="19"
-      styleClass="connector_group"
-      stylesheets="/vbb/css/connectors_style.css">
+      styleClass="area">
 
     <padding>
         <Insets top="10" right="14" bottom="10" left="45"/>
@@ -26,18 +26,18 @@
         <ConnectorControl/>
     </VBox>
 
-    <VBox spacing="24">
+    <VBox spacing="24" styleClass="switch_box">
         <padding>
             <Insets top="10" right="15" bottom="10" left="15"/>
         </padding>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
-        <SwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
     </VBox>
 
 </HBox>

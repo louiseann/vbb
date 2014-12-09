@@ -6,27 +6,26 @@
 <?import javafx.geometry.Insets?>
 <fx:root type="javafx.scene.layout.HBox"
          xmlns:fx="http://javafx.com.javafx"
-         prefWidth="250" prefHeight="682"
-         spacing="12">
+         prefWidth="250" prefHeight="700"
+         spacing="12"
+         id="breadboard">
 
     <padding>
         <Insets top="12" right="12" bottom="12" left="12"/>
     </padding>
 
     <GridPane fx:id="colConnectedLeftGroup"
-              hgap="5" vgap="4"
-              alignment="CENTER">
+              hgap="4" vgap="4">
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         -->
     </GridPane>
 
-    <Rectangle width="2" height="682"/>
+    <Rectangle width="2" height="700" styleClass="breadboard_divider"/>
 
     <GridPane fx:id="rowConnectedLeftGroup"
-              hgap="5" vgap="4"
-              alignment="CENTER">
+              hgap="4" vgap="4">
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
@@ -36,11 +35,10 @@
         -->
     </GridPane>
 
-    <Rectangle width="9" height="682"/>
+    <Rectangle width="9" height="700" styleClass="breadboard_divider"/>
 
     <GridPane fx:id="rowConnectedRightGroup"
-              hgap="5" vgap="4"
-              alignment="CENTER">
+              hgap="4" vgap="4">
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
@@ -50,11 +48,10 @@
         -->
     </GridPane>
 
-    <Rectangle width="2" height="682"/>
+    <Rectangle width="2" height="700" styleClass="breadboard_divider"/>
 
     <GridPane fx:id="colConnectedRightGroup"
-              hgap="5" vgap="4"
-              alignment="CENTER">
+              hgap="4" vgap="4">
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>

@@ -1,5 +1,10 @@
 #tools_area {
-    -fx-background-color: rgb(242, 241, 240);
-    /*-fx-padding: 10px;
-    -fx-alignment: center;*/
+    -fx-background-color: #f2f1f0;
+    -fx-alignment: top-center;
+    -fx-spacing: 10px;
+    -fx-padding: 5px;
+}
+
+.divider {
+    -fx-fill: #cecbc8;
 }

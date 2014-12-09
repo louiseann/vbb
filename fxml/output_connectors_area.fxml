@@ -5,28 +5,27 @@
 
 <GridPane xmlns:fx="http://javafx.com/javafx"
           hgap="35" vgap="14"
-          styleClass="connector_group"
-          stylesheets="/vbb/css/connectors_style.css">
+          styleClass="area">
 
     <padding>
         <Insets top="14" right="30" bottom="14" left="45"/>
     </padding>
 
     <ConnectorControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="led"/>
     <ConnectorControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    <Circle radius="10" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="led"/>
 
 </GridPane>

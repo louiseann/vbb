@@ -25,8 +25,6 @@ public class BreadboardControl extends HBox
     @FXML
     private GridPane rowConnectedRightGroup;
 
-    private IntegerProperty width = new SimpleIntegerProperty();
-    private IntegerProperty height = new SimpleIntegerProperty();
     private IntegerProperty row = new SimpleIntegerProperty();
 
     public BreadboardControl()
@@ -45,6 +43,7 @@ public class BreadboardControl extends HBox
     @FXML
     private void initialize()
     {
+        setRow(64);
         createSocketHoles();
     }
 
@@ -65,20 +64,65 @@ public class BreadboardControl extends HBox
 
     private void createSocketHoles()
     {
-        addSocketHole(colConnectedLeftGroup, 2);
-        addSocketHole(colConnectedRightGroup, 2);
-        addSocketHole(rowConnectedLeftGroup, 5);
-        addSocketHole(rowConnectedRightGroup, 5);
+        addColumnConnectedHoles(colConnectedLeftGroup);
+        addColumnConnectedHoles(colConnectedRightGroup);
+        addRowConnectedHoles(rowConnectedLeftGroup);
+        addRowConnectedHoles(rowConnectedRightGroup);
     }
 
-    private void addSocketHole(GridPane socketHolesGroup, int cols)
+    private Rectangle createHole()
     {
-        for(int x = 0; x < 64; x++)
+        Rectangle socketHole = new Rectangle(7, 7);
+        socketHole.setStyle("-fx-fill: #212121;");
+        return socketHole;
+    }
+
+    private Rectangle createSpace()
+    {
+        Rectangle socketHole = new Rectangle(7, 7);
+        socketHole.setStyle("-fx-fill: #ffffff;");
+        return socketHole;
+    }
+
+    private void addColumnConnectedHoles(GridPane twoColGroup)
+    {
+        for(int x = 0; x < 64;)
         {
-            for(int y = 0; y < cols; y++)
+            if(x == 0 || x == 1 || x == getRow()/2 || x == getRow()-1)
             {
-                Rectangle socketHole = new Rectangle(7, 7, Color.BLACK);
-                socketHolesGroup.add(socketHole, y, x);
+                for(int y = 0; y < 2; y++)
+                {
+                    twoColGroup.add(createSpace(), y, x);
+                }
+                x++;
+            }
+
+            else
+            {
+                for (int r = 0; r < 5; r++)
+                {
+                    for (int y = 0; y < 2; y++)
+                    {
+                        twoColGroup.add(createHole(), y, x);
+                    }
+                    x++;
+                }
+                for(int y = 0; y < 2; y++)
+                {
+                    twoColGroup.add(createSpace(), y, x);
+                }
+                x++;
+            }
+        }
+    }
+
+    private void addRowConnectedHoles(GridPane socketHolesGroup)
+    {
+        for(int x = 0; x < getRow(); x++)
+        {
+            for(int y = 0; y < 5; y++)
+            {
+                socketHolesGroup.add(createHole(), y, x);
             }
         }
     }

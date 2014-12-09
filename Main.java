@@ -12,7 +12,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/digital_trainer_board.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
         primaryStage.setTitle("Hello World");
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();

@@ -14,7 +14,7 @@ public class ConnectorControl extends StackPane
 {
     public ConnectorControl()
     {
-        FXMLLoader connectorLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/custom_control/io_connector.fxml"));
+        FXMLLoader connectorLoader = new FXMLLoader(getClass().getResource("/vbb/fxml/custom_control/dt_board_connector.fxml"));
         connectorLoader.setRoot(this);
         connectorLoader.setController(this);
 

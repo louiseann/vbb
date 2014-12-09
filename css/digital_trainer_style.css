@@ -1,0 +1,42 @@
+#digital_trainer_board {
+    -fx-background-color: #facd8a;
+}
+
+.area {
+    -fx-border-color: #000000;
+    -fx-border-width: 3px;
+}
+
+#breadboard {
+    -fx-background-color: #ffffff;
+}
+
+.breadboard_divider {
+    -fx-fill: #c1c1c1;
+}
+
+.connector_outer_circle {
+    -fx-fill: #a06700;
+}
+
+.connector_inner_circle {
+    -fx-fill: #212121;
+}
+
+.switch_box {
+    -fx-background-color: #032f55;
+}
+
+.switch_toggle {
+    -fx-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);
+}
+
+.switch_toggle_box {
+    -fx-fill: #ffffff;
+    -fx-effect: innershadow(gaussian, #000000, 3, 0, 0, 0);
+}
+
+.led {
+    -fx-fill: #960014;
+}
