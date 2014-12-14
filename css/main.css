@@ -1,0 +1,5 @@
+#main {
+    -fx-min-width: 1280px;
+    -fx-min-height: 720px;
+    -fx-background-color: #300a24;
+}
