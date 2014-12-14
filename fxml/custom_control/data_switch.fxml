@@ -1,6 +1,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/javafx" alignment="CENTER_RIGHT">
-    <Rectangle fx:id="box" width="22" height="10" onMouseClicked="#toggleSwitch" styleClass="switch_toggle_box"/>
-    <Rectangle fx:id="toggle" width="10" height="10" styleClass="switch_toggle"
+    <Rectangle fx:id="box" width="22" height="10" x="0" y="0" onMouseClicked="#toggleSwitch" styleClass="switch_toggle_box"/>
+    <Rectangle fx:id="toggleHandle" width="10" height="10" x="12" y="0" styleClass="switch_toggle"
                mouseTransparent="true"/>
 </fx:root>

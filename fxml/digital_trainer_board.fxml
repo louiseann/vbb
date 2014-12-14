@@ -7,9 +7,9 @@
 
 <?import javafx.geometry.Insets?>
 <HBox xmlns:fx="http://javafx.com/javafx"
-      prefWidth="540" prefHeight="730"
-      minWidth="540" minHeight="730"
-      maxWidth="540" maxHeight="730"
+      prefWidth="540" prefHeight="720"
+      minWidth="540" minHeight="720"
+      maxWidth="540" maxHeight="720"
       spacing="26"
       id="digital_trainer_board"
       stylesheets="/vbb/css/digital_trainer_style.css">
@@ -25,7 +25,7 @@
             </image>
         </ImageView>
     </AnchorPane>
-    <VBox alignment="CENTER" styleClass="area">
+    <VBox alignment="CENTER" id="breadboard_area" styleClass="area">
         <padding>
             <Insets top="5" right="5" bottom="5" left="5"/>
         </padding>

@@ -1,5 +1,5 @@
 <?import javafx.scene.layout.HBox?>
-<?import vbb.digital_trainer.controls.PowerSwitchControl?>
+<?import vbb.digital_trainer.controls.switch_control.PowerSwitchControl?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.VBox?>
 <?import vbb.digital_trainer.controls.ConnectorControl?>

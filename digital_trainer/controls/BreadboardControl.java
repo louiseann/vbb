@@ -72,14 +72,14 @@ public class BreadboardControl extends HBox
 
     private Rectangle createHole()
     {
-        Rectangle socketHole = new Rectangle(7, 7);
+        Rectangle socketHole = new Rectangle(6, 6);
         socketHole.setStyle("-fx-fill: #212121;");
         return socketHole;
     }
 
     private Rectangle createSpace()
     {
-        Rectangle socketHole = new Rectangle(7, 7);
+        Rectangle socketHole = new Rectangle(6, 6);
         socketHole.setStyle("-fx-fill: #ffffff;");
         return socketHole;
     }
@@ -88,7 +88,7 @@ public class BreadboardControl extends HBox
     {
         for(int x = 0; x < 64;)
         {
-            if(x == 0 || x == 1 || x == getRow()/2 || x == getRow()-1)
+            if(x == 0 || x == 1 || x == getRow()/2 || x == getRow()-1 || x == getRow()-2)
             {
                 for(int y = 0; y < 2; y++)
                 {
