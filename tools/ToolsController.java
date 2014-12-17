@@ -46,13 +46,13 @@ public class ToolsController
 
         toolViews = new LinkedHashMap<Button, SelectedToolView>();
         toolViews.put(selectTool, new SelectedToolView("select", new Image("/vbb/images/tools/select.png")));
-        toolViews.put(andChipTool, new SelectedToolView("and", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(orChipTool, new SelectedToolView("or", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(notChipTool, new SelectedToolView("not", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(nandChipTool, new SelectedToolView("nand", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(norChipTool, new SelectedToolView("nor", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(xorChipTool, new SelectedToolView("xor", new Image("/vbb/images/tools/chips/chip.png")));
-        toolViews.put(xnorChipTool, new SelectedToolView("xnor", new Image("/vbb/images/tools/chips/chip.png")));
+        toolViews.put(andChipTool, new SelectedToolView("and", new Image("/vbb/images/tools/chips/and_tool.png")));
+        toolViews.put(orChipTool, new SelectedToolView("or", new Image("/vbb/images/tools/chips/or_tool.png")));
+        toolViews.put(notChipTool, new SelectedToolView("not", new Image("/vbb/images/tools/chips/not_tool.png")));
+        toolViews.put(nandChipTool, new SelectedToolView("nand", new Image("/vbb/images/tools/chips/nand_tool.png")));
+        toolViews.put(norChipTool, new SelectedToolView("nor", new Image("/vbb/images/tools/chips/nor_tool.png")));
+        toolViews.put(xorChipTool, new SelectedToolView("xor", new Image("/vbb/images/tools/chips/xor_tool.png")));
+        toolViews.put(xnorChipTool, new SelectedToolView("xnor", new Image("/vbb/images/tools/chips/xnor_tool.png")));
         toolViews.put(wireTool, new SelectedToolView("wire", new Image("/vbb/images/tools/wire.png")));
     }
 
