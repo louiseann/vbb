@@ -4,48 +4,51 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-
 <?import javafx.geometry.Insets?>
-<HBox xmlns:fx="http://javafx.com/javafx"
-      prefWidth="540" prefHeight="720"
-      minWidth="540" minHeight="720"
-      maxWidth="540" maxHeight="720"
-      spacing="26"
-      id="digital_trainer_board"
-      stylesheets="/vbb/css/digital_trainer_style.css">
-    <AnchorPane>
-        <ImageView AnchorPane.topAnchor="7" AnchorPane.leftAnchor="7">
-            <image>
-                <Image url="/vbb/images/screw.png"/>
-            </image>
-        </ImageView>
-        <ImageView AnchorPane.bottomAnchor="7" AnchorPane.leftAnchor="7">
-            <image>
-                <Image url="/vbb/images/screw.png"/>
-            </image>
-        </ImageView>
-    </AnchorPane>
-    <VBox alignment="CENTER" id="breadboard_area" styleClass="area">
-        <padding>
-            <Insets top="5" right="5" bottom="5" left="5"/>
-        </padding>
-        <BreadboardControl/>
-    </VBox>
-    <VBox alignment="CENTER" spacing="19">
-        <fx:include source="power_supply.fxml"/>
-        <fx:include source="input_connectors_area.fxml"/>
-        <fx:include source="output_connectors_area.fxml"/>
-    </VBox>
-    <AnchorPane>
-        <ImageView AnchorPane.topAnchor="7" AnchorPane.rightAnchor="7">
-            <image>
-                <Image url="/vbb/images/screw.png"/>
-            </image>
-        </ImageView>
-        <ImageView AnchorPane.bottomAnchor="7" AnchorPane.rightAnchor="7">
-            <image>
-                <Image url="/vbb/images/screw.png"/>
-            </image>
-        </ImageView>
-    </AnchorPane>
-</HBox>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.canvas.Canvas?>
+<StackPane xmlns:fx="http://javafx.com/javafx">
+    <HBox prefWidth="540" prefHeight="720"
+          minWidth="540" minHeight="720"
+          maxWidth="540" maxHeight="720"
+          spacing="26"
+          id="digital_trainer_board"
+          stylesheets="/vbb/css/digital_trainer_style.css">
+        <AnchorPane>
+            <ImageView AnchorPane.topAnchor="7" AnchorPane.leftAnchor="7">
+                <image>
+                    <Image url="/vbb/images/screw.png"/>
+                </image>
+            </ImageView>
+            <ImageView AnchorPane.bottomAnchor="7" AnchorPane.leftAnchor="7">
+                <image>
+                    <Image url="/vbb/images/screw.png"/>
+                </image>
+            </ImageView>
+        </AnchorPane>
+        <VBox alignment="CENTER" id="breadboard_area" styleClass="area">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
+            <BreadboardControl fx:id="breadboard"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="19">
+            <fx:include source="power_supply.fxml"/>
+            <fx:include source="input_connectors_area.fxml"/>
+            <fx:include source="output_connectors_area.fxml"/>
+        </VBox>
+        <AnchorPane>
+            <ImageView AnchorPane.topAnchor="7" AnchorPane.rightAnchor="7">
+                <image>
+                    <Image url="/vbb/images/screw.png"/>
+                </image>
+            </ImageView>
+            <ImageView AnchorPane.bottomAnchor="7" AnchorPane.rightAnchor="7">
+                <image>
+                    <Image url="/vbb/images/screw.png"/>
+                </image>
+            </ImageView>
+        </AnchorPane>
+    </HBox>
+    <Canvas fx:id="digitalTrainerCanvas"/>
+</StackPane>

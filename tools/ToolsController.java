@@ -2,10 +2,16 @@ package vbb.tools;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.ActionEvent;
+import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,26 +22,26 @@ import java.util.Map;
 public class ToolsController
 {
     @FXML
-    Button selectTool;
+    private Button selectTool;
     @FXML
-    Button andChipTool;
+    private Button andChipTool, orChipTool, notChipTool, nandChipTool, norChipTool, xorChipTool, xnorChipTool;
     @FXML
-    Button orChipTool;
+    private Button wireTool;
+
     @FXML
-    Button notChipTool;
+    private Rectangle wireView;
+
     @FXML
-    Button nandChipTool;
+    private Rectangle color1, color2, color3, color4, color5, color6, color7, color8, color9, color10, color11, color12;
     @FXML
-    Button norChipTool;
-    @FXML
-    Button xorChipTool;
-    @FXML
-    Button xnorChipTool;
-    @FXML
-    Button wireTool;
+    private Rectangle color1BG, color2BG, color3BG, color4BG, color5BG, color6BG, color7BG, color8BG, color9BG,
+                      color10BG, color11BG, color12BG;
+
+
+    private Rectangle wireViewCopy;
 
     private ObjectProperty currentTool;
-    private Map<Button, SelectedToolView> toolViews;
+    private Map<Button, Tool> tools;
 
     @FXML
     public void initialize()
@@ -44,16 +50,95 @@ public class ToolsController
         setCurrentTool(selectTool);
         focusToolButton(selectTool);
 
-        toolViews = new LinkedHashMap<Button, SelectedToolView>();
-        toolViews.put(selectTool, new SelectedToolView("select", new Image("/vbb/images/tools/select.png")));
-        toolViews.put(andChipTool, new SelectedToolView("and", new Image("/vbb/images/tools/chips/and_tool.png")));
-        toolViews.put(orChipTool, new SelectedToolView("or", new Image("/vbb/images/tools/chips/or_tool.png")));
-        toolViews.put(notChipTool, new SelectedToolView("not", new Image("/vbb/images/tools/chips/not_tool.png")));
-        toolViews.put(nandChipTool, new SelectedToolView("nand", new Image("/vbb/images/tools/chips/nand_tool.png")));
-        toolViews.put(norChipTool, new SelectedToolView("nor", new Image("/vbb/images/tools/chips/nor_tool.png")));
-        toolViews.put(xorChipTool, new SelectedToolView("xor", new Image("/vbb/images/tools/chips/xor_tool.png")));
-        toolViews.put(xnorChipTool, new SelectedToolView("xnor", new Image("/vbb/images/tools/chips/xnor_tool.png")));
-        toolViews.put(wireTool, new SelectedToolView("wire", new Image("/vbb/images/tools/wire.png")));
+        tools = new LinkedHashMap<Button, Tool>();
+
+        addTool(selectTool, "select", new ImageView(new Image("/vbb/images/tools/select.png")));
+
+        addTool(andChipTool, "and", new ImageView(new Image("/vbb/images/tools/chips/and_tool.png")));
+        addTool(orChipTool, "or", new ImageView(new Image("/vbb/images/tools/chips/or_tool.png")));
+        addTool(notChipTool, "not", new ImageView(new Image("/vbb/images/tools/chips/not_tool.png")));
+        addTool(nandChipTool, "nand", new ImageView(new Image("/vbb/images/tools/chips/nand_tool.png")));
+        addTool(norChipTool, "nor", new ImageView(new Image("/vbb/images/tools/chips/nor_tool.png")));
+        addTool(xorChipTool, "xor", new ImageView(new Image("/vbb/images/tools/chips/xor_tool.png")));
+        addTool(xnorChipTool, "xnor", new ImageView(new Image("/vbb/images/tools/chips/xnor_tool.png")));
+
+        wireView.setFill(color1.getFill());
+        focusWireColor(color1BG);
+
+        addTool(wireTool, "wire", createWireCursor());
+
+        color1BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color1, color1BG);
+            }
+        });
+        color2BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color2, color2BG);
+            }
+        });
+        color3BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color3, color3BG);
+            }
+        });
+        color4BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color4, color4BG);
+            }
+        });
+        color5BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color5, color5BG);
+            }
+        });
+        color6BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color6, color6BG);
+            }
+        });
+        color7BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color7, color7BG);
+            }
+        });
+        color8BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color8, color8BG);
+            }
+        });
+        color9BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color9, color9BG);
+            }
+        });
+        color10BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color10, color10BG);
+            }
+        });
+        color11BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color11, color11BG);
+            }
+        });
+        color12BG.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                changeWireColor(color12, color12BG);
+            }
+        });
     }
 
     @FXML
@@ -101,8 +186,81 @@ public class ToolsController
         tool.setStyle("-fx-background-color: transparent;");
     }
 
-    public SelectedToolView getSelectedToolView(Button tool)
+    public Tool getSelectedToolView(Button tool)
     {
-        return toolViews.get(tool);
+        return tools.get(tool);
+    }
+
+    private void addTool(Button toolButton, String toolName, Node toolView)
+    {
+        tools.put(toolButton, createTool(toolName, toolView));
+    }
+
+    private static Tool createTool(String toolName, Node toolView)
+    {
+        Tool tool = new Tool(toolName);
+        tool.setToolView(toolView);
+
+        return tool;
+    }
+
+    // wire //
+
+    private StackPane createWireCursor()
+    {
+        Rectangle wireBG = new Rectangle(24, 23, Color.TRANSPARENT);
+        wireViewCopy = new Rectangle(5, 30, wireView.getFill());
+        wireViewCopy.setRotate(45);
+
+        return new StackPane(wireBG, wireViewCopy);
+    }
+
+    private void focusWireColor(Rectangle colorBG)
+    {
+        colorBG.setStyle("-fx-stroke: #000000; -fx-stroke-type: inside;");
+    }
+
+    private void unfocusWireColor(Rectangle colorBG)
+    {
+        colorBG.setStyle("-fx-stroke: #ffffff; -fx-stroke-type: inside;");
+    }
+
+    private Rectangle getRectangleWith(Color color)
+    {
+        if (color1.getFill().equals(color))
+            return color1BG;
+        else if (color2.getFill().equals(color))
+            return color2BG;
+        else if (color3.getFill().equals(color))
+            return color3BG;
+        else if (color4.getFill().equals(color))
+            return color4BG;
+        else if (color5.getFill().equals(color))
+            return color5BG;
+        else if (color6.getFill().equals(color))
+            return color6BG;
+        else if (color7.getFill().equals(color))
+            return color7BG;
+        else if (color8.getFill().equals(color))
+            return color8BG;
+        else if (color9.getFill().equals(color))
+            return color9BG;
+        else if (color10.getFill().equals(color))
+            return color10BG;
+        else if (color11.getFill().equals(color))
+            return color11BG;
+        else if (color12.getFill().equals(color))
+            return color12BG;
+        else
+            return null;
+    }
+
+    private void changeWireColor(Rectangle color, Rectangle colorBG)
+    {
+        focusWireColor(colorBG);
+        unfocusWireColor(getRectangleWith((Color) wireView.getFill()));
+
+        wireView.setFill(color.getFill());
+        wireViewCopy.setFill(wireView.getFill());
     }
 }

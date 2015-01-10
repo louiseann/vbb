@@ -11,25 +11,21 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import vbb.tools.ToolsController;
 
 public class MainController
 {
     @FXML
-    private BorderPane mainPane;
-    @FXML
-    private Group centerArea;
-    @FXML
     private BorderPane digitalTrainerPane;
-    @FXML
-    private VBox tools;
     @FXML
     private ToolsController toolsController;
 
-    private Canvas toolCanvas;
+    private Pane toolCursor;
 
     @FXML
     public void initialize()
@@ -40,24 +36,22 @@ public class MainController
             @Override
             public void handle(MouseEvent event) {
                 digitalTrainerPane.setCursor(Cursor.NONE);
-                digitalTrainerPane.getChildren().add(toolCanvas);
-                toolCanvas.setTranslateX(event.getX());
-                toolCanvas.setTranslateY(event.getY());
+                digitalTrainerPane.getChildren().add(toolCursor);
+                moveTool(event.getX(), event.getY());
             }
         });
 
         digitalTrainerPane.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                digitalTrainerPane.getChildren().remove(toolCanvas);
+                digitalTrainerPane.getChildren().remove(toolCursor);
             }
         });
 
         digitalTrainerPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                toolCanvas.setTranslateX(event.getX());
-                toolCanvas.setTranslateY(event.getY());
+                moveTool(event.getX(), event.getY());
             }
         });
 
@@ -71,9 +65,13 @@ public class MainController
 
     private void setUpToolCursorImage()
     {
-        Image toolImage = toolsController.getSelectedToolView(toolsController.currentToolButton()).getToolImage();
-        toolCanvas = new Canvas(toolImage.getWidth(), toolImage.getHeight());
-        final GraphicsContext toolCanvasGraphics = toolCanvas.getGraphicsContext2D();
-        toolCanvasGraphics.drawImage(toolImage, 0, 0);
+        toolCursor = toolsController.getSelectedToolView(toolsController.currentToolButton()).getToolView();
+        toolCursor.setMouseTransparent(true);
+    }
+
+    private void moveTool(double x, double y)
+    {
+        toolCursor.setTranslateX(x);
+        toolCursor.setTranslateY(y);
     }
 }

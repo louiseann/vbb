@@ -163,62 +163,58 @@
                 prefHeight="35" minHeight="35" maxHeight="35"
                 prefWidth="45" minWidth="45" maxWidth="45">
             <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/images/tools/wire.png"/>
-                    </image>
-                </ImageView>
+                <Rectangle fx:id="wireView" width="5" height="30" rotate="45" mouseTransparent="true"/>
             </graphic>
         </Button>
 
         <GridPane alignment="CENTER" id="color_picker">
             <StackPane alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color1"/>
+                <Rectangle fx:id="color1BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color1" id="color1" fill="#ff0000" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color2"/>
+                <Rectangle fx:id="color2BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color2" id="color2" fill="#00ffff" width="25" height="25" mouseTransparent="true" />
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="0">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color3"/>
+                <Rectangle fx:id="color3BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color3" id="color3" fill="#006a25" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="0">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color4"/>
+                <Rectangle fx:id="color4BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color4" id="color4" fill="#e8641b" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="1">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color5"/>
+                <Rectangle fx:id="color5BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color5" id="color5" fill="#ffff00" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color6"/>
+                <Rectangle fx:id="color6BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color6" id="color6" fill="#0000ff" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="1">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color7"/>
+                <Rectangle fx:id="color7BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color7" id="color7" fill="#e10052" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="1">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color8"/>
+                <Rectangle fx:id="color8BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color8" id="color8" fill="#5b3715" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="2">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color9"/>
+                <Rectangle fx:id="color9BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color9" id="color9" fill="#00ff00" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="2">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color10"/>
+                <Rectangle fx:id="color10BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color10" id="color10" fill="#ff00ff" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="2" GridPane.columnIndex="2">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color11"/>
+                <Rectangle fx:id="color11BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color11" id="color11" fill="#00a49d" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
             <StackPane alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="2">
-                <Rectangle width="29" height="29" styleClass="color"/>
-                <Rectangle width="25" height="25" mouseTransparent="true" id="color12"/>
+                <Rectangle fx:id="color12BG" width="29" height="29" styleClass="color"/>
+                <Rectangle fx:id="color12" id="color12" fill="#67087b" width="25" height="25" mouseTransparent="true"/>
             </StackPane>
         </GridPane>
     </VBox>

@@ -1,19 +1,21 @@
 package vbb.tools;
 
+import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 /**
  * Created by owie on 12/11/14.
  */
-public class SelectedToolView
+public class Tool
 {
     private String toolName;
-    private Image toolImage;
+    private Pane toolView;
 
-    public SelectedToolView(String toolName, Image toolImage)
+    public Tool(String toolName)
     {
         setToolName(toolName);
-        setToolImage(toolImage);
     }
 
     public void setToolName(String name)
@@ -26,13 +28,13 @@ public class SelectedToolView
         return toolName;
     }
 
-    public void setToolImage(Image image)
+    public void setToolView(Node toolView)
     {
-        toolImage = image;
+        this.toolView = new Pane(toolView);
     }
 
-    public Image getToolImage()
+    public Pane getToolView()
     {
-        return toolImage;
+        return toolView;
     }
 }

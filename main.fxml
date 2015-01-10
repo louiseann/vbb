@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns:fx="http://javafx.com/javafx"
-            fx:id="mainPane" fx:controller="vbb.MainController"
+            fx:controller="vbb.MainController"
             id="main" stylesheets="/vbb/css/main.css">
     <left>
         <fx:include fx:id="tools" source="fxml/tools.fxml"/>
