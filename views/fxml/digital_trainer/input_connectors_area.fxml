@@ -1,0 +1,42 @@
+<?import vbb.controllers.digital_trainer.controls.ConnectorControl?>
+<?import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns:fx="http://javafx.com/javafx" spacing="19"
+      styleClass="area" stylesheets="/vbb/views/css/digital_trainer_style.css">
+
+    <padding>
+        <Insets top="10" right="14" bottom="10" left="45"/>
+    </padding>
+
+    <VBox spacing="24">
+        <padding>
+            <Insets top="10" bottom="10"/>
+        </padding>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+        <ConnectorControl/>
+    </VBox>
+
+    <VBox spacing="24" styleClass="switch_box">
+        <padding>
+            <Insets top="10" right="15" bottom="10" left="15"/>
+        </padding>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+        <DataSwitchControl/>
+    </VBox>
+
+</HBox>

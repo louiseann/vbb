@@ -3,20 +3,19 @@ package vbb;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application
+{
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        primaryStage.setTitle("Hello World");
+    public void start(Stage primaryStage) throws Exception
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("views/fxml/main.fxml"));
+        primaryStage.setTitle("Virtual Breadboarding (VBb): A Logic Gate Simulator");
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         System.out.println(primaryScreenBounds.getWidth() + " " + primaryScreenBounds.getHeight());
@@ -28,7 +27,8 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

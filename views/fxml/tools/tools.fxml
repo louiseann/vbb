@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.Button?>
+<?import vbb.controllers.tools.controls.ColorPicker?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="vbb.controllers.tools.ToolsController"
+      snapToPixel="true"
+      prefWidth="120" prefHeight="730"
+      minWidth="120"
+      id="tools_area" stylesheets="/vbb/views/css/tools_style.css">
+
+    <ImageView id="tools_topBar">
+        <image>
+            <Image url="/vbb/views/images/bars.png"/>
+        </image>
+    </ImageView>
+
+    <Button fx:id="selectTool" styleClass="tool"
+            prefHeight="35" minHeight="35" maxHeight="35"
+            prefWidth="45" minWidth="45" maxWidth="45"
+            onAction="#handleToolSelection">
+        <graphic>
+            <ImageView>
+                <image>
+                    <Image url="@/vbb/views/images/tools/select.png"/>
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <Rectangle width="90" height="1" styleClass="divider"/>
+
+    <GridPane snapToPixel="true"
+              hgap="10" vgap="2"
+              alignment="CENTER">
+
+        <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="AND" styleClass="gate_label"/>
+            <Label text="7408" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="andChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="0" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/and.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="OR" styleClass="gate_label"/>
+            <Label text="7432" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="orChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/or.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="NOT" styleClass="gate_label"/>
+            <Label text="7404" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="notChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/not.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="NAND" styleClass="gate_label"/>
+            <Label text="7400" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="nandChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="3" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/nand.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="NOR" styleClass="gate_label"/>
+            <Label text="7402" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="norChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="4" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/nor.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="XOR" styleClass="gate_label"/>
+            <Label text="7486" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="xorChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="5" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/xor.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+        <VBox GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="chip_label">
+            <Label text="XNOR" styleClass="gate_label"/>
+            <Label text="747266" styleClass="ic_number_label"/>
+        </VBox>
+        <Button fx:id="xnorChipTool" styleClass="chip"
+                onAction="#handleToolSelection"
+                GridPane.rowIndex="6" GridPane.columnIndex="1">
+            <graphic>
+                <ImageView>
+                    <image>
+                        <Image url="@/vbb/views/images/tools/chips/xnor.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+    </GridPane>
+
+    <Rectangle width="90" height="1" styleClass="divider"/>
+
+    <VBox alignment="CENTER" spacing="5">
+        <Button fx:id="wireTool" styleClass="tool"
+                onAction="#handleToolSelection"
+                prefHeight="35" minHeight="35" maxHeight="35"
+                prefWidth="45" minWidth="45" maxWidth="45">
+            <graphic>
+                <Rectangle fx:id="wireView" width="5" height="25" rotate="45" mouseTransparent="true"/>
+            </graphic>
+        </Button>
+        <ColorPicker fx:id="wireColorPicker"/>
+    </VBox>
+
+</VBox>

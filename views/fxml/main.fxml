@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/javafx"
+            fx:controller="vbb.controllers.MainController"
+            id="main" stylesheets="/vbb/views/css/main.css">
+    <left>
+        <fx:include fx:id="tools" source="tools/tools.fxml"/>
+    </left>
+    <center>
+        <BorderPane fx:id="digitalTrainerPane">
+            <center>
+                <fx:include source="digital_trainer/digital_trainer_board.fxml"/>
+            </center>
+        </BorderPane>
+    </center>
+    <right>
+        <fx:include source="truth_table_generator/truth_table_generator.fxml" />
+    </right>
+</BorderPane>
