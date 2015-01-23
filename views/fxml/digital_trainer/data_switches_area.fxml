@@ -4,7 +4,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
-<HBox xmlns:fx="http://javafx.com/javafx" spacing="19"
+<HBox xmlns:fx="http://javafx.com/javafx"
+      fx:controller="vbb.controllers.digital_trainer.DataSwitchesAreaController"
+      spacing="19"
       styleClass="area" stylesheets="/vbb/views/css/digital_trainer_style.css">
 
     <padding>

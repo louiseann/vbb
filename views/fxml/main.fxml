@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.Group?>
 <BorderPane xmlns:fx="http://javafx.com/javafx"
             fx:controller="vbb.controllers.MainController"
             id="main" stylesheets="/vbb/views/css/main.css">
@@ -9,11 +12,10 @@
         <fx:include fx:id="tools" source="tools/tools.fxml"/>
     </left>
     <center>
-        <BorderPane fx:id="digitalTrainerPane">
-            <center>
-                <fx:include source="digital_trainer/digital_trainer_board.fxml"/>
-            </center>
-        </BorderPane>
+        <StackPane fx:id="centerPane">
+            <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer_board.fxml"/>
+            <Pane fx:id="drawingPane" mouseTransparent="true"/>
+        </StackPane>
     </center>
     <right>
         <fx:include source="truth_table_generator/truth_table_generator.fxml" />

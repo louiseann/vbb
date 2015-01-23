@@ -2,8 +2,10 @@ package vbb.controllers.digital_trainer.controls.breadboard;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -24,6 +26,7 @@ public class BreadboardControl extends HBox
     private GridPane rowConnectedRightGroup;
 
     private IntegerProperty row = new SimpleIntegerProperty();
+    private EventHandler<MouseEvent> onClickOnSocket;
 
     public BreadboardControl()
     {
@@ -42,7 +45,6 @@ public class BreadboardControl extends HBox
     private void initialize()
     {
         setRow(64);
-        createSocketHoles();
     }
 
     public void setRow(int row)
@@ -60,6 +62,13 @@ public class BreadboardControl extends HBox
         return row.get();
     }
 
+    public void setOnClickOnSocket(EventHandler<MouseEvent> onClickOnSocket)
+    {
+        this.onClickOnSocket = onClickOnSocket;
+        System.out.println("set");
+        createSocketHoles();
+    }
+
     private void createSocketHoles()
     {
         addColumnConnectedHoles(colConnectedLeftGroup);
@@ -71,6 +80,12 @@ public class BreadboardControl extends HBox
     private SocketHoleControl createHole()
     {
         SocketHoleControl socketHole = new SocketHoleControl();
+        try {
+            socketHole.addEventHandler(MouseEvent.MOUSE_CLICKED, onClickOnSocket);
+        } catch (NullPointerException e) {
+            System.out.println("breadboard null eventhandler");
+        }
+
         socketHole.getHoleBox().setStyle("-fx-fill: #212121;");
         return socketHole;
     }

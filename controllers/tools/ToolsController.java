@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.controls.ColorPicker;
@@ -28,6 +29,8 @@ import java.util.Map;
 public class ToolsController
 {
     @FXML
+    private VBox toolsArea;
+    @FXML
     private Button selectTool;
     @FXML
     private Button andChipTool, orChipTool, notChipTool, nandChipTool, norChipTool, xorChipTool, xnorChipTool;
@@ -35,13 +38,13 @@ public class ToolsController
     private Button wireTool;
 
     @FXML
-    private Rectangle wireView;
+    private Rectangle wireToolView;
 
     @FXML
     private ColorPicker wireColorPicker;
 
 
-    private Rectangle wireViewCopy;
+    private Rectangle wireToolViewCopy;
 
     private static ObjectProperty focusedToolButton;
     private static Map<Button, Tool> tools;
@@ -53,7 +56,7 @@ public class ToolsController
         setFocusedToolButton(selectTool);
         focusToolButton(selectTool);
 
-        wireView.setFill(Color.web(wireColorPicker.getSelectedColor()));
+        wireToolView.setFill(Color.web(wireColorPicker.getSelectedColor()));
 
         tools = new LinkedHashMap<Button, Tool>();
 
@@ -91,6 +94,11 @@ public class ToolsController
         }
     }
 
+    public VBox getToolsArea()
+    {
+        return toolsArea;
+    }
+
     private void focusToolButton(Button tool)
     {
         tool.setStyle("-fx-background-color: #ffffff;\n" +
@@ -108,16 +116,16 @@ public class ToolsController
     private StackPane createWireCursor()
     {
         Rectangle wireBG = new Rectangle(21, 21, Color.TRANSPARENT);
-        wireViewCopy = new Rectangle(5, 25, wireView.getFill());
-        wireViewCopy.setRotate(45);
+        wireToolViewCopy = new Rectangle(5, 25, wireToolView.getFill());
+        wireToolViewCopy.setRotate(45);
 
-        return new StackPane(wireBG, wireViewCopy);
+        return new StackPane(wireBG, wireToolViewCopy);
     }
 
     private void changeWireColor(Color color)
     {
-        wireView.setFill(color);
-        wireViewCopy.setFill(color);
+        wireToolView.setFill(color);
+        wireToolViewCopy.setFill(color);
     }
 
     // end of wire methods

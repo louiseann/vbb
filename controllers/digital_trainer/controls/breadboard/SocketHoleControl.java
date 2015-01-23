@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.ToolsController;
 
+import javax.swing.event.DocumentEvent;
 import java.io.IOException;
 
 /**
@@ -20,6 +21,7 @@ public class SocketHoleControl extends Pane
     private Rectangle holeBox;
 
     private int row, col;
+    private EventHandler<MouseEvent> onClickedHandler;
 
     public SocketHoleControl()
     {
@@ -71,19 +73,15 @@ public class SocketHoleControl extends Pane
                     holeBox.setStyle("-fx-stroke: null;");
             }
         });
-
-        holeBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                String toolClass = ToolsController.getCurrentTool().getClassificationClassName();
-                if (toolClass.equals("IntegratedCircuit"))
-                    holeBox.setFill(Color.RED);
-            }
-        });
     }
 
     public Rectangle getHoleBox()
     {
         return holeBox;
+    }
+
+    public void addOnClickedHandler(EventHandler<MouseEvent> onClickedHandler)
+    {
+        holeBox.addEventHandler(MouseEvent.MOUSE_CLICKED, onClickedHandler);
     }
 }

@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 
 <GridPane xmlns:fx="http://javafx.com/javafx"
+          fx:controller="vbb.controllers.digital_trainer.LEDDisplayAreaController"
           hgap="35" vgap="14"
           styleClass="area">
 

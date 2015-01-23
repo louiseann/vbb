@@ -36,9 +36,7 @@ public class Tool
 
     public void setView(Node view)
     {
-        this.view = new Pane();
-        this.view.setStyle("-fx-background-color: #0000ff;");
-        this.view.getChildren().add(view);
+        this.view = new Pane(view);
     }
 
     public Pane getView()

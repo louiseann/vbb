@@ -11,6 +11,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="vbb.controllers.tools.ToolsController"
+      fx:id="toolsArea"
       snapToPixel="true"
       prefWidth="120" prefHeight="730"
       minWidth="120"
@@ -163,7 +164,7 @@
                 prefHeight="35" minHeight="35" maxHeight="35"
                 prefWidth="45" minWidth="45" maxWidth="45">
             <graphic>
-                <Rectangle fx:id="wireView" width="5" height="25" rotate="45" mouseTransparent="true"/>
+                <Rectangle fx:id="wireToolView" width="5" height="25" rotate="45" mouseTransparent="true"/>
             </graphic>
         </Button>
         <ColorPicker fx:id="wireColorPicker"/>
