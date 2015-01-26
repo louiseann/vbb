@@ -1,5 +1,6 @@
 package vbb.models.tools;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -14,10 +15,8 @@ public class Tool
     private Object classification;
     private Pane view;
     private Cursor cursor;
-    private Button button;
 
-    private static double xHotSpot;
-    private static double yHotSpot;
+    private Point2D viewHotSpot;
 
     public Tool(String name)
     {
@@ -37,6 +36,15 @@ public class Tool
     public void setView(Node view)
     {
         this.view = new Pane(view);
+        this.view.setMouseTransparent(true);
+    }
+
+    public void setView(Node view, double xHotSpot, double yHotSpot)
+    {
+        this.view = new Pane(view);
+        this.view.setMouseTransparent(true);
+
+        this.viewHotSpot = new Point2D(xHotSpot, yHotSpot);
     }
 
     public Pane getView()
@@ -44,28 +52,38 @@ public class Tool
         return view;
     }
 
-    public Object getClassification()
-    {
-        return classification;
-    }
-
     public void setClassification(Object classification)
     {
         this.classification = classification;
     }
 
-    public Button getButton()
+    public Object getClassification()
     {
-        return button;
-    }
-
-    public void setButton(Button button)
-    {
-        this.button = button;
+        return classification;
     }
 
     public String getClassificationClassName()
     {
         return classification.getClass().getSimpleName();
+    }
+
+    public void setCursor(Cursor cursor)
+    {
+        this.cursor = cursor;
+    }
+
+    public Cursor getCursor()
+    {
+        return cursor;
+    }
+
+    public void setViewHotSpot(double x, double y)
+    {
+        viewHotSpot = new Point2D(x, y);
+    }
+
+    public Point2D getViewHotSpot()
+    {
+        return viewHotSpot;
     }
 }

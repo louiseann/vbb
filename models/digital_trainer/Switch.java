@@ -1,4 +1,4 @@
-package vbb.controllers.digital_trainer.controls.switch_control;
+package vbb.models.digital_trainer;
 
 /**
  * Created by owie on 12/14/14.
@@ -8,7 +8,7 @@ public class Switch
     public final static boolean ON = true;
     public final static boolean OFF = false;
 
-    protected boolean state;
+    private boolean state;
 
     public Switch()
     {
@@ -20,7 +20,7 @@ public class Switch
         return state;
     }
 
-    protected void toggle()
+    public void toggle()
     {
         state = !state;
     }

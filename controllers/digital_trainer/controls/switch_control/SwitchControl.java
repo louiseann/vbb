@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.ToolsController;
+import vbb.models.digital_trainer.Switch;
 
 import java.io.IOException;
 
@@ -41,14 +42,14 @@ public class SwitchControl extends StackPane
     {
         if (ToolsController.getCurrentTool().getClassificationClassName().equals("Select"))
         {
-            if(aSwitch.state == Switch.ON)
+            if(aSwitch.getState() == Switch.ON)
             {
                 double xPosition = toggleHandle.getLayoutX() - (toggleHandle.getLayoutX() - box.getLayoutX());
                 moveToggleHandle(xPosition, 0);
                 toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);");
             }
 
-            else if(aSwitch.state == Switch.OFF)
+            else if(aSwitch.getState() == Switch.OFF)
             {
                 double xPosition = box.getLayoutX() - (box.getWidth() - toggleHandle.getWidth());
                 moveToggleHandle(xPosition, 0);

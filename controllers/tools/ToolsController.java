@@ -8,8 +8,6 @@ import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,6 +15,7 @@ import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.controls.ColorPicker;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
+import vbb.models.tools.VBbTool;
 import vbb.models.tools.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
 
@@ -31,11 +30,12 @@ public class ToolsController
     @FXML
     private VBox toolsArea;
     @FXML
-    private Button selectTool;
+    private Button selectButton;
     @FXML
-    private Button andChipTool, orChipTool, notChipTool, nandChipTool, norChipTool, xorChipTool, xnorChipTool;
+    private Button andChipButton, orChipButton, notChipButton, nandChipButton, norChipButton, xorChipButton,
+                   xnorChipButton;
     @FXML
-    private Button wireTool;
+    private Button wireButton;
 
     @FXML
     private Rectangle wireToolView;
@@ -53,24 +53,14 @@ public class ToolsController
     public void initialize()
     {
         focusedToolButton = new SimpleObjectProperty();
-        setFocusedToolButton(selectTool);
-        focusToolButton(selectTool);
+        setFocusedToolButton(selectButton);
+        focusToolButton(selectButton);
 
         wireToolView.setFill(Color.web(wireColorPicker.getSelectedColor()));
+        VBbTool.Wire().setView(createWireView());
 
         tools = new LinkedHashMap<Button, Tool>();
-
-        addTool(selectTool, "select", "select", new ImageView(new Image("/vbb/views/images/tools/cursor2.png")));
-
-        addTool(andChipTool, "and", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/and_tool.png")));
-        addTool(orChipTool, "or", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/or_tool.png")));
-        addTool(notChipTool, "not", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/not_tool.png")));
-        addTool(nandChipTool, "nand", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/nand_tool.png")));
-        addTool(norChipTool, "nor", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/nor_tool.png")));
-        addTool(xorChipTool, "xor", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/xor_tool.png")));
-        addTool(xnorChipTool, "xnor", "ic", new ImageView(new Image("/vbb/views/images/tools/chips/xnor_tool.png")));
-
-        addTool(wireTool, "wire", "wire", createWireCursor());
+        populateTools();
 
         wireColorPicker.selectedColor().addListener(new ChangeListener<String>() {
             @Override
@@ -94,11 +84,6 @@ public class ToolsController
         }
     }
 
-    public VBox getToolsArea()
-    {
-        return toolsArea;
-    }
-
     private void focusToolButton(Button tool)
     {
         tool.setStyle("-fx-background-color: #ffffff;\n" +
@@ -113,7 +98,7 @@ public class ToolsController
 
     // wire //
 
-    private StackPane createWireCursor()
+    private StackPane createWireView()
     {
         Rectangle wireBG = new Rectangle(21, 21, Color.TRANSPARENT);
         wireToolViewCopy = new Rectangle(5, 25, wireToolView.getFill());
@@ -155,24 +140,21 @@ public class ToolsController
         return (Button) getFocusedToolButton();
     }
 
-    private static void addTool(Button toolButton, String toolName, String classification, Node toolView)
+    private void populateTools()
     {
-        Tool tool = createTool(toolName, classification, toolView);
-        tools.put(toolButton, tool);
+        tools.put(selectButton, VBbTool.Select());
+        tools.put(andChipButton, VBbTool.AndChip());
+        tools.put(orChipButton, VBbTool.OrChip());
+        tools.put(notChipButton, VBbTool.NotChip());
+        tools.put(nandChipButton, VBbTool.NandChip());
+        tools.put(norChipButton, VBbTool.NorChip());
+        tools.put(xorChipButton, VBbTool.XorChip());
+        tools.put(xnorChipButton, VBbTool.XnorChip());
+        tools.put(wireButton, VBbTool.Wire());
     }
 
-    private static Tool createTool(String name, String classification, Node view)
+    public Color getWireColor()
     {
-        Tool tool = new Tool(name);
-        tool.setView(view);
-
-        if (classification.equals("select"))
-            tool.setClassification(new Select());
-        else if (classification.equals("ic"))
-            tool.setClassification(new IntegratedCircuit());
-        else if (classification.equals("wire"))
-            tool.setClassification(new Wire());
-
-        return tool;
+        return (Color) wireToolView.getFill();
     }
 }

@@ -23,14 +23,14 @@
         </image>
     </ImageView>
 
-    <Button fx:id="selectTool" styleClass="tool"
+    <Button fx:id="selectButton" styleClass="tool"
             prefHeight="35" minHeight="35" maxHeight="35"
             prefWidth="45" minWidth="45" maxWidth="45"
             onAction="#handleToolSelection">
         <graphic>
             <ImageView>
                 <image>
-                    <Image url="@/vbb/views/images/tools/select.png"/>
+                    <Image url="@/vbb/views/images/tools/select_icon.png"/>
                 </image>
             </ImageView>
         </graphic>
@@ -46,7 +46,7 @@
             <Label text="AND" styleClass="gate_label"/>
             <Label text="7408" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="andChipTool" styleClass="chip"
+        <Button fx:id="andChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="0" GridPane.columnIndex="1">
             <graphic>
@@ -62,7 +62,7 @@
             <Label text="OR" styleClass="gate_label"/>
             <Label text="7432" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="orChipTool" styleClass="chip"
+        <Button fx:id="orChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="1" GridPane.columnIndex="1">
             <graphic>
@@ -78,7 +78,7 @@
             <Label text="NOT" styleClass="gate_label"/>
             <Label text="7404" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="notChipTool" styleClass="chip"
+        <Button fx:id="notChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="2" GridPane.columnIndex="1">
             <graphic>
@@ -94,7 +94,7 @@
             <Label text="NAND" styleClass="gate_label"/>
             <Label text="7400" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="nandChipTool" styleClass="chip"
+        <Button fx:id="nandChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="3" GridPane.columnIndex="1">
             <graphic>
@@ -110,7 +110,7 @@
             <Label text="NOR" styleClass="gate_label"/>
             <Label text="7402" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="norChipTool" styleClass="chip"
+        <Button fx:id="norChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="4" GridPane.columnIndex="1">
             <graphic>
@@ -126,7 +126,7 @@
             <Label text="XOR" styleClass="gate_label"/>
             <Label text="7486" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="xorChipTool" styleClass="chip"
+        <Button fx:id="xorChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="5" GridPane.columnIndex="1">
             <graphic>
@@ -142,7 +142,7 @@
             <Label text="XNOR" styleClass="gate_label"/>
             <Label text="747266" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="xnorChipTool" styleClass="chip"
+        <Button fx:id="xnorChipButton" styleClass="chip"
                 onAction="#handleToolSelection"
                 GridPane.rowIndex="6" GridPane.columnIndex="1">
             <graphic>
@@ -159,7 +159,7 @@
     <Rectangle width="90" height="1" styleClass="divider"/>
 
     <VBox alignment="CENTER" spacing="5">
-        <Button fx:id="wireTool" styleClass="tool"
+        <Button fx:id="wireButton" styleClass="tool"
                 onAction="#handleToolSelection"
                 prefHeight="35" minHeight="35" maxHeight="35"
                 prefWidth="45" minWidth="45" maxWidth="45">

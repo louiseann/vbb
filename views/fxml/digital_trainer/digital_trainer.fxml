@@ -5,15 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.Group?>
+<?import javafx.scene.layout.Pane?>
+
 <StackPane xmlns:fx="http://javafx.com/javafx"
-           fx:controller="vbb.controllers.digital_trainer.DigitalTrainerController"
-           prefWidth="540" prefHeight="720"
-           minWidth="540" minHeight="720"
-           maxWidth="540" maxHeight="720">
-    <HBox spacing="26"
+           fx:controller="vbb.controllers.digital_trainer.DigitalTrainerController">
+    <HBox prefWidth="540" prefHeight="720"
+          minWidth="540" minHeight="720"
+          maxWidth="540" maxHeight="720"
+          spacing="26"
           id="digital_trainer_board"
           stylesheets="/vbb/views/css/digital_trainer_style.css">
         <AnchorPane>
@@ -35,7 +35,7 @@
             <BreadboardControl fx:id="breadboard"/>
         </VBox>
         <VBox alignment="CENTER" spacing="19">
-            <fx:include source="power_supply.fxml"/>
+            <fx:include fx:id="powerSupplyArea" source="power_supply_area.fxml"/>
             <fx:include fx:id="dataSwitchesArea" source="data_switches_area.fxml"/>
             <fx:include fx:id="ledDisplayArea" source="led_display_area.fxml"/>
         </VBox>
@@ -52,5 +52,5 @@
             </ImageView>
         </AnchorPane>
     </HBox>
-    <Group fx:id="appliedTools" mouseTransparent="true"/>
+    <Pane fx:id="appliedTools" mouseTransparent="true"/>
 </StackPane>

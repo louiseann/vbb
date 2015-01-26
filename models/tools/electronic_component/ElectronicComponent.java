@@ -5,9 +5,9 @@ package vbb.models.tools.electronic_component;
  */
 public class ElectronicComponent
 {
-    protected int colSpan;
-    protected int rowSpan;
-    protected boolean overpassesBreadboardRavine;
+    private int colSpan;
+    private int rowSpan;
+    private boolean overpassesBreadboardRavine;
 
     public ElectronicComponent()
     {

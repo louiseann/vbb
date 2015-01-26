@@ -4,18 +4,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import vbb.controllers.digital_trainer.controls.SocketControl;
-import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
 
 /**
  * Created by owie on 1/21/15.
  */
-public class DataSwitchesAreaController
+public class LedDisplayAreaController
 {
     @FXML
     private SocketControl socket1, socket2, socket3, socket4, socket5, socket6, socket7, socket8;
-    @FXML
-    private DataSwitchControl dataSwitch1, dataSwitch2, dataSwitch3, dataSwitch4,
-                              dataSwitch5, dataSwitch6, dataSwitch7, dataSwitch8;
 
     public void addSocketsOnClickedHandler(EventHandler<MouseEvent> handler)
     {

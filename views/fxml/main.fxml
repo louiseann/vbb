@@ -2,19 +2,16 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.Pane?>
 
-<?import javafx.scene.Group?>
 <BorderPane xmlns:fx="http://javafx.com/javafx"
             fx:controller="vbb.controllers.MainController"
             id="main" stylesheets="/vbb/views/css/main.css">
     <left>
-        <fx:include fx:id="tools" source="tools/tools.fxml"/>
+        <fx:include fx:id="toolsArea" source="tools/tools.fxml"/>
     </left>
     <center>
         <StackPane fx:id="centerPane">
-            <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer_board.fxml"/>
-            <Pane fx:id="drawingPane" mouseTransparent="true"/>
+            <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer.fxml"/>
         </StackPane>
     </center>
     <right>

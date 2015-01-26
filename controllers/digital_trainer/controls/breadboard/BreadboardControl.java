@@ -1,7 +1,11 @@
 package vbb.controllers.digital_trainer.controls.breadboard;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +30,12 @@ public class BreadboardControl extends HBox
     private GridPane rowConnectedRightGroup;
 
     private IntegerProperty row = new SimpleIntegerProperty();
-    private EventHandler<MouseEvent> onClickOnSocket;
+
+    private EventHandler<MouseEvent> socketsMouseClickedHandler;
+    private EventHandler<MouseEvent> socketsMouseEnteredHandler;
+    private EventHandler<MouseEvent> socketsMouseExitedHandler;
+
+    private static BooleanProperty eventHandlersSet = new SimpleBooleanProperty(false);
 
     public BreadboardControl()
     {
@@ -39,6 +48,14 @@ public class BreadboardControl extends HBox
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        eventHandlersSet.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (areEventHandlersSet())
+                    createSocketHoles();
+            }
+        });
     }
 
     @FXML
@@ -62,82 +79,117 @@ public class BreadboardControl extends HBox
         return row.get();
     }
 
-    public void setOnClickOnSocket(EventHandler<MouseEvent> onClickOnSocket)
+    public void setSocketsMouseClickedHandler(EventHandler<MouseEvent> socketsMouseClickedHandler)
     {
-        this.onClickOnSocket = onClickOnSocket;
-        System.out.println("set");
-        createSocketHoles();
+        this.socketsMouseClickedHandler = socketsMouseClickedHandler;
+        checkEventHandlers();
+    }
+
+    public void setSocketsMouseEnteredHandler(EventHandler<MouseEvent> socketsMouseEnteredHandler)
+    {
+        this.socketsMouseEnteredHandler = socketsMouseEnteredHandler;
+        checkEventHandlers();
+    }
+
+    public void setSocketsMouseExitedHandler(EventHandler<MouseEvent> socketsMouseExitedHandler)
+    {
+        this.socketsMouseExitedHandler = socketsMouseExitedHandler;
+        checkEventHandlers();
+    }
+
+    private static boolean areEventHandlersSet()
+    {
+        return eventHandlersSet.get();
+    }
+
+    private void checkEventHandlers()
+    {
+        if (socketsMouseClickedHandler != null &&
+            socketsMouseEnteredHandler != null &&
+            socketsMouseExitedHandler != null)
+            eventHandlersSet.set(true);
+        else
+            eventHandlersSet.set(false);
     }
 
     private void createSocketHoles()
     {
-        addColumnConnectedHoles(colConnectedLeftGroup);
-        addColumnConnectedHoles(colConnectedRightGroup);
-        addRowConnectedHoles(rowConnectedLeftGroup);
-        addRowConnectedHoles(rowConnectedRightGroup);
+        addColumnConnectedHoles(colConnectedLeftGroup, true);
+        addColumnConnectedHoles(colConnectedRightGroup, false);
+        addRowConnectedHoles(rowConnectedLeftGroup, true);
+        addRowConnectedHoles(rowConnectedRightGroup, false);
     }
 
-    private SocketHoleControl createHole()
+    private BreadboardSocketControl createHole(int row, int col, boolean inRowConnectedGroup, boolean inLeft)
     {
-        SocketHoleControl socketHole = new SocketHoleControl();
-        try {
-            socketHole.addEventHandler(MouseEvent.MOUSE_CLICKED, onClickOnSocket);
-        } catch (NullPointerException e) {
-            System.out.println("breadboard null eventhandler");
-        }
-
-        socketHole.getHoleBox().setStyle("-fx-fill: #212121;");
-        return socketHole;
+        BreadboardSocketControl socket = new BreadboardSocketControl(row, col);
+        socket.setInRowConnectedGroup(inRowConnectedGroup);
+        socket.setInLeft(inLeft);
+        socket.addMouseClickedHandler(socketsMouseClickedHandler);
+        socket.addMouseEnteredHandler(socketsMouseEnteredHandler);
+        socket.addMouseExitedHandler(socketsMouseExitedHandler);
+        socket.getHoleBox().setStyle("-fx-fill: #212121;");
+        return socket;
     }
 
-    private SocketHoleControl createSpace()
+    private BreadboardSocketControl createSpace()
     {
-        SocketHoleControl socketHole = new SocketHoleControl();
+        BreadboardSocketControl socketHole = new BreadboardSocketControl();
         socketHole.getHoleBox().setStyle("-fx-fill: #ffffff;");
         socketHole.getHoleBox().setDisable(true);
         return socketHole;
     }
 
-    private void addColumnConnectedHoles(GridPane twoColGroup)
+    private void addColumnConnectedHoles(GridPane twoColGroup, boolean inLeft)
     {
-        for(int x = 0; x < getRow();)
+        for (int row = 0; row < getRow();)
         {
-            if(x == 0 || x == 1 || x == getRow()/2 || x == getRow()-1 || x == getRow()-2)
+            if (row == 0 || row == 1 || row == getRow()/2 || row == getRow()-1 || row == getRow()-2)
             {
-                for(int y = 0; y < 2; y++)
+                for (int col = 0; col < 2; col++)
                 {
-                    twoColGroup.add(createSpace(), y, x);
+                    twoColGroup.add(createSpace(), col, row);
                 }
-                x++;
+                row++;
             }
 
             else
             {
                 for (int r = 0; r < 5; r++)
                 {
-                    for (int y = 0; y < 2; y++)
+                    for (int col = 0; col < 2; col++)
                     {
-                        twoColGroup.add(createHole(), y, x);
+                        twoColGroup.add(createHole(row, col, false, inLeft), col, row);
                     }
-                    x++;
+                    row++;
                 }
-                for(int y = 0; y < 2; y++)
+                for (int y = 0; y < 2; y++)
                 {
-                    twoColGroup.add(createSpace(), y, x);
+                    twoColGroup.add(createSpace(), y, row);
                 }
-                x++;
+                row++;
             }
         }
     }
 
-    private void addRowConnectedHoles(GridPane socketHolesGroup)
+    private void addRowConnectedHoles(GridPane socketHolesGroup, boolean inLeft)
     {
-        for(int x = 0; x < getRow(); x++)
+        for (int row = 0; row < getRow(); row++)
         {
-            for(int y = 0; y < 5; y++)
+            for (int col = 0; col < 5; col++)
             {
-                socketHolesGroup.add(createHole(), y, x);
+                socketHolesGroup.add(createHole(row, col, true, inLeft), col, row);
             }
         }
+    }
+
+    public BreadboardSocketControl getSocket(int row, int col, boolean inRowConnectedGroup, boolean inLeft)
+    {
+        if (inRowConnectedGroup)
+        {
+            /*if (inLeft)
+                return rowConnectedLeftGroup.getChildren().get()*/
+        }
+        return new BreadboardSocketControl();
     }
 }

@@ -8,31 +8,42 @@ import java.util.List;
  */
 public class IntegratedCircuit extends ElectronicComponent
 {
-    private int pinCount;
+    private int pins;
     private String gate;
-    private List<String> pins;
+    private List<String> pinsFunctions;
 
     public IntegratedCircuit()
     {
         super();
-        this.overpassesBreadboardRavine = true;
+        this.setOverpassesBreadboardRavine(true);
     }
 
     public IntegratedCircuit(int pins)
     {
         super();
-        this.overpassesBreadboardRavine = true;
+        this.setOverpassesBreadboardRavine(true);
 
-        pinCount = pins;
-        this.pins = new ArrayList<String>(pins);
+        this.pins = pins;
+        this.pinsFunctions = new ArrayList<String>(pins);
     }
 
     public IntegratedCircuit(int pins, int colSpan)
     {
         super(pins/2, colSpan);
-        this.overpassesBreadboardRavine = true;
+        this.setOverpassesBreadboardRavine(true);
 
-        pinCount = pins;
+        this.pins = pins;
+        this.pinsFunctions = new ArrayList<String>(pins);
+    }
+
+    public int getPins()
+    {
+        return pins;
+    }
+
+    public void setPins(int pins)
+    {
+        this.pins = pins;
     }
 
     public String getGate()
@@ -47,6 +58,6 @@ public class IntegratedCircuit extends ElectronicComponent
 
     public void set(int pin, String function)
     {
-        pins.set(pin, function);
+        pinsFunctions.add(pin, function);
     }
 }

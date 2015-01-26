@@ -1,4 +1,4 @@
-<?import vbb.controllers.digital_trainer.controls.ConnectorControl?>
+<?import vbb.controllers.digital_trainer.controls.SocketControl?>
 <?import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,28 +17,28 @@
         <padding>
             <Insets top="10" bottom="10"/>
         </padding>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
-        <ConnectorControl/>
+        <SocketControl fx:id="socket1"/>
+        <SocketControl fx:id="socket2"/>
+        <SocketControl fx:id="socket3"/>
+        <SocketControl fx:id="socket4"/>
+        <SocketControl fx:id="socket5"/>
+        <SocketControl fx:id="socket6"/>
+        <SocketControl fx:id="socket7"/>
+        <SocketControl fx:id="socket8"/>
     </VBox>
 
     <VBox spacing="24" styleClass="switch_box">
         <padding>
             <Insets top="10" right="15" bottom="10" left="15"/>
         </padding>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
-        <DataSwitchControl/>
+        <DataSwitchControl fx:id="dataSwitch1"/>
+        <DataSwitchControl fx:id="dataSwitch2"/>
+        <DataSwitchControl fx:id="dataSwitch3"/>
+        <DataSwitchControl fx:id="dataSwitch4"/>
+        <DataSwitchControl fx:id="dataSwitch5"/>
+        <DataSwitchControl fx:id="dataSwitch6"/>
+        <DataSwitchControl fx:id="dataSwitch7"/>
+        <DataSwitchControl fx:id="dataSwitch8"/>
     </VBox>
 
 </HBox>

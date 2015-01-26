@@ -2,17 +2,18 @@
 <?import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.VBox?>
-<?import vbb.controllers.digital_trainer.controls.ConnectorControl?>
+<?import vbb.controllers.digital_trainer.controls.SocketControl?>
 <?import javafx.geometry.Insets?>
 
 <HBox xmlns:fx="http://javafx.com/javafx"
+      fx:controller="vbb.controllers.digital_trainer.PowerSupplyAreaController"
       spacing="7">
     <VBox spacing="24" styleClass="area">
         <padding>
             <Insets top="17" right="25" bottom="17" left="45"/>
         </padding>
-        <ConnectorControl/>
-        <ConnectorControl/>
+        <SocketControl fx:id="positiveSocket"/>
+        <SocketControl fx:id="negativeSocket"/>
     </VBox>
     <VBox alignment="CENTER" spacing="10">
         <padding>
