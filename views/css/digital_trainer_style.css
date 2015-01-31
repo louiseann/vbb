@@ -45,3 +45,7 @@
 .led {
     -fx-fill: #960014;
 }
+
+.led_light {
+    -fx-fill: rgba(223, 0, 36, .4);
+}

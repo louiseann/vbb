@@ -52,5 +52,8 @@
             </ImageView>
         </AnchorPane>
     </HBox>
-    <Pane fx:id="appliedTools" mouseTransparent="true"/>
+    <StackPane fx:id="pluggedTools" mouseTransparent="true">
+        <Pane fx:id="pluggedChips" mouseTransparent="true"/>
+        <Pane fx:id="pluggedWires" mouseTransparent="true"/>
+    </StackPane>
 </StackPane>

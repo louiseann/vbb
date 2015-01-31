@@ -1,10 +1,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.layout.VBox?>
 <?import vbb.controllers.digital_trainer.controls.SocketControl?>
 <?import javafx.geometry.Insets?>
 
+<?import vbb.controllers.digital_trainer.controls.LEDControl?>
 <HBox xmlns:fx="http://javafx.com/javafx"
       fx:controller="vbb.controllers.digital_trainer.PowerSupplyAreaController"
       spacing="7">
@@ -15,7 +15,7 @@
         <SocketControl fx:id="positiveSocket"/>
         <SocketControl fx:id="negativeSocket"/>
     </VBox>
-    <VBox alignment="CENTER" spacing="10">
+    <VBox alignment="CENTER" spacing="3">
         <padding>
             <Insets top="17"/>
         </padding>
@@ -23,8 +23,8 @@
             <padding>
                 <Insets top="7" right="7" bottom="7" left="7"/>
             </padding>
-            <PowerSwitchControl/>
+            <PowerSwitchControl fx:id="powerSwitch"/>
         </VBox>
-        <Circle radius="10" styleClass="led"/>
+        <LEDControl fx:id="ledControl"/>
     </VBox>
 </HBox>

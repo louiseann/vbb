@@ -46,8 +46,8 @@ public class ToolsController
 
     private Rectangle wireToolViewCopy;
 
-    private static ObjectProperty focusedToolButton;
-    private static Map<Button, Tool> tools;
+    private ObjectProperty focusedToolButton;
+    private Map<Button, Tool> tools;
 
     @FXML
     public void initialize()
@@ -115,27 +115,27 @@ public class ToolsController
 
     // end of wire methods
 
-    private static void setFocusedToolButton(Object toolButton)
+    private void setFocusedToolButton(Object toolButton)
     {
         focusedToolButton.set(toolButton);
     }
 
-    private static Object getFocusedToolButton()
+    private Object getFocusedToolButton()
     {
         return focusedToolButton.get();
     }
 
-    public static ObjectProperty currentTool()
+    public ObjectProperty currentTool()
     {
         return focusedToolButton;
     }
 
-    public static Tool getCurrentTool()
+    public Tool getCurrentTool()
     {
         return tools.get(currentToolButton());
     }
 
-    private static Button currentToolButton()
+    private Button currentToolButton()
     {
         return (Button) getFocusedToolButton();
     }

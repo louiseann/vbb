@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.ToolsController;
+import vbb.models.digital_trainer.breadboard_sockets.BreadboardSocket;
 
 import java.io.IOException;
 
@@ -18,21 +19,23 @@ public class BreadboardSocketControl extends Pane
     @FXML
     private Rectangle holeBox;
 
+    private BreadboardSocket socket;
+
     private int row, col;
     private boolean inColConnectedGroup, inRowConnectedGroup;
     private boolean inLeft, inRight;
-
-    private EventHandler<MouseEvent> onClickedHandler;
 
     public BreadboardSocketControl()
     {
         loadFXML();
     }
 
-    public BreadboardSocketControl(int row, int col)
+    public BreadboardSocketControl(BreadboardSocket socket, int row, int col)
     {
-        this.row = row;
-        this.col = col;
+        setSocket(socket);
+
+        setRow(row);
+        setCol(col);
 
         loadFXML();
     }
@@ -55,19 +58,14 @@ public class BreadboardSocketControl extends Pane
         return holeBox;
     }
 
-    public void addMouseClickedHandler(EventHandler<MouseEvent> handler)
+    public BreadboardSocket getSocket()
     {
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+        return socket;
     }
 
-    public void addMouseEnteredHandler(EventHandler<MouseEvent> handler)
+    public void setSocket(BreadboardSocket socket)
     {
-        this.addEventHandler(MouseEvent.MOUSE_ENTERED, handler);
-    }
-
-    public void addMouseExitedHandler(EventHandler<MouseEvent> handler)
-    {
-        this.addEventHandler(MouseEvent.MOUSE_EXITED, handler);
+        this.socket = socket;
     }
 
     public int getRow()

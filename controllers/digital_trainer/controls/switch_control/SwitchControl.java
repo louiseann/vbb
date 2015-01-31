@@ -2,10 +2,8 @@ package vbb.controllers.digital_trainer.controls.switch_control;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import vbb.controllers.tools.ToolsController;
 import vbb.models.digital_trainer.Switch;
 
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.io.IOException;
  */
 public class SwitchControl extends StackPane
 {
-    private Switch aSwitch;
+    private Switch switchInstance;
 
     @FXML
     Rectangle toggleHandle;
@@ -24,7 +22,7 @@ public class SwitchControl extends StackPane
 
     public SwitchControl(String fxmlSourceUrl)
     {
-        aSwitch = new Switch();
+        switchInstance = new Switch();
 
         FXMLLoader switchLoader = new FXMLLoader(getClass().getResource(fxmlSourceUrl));
         switchLoader.setRoot(this);
@@ -37,27 +35,28 @@ public class SwitchControl extends StackPane
         }
     }
 
-    @FXML
-    public void toggleSwitch(MouseEvent event)
+    public Switch getSwitchInstance()
     {
-        if (ToolsController.getCurrentTool().getClassificationClassName().equals("Select"))
+        return switchInstance;
+    }
+
+    public void toggleSwitch()
+    {
+        if(switchInstance.isOn())
         {
-            if(aSwitch.getState() == Switch.ON)
-            {
-                double xPosition = toggleHandle.getLayoutX() - (toggleHandle.getLayoutX() - box.getLayoutX());
-                moveToggleHandle(xPosition, 0);
-                toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);");
-            }
-
-            else if(aSwitch.getState() == Switch.OFF)
-            {
-                double xPosition = box.getLayoutX() - (box.getWidth() - toggleHandle.getWidth());
-                moveToggleHandle(xPosition, 0);
-                toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, 1, 0);");
-            }
-
-            aSwitch.toggle();
+            double xPosition = toggleHandle.getLayoutX() - (toggleHandle.getLayoutX() - box.getLayoutX());
+            moveToggleHandle(xPosition, 0);
+            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);");
         }
+
+        else
+        {
+            double xPosition = box.getLayoutX() - (box.getWidth() - toggleHandle.getWidth());
+            moveToggleHandle(xPosition, 0);
+            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, 1, 0);");
+        }
+
+        switchInstance.toggle();
     }
 
     private void moveToggleHandle(double x, double y)

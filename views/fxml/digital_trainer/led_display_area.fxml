@@ -1,32 +1,33 @@
 <?import javafx.scene.layout.GridPane?>
 <?import vbb.controllers.digital_trainer.controls.SocketControl?>
-<?import javafx.scene.shape.Circle?>
+<?import vbb.controllers.digital_trainer.controls.LEDControl?>
 <?import javafx.geometry.Insets?>
 
 <GridPane xmlns:fx="http://javafx.com/javafx"
           fx:controller="vbb.controllers.digital_trainer.LedDisplayAreaController"
-          hgap="35" vgap="14"
+          fx:id="ledDisplayArea"
+          hgap="35" vgap="0"
           styleClass="area">
 
     <padding>
-        <Insets top="14" right="30" bottom="14" left="45"/>
+        <Insets top="7" right="30" bottom="7" left="45"/>
     </padding>
 
-    <SocketControl fx:id="socket1" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket2" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket3" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket4" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket5" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket6" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket7" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="led"/>
-    <SocketControl fx:id="socket8" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-    <Circle radius="10" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="led"/>
+    <SocketControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <SocketControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+    <LEDControl GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
 </GridPane>

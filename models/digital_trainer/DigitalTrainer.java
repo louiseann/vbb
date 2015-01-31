@@ -3,17 +3,17 @@ package vbb.models.digital_trainer;
 /**
  * Created by owie on 1/11/15.
  */
-public class DigitalTrainer
+public class DigitalTrainer extends Control
 {
-    private static String currentTool;
+    private static DigitalTrainer instance = new DigitalTrainer();
 
-    public static void setCurrentTool(String tool)
+    private DigitalTrainer()
     {
-        currentTool = tool;
+        super();
     }
 
-    public static String getCurrentTool()
+    public static DigitalTrainer getInstance()
     {
-        return currentTool;
+        return instance;
     }
 }

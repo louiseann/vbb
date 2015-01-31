@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import vbb.controllers.tools.ToolsController;
+import vbb.models.digital_trainer.Socket;
 
 import java.io.IOException;
 
@@ -17,6 +18,8 @@ public class SocketControl extends StackPane
 {
     @FXML
     private Circle socketCircle;
+
+    private Socket socket;
 
     public SocketControl()
     {
@@ -29,6 +32,13 @@ public class SocketControl extends StackPane
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        socket = new Socket();
+    }
+
+    public Socket getSocket()
+    {
+        return socket;
     }
 
     public void addMouseClickedHandler(EventHandler<MouseEvent> handler)
