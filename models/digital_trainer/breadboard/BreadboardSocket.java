@@ -1,5 +1,7 @@
 package vbb.models.digital_trainer.breadboard;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.digital_trainer.Voltage;
 
@@ -17,9 +19,14 @@ public class BreadboardSocket extends Socket
     }
 
     @Override
-    public void powerUp(boolean voltage)
+    public void powerUp(boolean highVoltage)
     {
-        if (voltage == Voltage.HIGH)
-            mediator.powerConnectedSockets(this);
+        powered().set(highVoltage);
+        mediator.powerConnectedSockets(this);
+    }
+
+    private void callMediator()
+    {
+        mediator.powerConnectedSockets(this);
     }
 }

@@ -56,9 +56,13 @@ public class Socket extends Control
     private void shareEqualPower()
     {
         boolean voltage = this.isPowered() || socketConnected.isPowered();
-
-        this.powerUp(voltage);
-        socketConnected.powerUp(voltage);
+        if (voltage != this.isPowered())
+        {
+            this.powerUp(voltage);
+            socketConnected.powerUp(voltage);
+        }
+        else
+            socketConnected.powerUp(voltage);
     }
 
     private void changePower(boolean highVoltage)
