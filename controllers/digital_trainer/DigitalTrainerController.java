@@ -12,7 +12,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
 import vbb.models.digital_trainer.DigitalTrainer;
-import vbb.models.digital_trainer.Voltage;
 
 /**
  * Created by owie on 1/19/15.
@@ -119,7 +118,7 @@ public class DigitalTrainerController
 
     public void setPowerSwitchClickedHandler(EventHandler<MouseEvent> handler)
     {
-        powerSupplyAreaController.addPowerSwitchClickedHadler(handler);
+        powerSupplyAreaController.addPowerSwitchClickedHandler(handler);
     }
 
     public void setDataSwitchesClickedHandler(EventHandler<MouseEvent> handler)

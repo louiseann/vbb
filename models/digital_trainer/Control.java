@@ -25,8 +25,8 @@ public abstract class Control
         return powered.get();
     }
 
-    public void powerUp(boolean powerUp)
+    public void powerUp(boolean voltage)
     {
-        powered.set(powerUp);
+        powered.set(voltage);
     }
 }

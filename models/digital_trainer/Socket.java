@@ -2,6 +2,8 @@ package vbb.models.digital_trainer;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 /**
  * Created by owie on 11/29/14.
@@ -9,14 +11,20 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class Socket extends Control
 {
     private BooleanProperty occupied;
-    private Voltage voltage;
-
-    private Socket connectedTo;
+    private Socket socketConnected;
 
     public Socket()
     {
+        super();
         occupied = new SimpleBooleanProperty(false);
-        voltage = new Voltage(Voltage.LOW);
+
+        this.powered().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (socketConnected != null)
+                    changePower(newValue);
+            }
+        });
     }
 
     public BooleanProperty occupied()
@@ -24,7 +32,7 @@ public class Socket extends Control
         return occupied;
     }
 
-    public boolean getOccupied()
+    public boolean isOccupied()
     {
         return occupied.get();
     }
@@ -34,33 +42,28 @@ public class Socket extends Control
         this.occupied.set(occupied);
     }
 
-    public Voltage voltage()
+    public Socket getSocketConnected()
     {
-        return voltage;
+        return socketConnected;
     }
 
-    public boolean getVoltage()
+    public void setSocketConnected(Socket socket)
     {
-        return voltage.get();
+        this.socketConnected = socket;
+        shareEqualPower();
     }
 
-    private void setVoltage(boolean voltage)
+    private void shareEqualPower()
     {
-        this.voltage.set(voltage);
+        boolean voltage = this.isPowered() || socketConnected.isPowered();
+
+        this.powerUp(voltage);
+        socketConnected.powerUp(voltage);
     }
 
-    public Socket getConnectedTo()
+    private void changePower(boolean highVoltage)
     {
-        return connectedTo;
+        this.powerUp(highVoltage);
+        socketConnected.powerUp(highVoltage);
     }
-
-    public void setConnectedTo(Socket socket)
-    {
-        this.connectedTo = socket;
-    }
-
-    //public void powerUp(boolean voltage)
-    //{
-    //    setVoltage(voltage);
-    //}
 }

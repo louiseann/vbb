@@ -81,7 +81,7 @@ public class MainController
                 String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
                 if (currentToolClass.equals("Wire"))
                 {
-                    if (Wire.isStartSet())
+                    if (WireControl.isStartSet())
                     {
                         wireControl.setEndX(event.getX());
                         wireControl.setEndY(event.getY());
@@ -93,9 +93,11 @@ public class MainController
         toolsAreaController.currentTool().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                if (Wire.isStartSet())
+                if (WireControl.isStartSet())
+                {
                     digitalTrainerController.unplugWire(wireControl);
-
+                    WireControl.startSet(false);
+                }
                 setUpToolCursorImage();
             }
         });
@@ -122,11 +124,7 @@ public class MainController
                 if (currentToolClass.equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socketControl);
                 else if (currentToolClass.equals(Wire.class.getSimpleName()))
-                {
-                    handleWireClicked(socketControl);
-                    handleWirePluggedAt(socketControl.getSocket());
-                }
-
+                    handleWireToolClicked(socketControl, socketControl.getSocket());
             }
         };
         final EventHandler<MouseEvent> enteredHandler = new EventHandler<MouseEvent>() {
@@ -159,10 +157,7 @@ public class MainController
                 String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
                 SocketControl socketControl = (SocketControl) ((Circle) event.getSource()).getParent();
                 if (currentToolClass.equals(Wire.class.getSimpleName()))
-                {
-                    handleWireClicked(socketControl);
-                    handleWirePluggedAt(socketControl.getSocket());
-                }
+                    handleWireToolClicked(socketControl, socketControl.getSocket());
             }
         };
         final EventHandler<MouseEvent> enteredOnSocketHandler = new EventHandler<MouseEvent>() {
@@ -230,14 +225,32 @@ public class MainController
         };
     }
 
-    private void handleWireClicked(Node nodeSocket)
+    private void handleWireToolClicked(Node nodeSocket, Socket socket)
     {
-        final Bounds nodeBounds = nodeSocket.localToScene(nodeSocket.getBoundsInLocal());
+        if (!socket.isOccupied())
+        {
+            Wire wire = WireControl.isStartSet() ? wireControl.getWire() : new Wire();
+            plug(wire, socket);
+
+            setWireControl(nodeSocket, wire);
+        }
+    }
+
+    private void plug(Wire wire, Socket atSocket)
+    {
+        wire.plug(atSocket);
+        atSocket.setOccupied(true);
+    }
+
+    private void setWireControl(Node socketNode, Wire wire)
+    {
+        final Bounds nodeBounds = socketNode.localToScene(socketNode.getBoundsInLocal());
         Point2D position = getPointAtCenterPane(nodeBounds);
 
-        if (!Wire.isStartSet())
+        if (!WireControl.isStartSet())
         {
             wireControl = new WireControl();
+            wireControl.setWire(wire);
             wireControl.setStroke(toolsAreaController.getWireColor());
             wireControl.setStrokeWidth(4);
             wireControl.setMouseTransparent(false);
@@ -253,19 +266,17 @@ public class MainController
             wireControl.addEventHandler(MouseEvent.MOUSE_ENTERED, enteredHandler);
             wireControl.addEventHandler(MouseEvent.MOUSE_EXITED, exitedHandler);
 
+            WireControl.startSet(true);
+
             digitalTrainerController.plugWire(wireControl);
         }
         else
         {
             wireControl.setEndX(position.getX());
             wireControl.setEndY(position.getY());
-        }
-    }
 
-    private void handleWirePluggedAt(Socket socket)
-    {
-        Wire wire = wireControl.getWire();
-        wire.plugAt(socket);
+            WireControl.startSet(false);
+        }
     }
 
     private void handleIntegratedCircuitEvent(EventType eventType, BreadboardSocketControl socket)
@@ -304,7 +315,6 @@ public class MainController
                         socket.getHoleBox().setStyle("-fx-stroke: null;");
                 }
             }
-
         }
     }
 

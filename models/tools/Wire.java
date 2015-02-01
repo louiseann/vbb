@@ -10,13 +10,6 @@ public class Wire
     private Socket socketAtEndPoint;
     private Socket socketAtOtherEndPoint;
 
-    private static boolean startSet = false;
-
-    public static boolean isStartSet()
-    {
-        return startSet;
-    }
-
     public Socket getSocketAtEndPoint()
     {
         return socketAtEndPoint;
@@ -37,18 +30,19 @@ public class Wire
         this.socketAtOtherEndPoint = socket;
     }
 
-    public void plugAt(Socket socket)
+    public void plug(Socket atSocket)
     {
-        if (!isStartSet())
-        {
-            setSocketAtEndPoint(socket);
-            startSet = true;
-        }
+        if (socketAtEndPoint == null)
+            setSocketAtEndPoint(atSocket);
         else
         {
-            setSocketAtOtherEndPoint(socket);
-            startSet = false;
+            setSocketAtOtherEndPoint(atSocket);
+            setConnection();
         }
+    }
 
+    private void setConnection()
+    {
+        socketAtEndPoint.setSocketConnected(socketAtOtherEndPoint);
     }
 }

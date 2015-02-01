@@ -1,4 +1,4 @@
-package vbb.models.digital_trainer.breadboard_sockets;
+package vbb.models.digital_trainer.breadboard;
 
 import vbb.models.digital_trainer.Socket;
 import vbb.models.digital_trainer.Voltage;

@@ -12,8 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import vbb.models.digital_trainer.breadboard_sockets.BreadboardSocket;
-import vbb.models.digital_trainer.breadboard_sockets.MetalStrip;
+import vbb.models.digital_trainer.breadboard.BreadboardSocket;
+import vbb.models.digital_trainer.breadboard.MetalStrip;
 
 import java.io.IOException;
 

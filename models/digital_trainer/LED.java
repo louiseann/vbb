@@ -5,4 +5,8 @@ package vbb.models.digital_trainer;
  */
 public class LED extends Control
 {
+    public LED()
+    {
+        super();
+    }
 }

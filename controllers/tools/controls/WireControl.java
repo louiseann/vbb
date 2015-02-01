@@ -8,15 +8,32 @@ import vbb.models.tools.Wire;
  */
 public class WireControl extends Line
 {
+    private static boolean startSet = false;
+
     private Wire wire;
 
     public WireControl()
     {
-        wire = new Wire();
+        super();
+    }
+
+    public static boolean isStartSet()
+    {
+        return startSet;
+    }
+
+    public static void startSet(boolean started)
+    {
+        startSet = started;
     }
 
     public Wire getWire()
     {
         return wire;
+    }
+
+    public void setWire(Wire wire)
+    {
+        this.wire = wire;
     }
 }

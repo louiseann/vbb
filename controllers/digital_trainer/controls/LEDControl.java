@@ -37,6 +37,13 @@ public class LEDControl extends StackPane
 
         led = new LED();
         lightUp(false);
+
+        led.powered().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                lightUp(newValue);
+            }
+        });
     }
 
     public LED getLed()

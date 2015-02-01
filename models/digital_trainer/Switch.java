@@ -30,7 +30,13 @@ public class Switch extends Control
         state.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    powerUpControls(state.get());
+                powerUpControls(newValue);
+            }
+        });
+        powered().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                powerUpControls(newValue && getState());
             }
         });
     }
@@ -67,12 +73,15 @@ public class Switch extends Control
 
     public void powerUpControls(boolean highVoltage)
     {
+        boolean voltage;
         if (this.isPowered())
+            voltage = highVoltage;
+        else
+            voltage = Voltage.LOW && highVoltage;
+
+        for (Control control : poweredControls)
         {
-            for (Control control : poweredControls)
-            {
-                control.powerUp(highVoltage);
-            }
+            control.powerUp(voltage);
         }
     }
 }

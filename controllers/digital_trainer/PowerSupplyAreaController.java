@@ -27,13 +27,6 @@ public class PowerSupplyAreaController
     public void initialize()
     {
         powerSwitch.getSwitchInstance().powerUp(true);
-
-        ledControl.getLed().powered().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                ledControl.lightUp(newValue);
-            }
-        });
     }
 
     public Switch getPowerSwitch()
@@ -41,7 +34,7 @@ public class PowerSupplyAreaController
         return powerSwitch.getSwitchInstance();
     }
 
-    public void addPowerSwitchClickedHadler(EventHandler<MouseEvent> handler)
+    public void addPowerSwitchClickedHandler(EventHandler<MouseEvent> handler)
     {
         powerSwitch.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
     }

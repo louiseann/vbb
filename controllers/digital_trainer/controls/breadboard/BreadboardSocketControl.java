@@ -1,13 +1,10 @@
 package vbb.controllers.digital_trainer.controls.breadboard;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import vbb.controllers.tools.ToolsController;
-import vbb.models.digital_trainer.breadboard_sockets.BreadboardSocket;
+import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 
 import java.io.IOException;
 

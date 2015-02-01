@@ -1,4 +1,4 @@
-package vbb.models.digital_trainer.breadboard_sockets;
+package vbb.models.digital_trainer.breadboard;
 
 import vbb.models.digital_trainer.Socket;
 
@@ -23,6 +23,7 @@ public class MetalStrip
         {
             if (socket != source)
             {
+                socket.powerUp(source.isPowered());
                 System.out.println("fire!");
             }
         }
