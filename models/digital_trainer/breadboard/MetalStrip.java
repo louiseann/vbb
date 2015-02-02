@@ -24,9 +24,10 @@ public class MetalStrip
             if (socket != source)
             {
                 socket.powered().set(source.isPowered());
-                System.out.println("fire!");
+                System.out.println("fire! " + source.isPowered());
             }
         }
+        System.out.println();
     }
 
     public void addSocket(Socket socket)

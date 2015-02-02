@@ -4,6 +4,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -33,6 +35,21 @@ public class Tool
         return name;
     }
 
+    public void setClassification(Object classification)
+    {
+        this.classification = classification;
+    }
+
+    public Object getClassification()
+    {
+        return classification;
+    }
+
+    public String getClassificationClassName()
+    {
+        return classification.getClass().getSimpleName();
+    }
+
     public void setView(Node view)
     {
         this.view = new Pane(view);
@@ -52,19 +69,10 @@ public class Tool
         return view;
     }
 
-    public void setClassification(Object classification)
+    public Image getViewImage()
     {
-        this.classification = classification;
-    }
-
-    public Object getClassification()
-    {
-        return classification;
-    }
-
-    public String getClassificationClassName()
-    {
-        return classification.getClass().getSimpleName();
+        ImageView imageView = (ImageView) view.getChildren().get(0);
+        return imageView.getImage();
     }
 
     public void setCursor(Cursor cursor)

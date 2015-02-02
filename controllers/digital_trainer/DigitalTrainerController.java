@@ -10,8 +10,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Shape;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
 import vbb.models.digital_trainer.DigitalTrainer;
+import vbb.models.digital_trainer.Socket;
 
 /**
  * Created by owie on 1/19/15.

@@ -24,9 +24,4 @@ public class BreadboardSocket extends Socket
         powered().set(highVoltage);
         mediator.powerConnectedSockets(this);
     }
-
-    private void callMediator()
-    {
-        mediator.powerConnectedSockets(this);
-    }
 }

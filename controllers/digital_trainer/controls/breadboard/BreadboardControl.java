@@ -1,9 +1,7 @@
 package vbb.controllers.digital_trainer.controls.breadboard;
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -16,6 +14,8 @@ import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.digital_trainer.breadboard.MetalStrip;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by owie on 12/6/14.
@@ -31,11 +31,15 @@ public class BreadboardControl extends HBox
     @FXML
     private GridPane rowConnectedRightGroup;
 
-    private IntegerProperty row = new SimpleIntegerProperty();
+    private int rowCount;
+    private int rowConnectedMaxCol = 5, colConnectedMaxCol = 2;
 
     private EventHandler<MouseEvent> socketsMouseClickedHandler;
     private EventHandler<MouseEvent> socketsMouseEnteredHandler;
     private EventHandler<MouseEvent> socketsMouseExitedHandler;
+
+    private List<List<BreadboardSocketControl>> rowConnectedLeftSocketControlsWrapper;
+    private List<List<BreadboardSocketControl>> rowConnectedRightSocketControlsWrapper;
 
     private static BooleanProperty eventHandlersSet = new SimpleBooleanProperty(false);
 
@@ -51,6 +55,9 @@ public class BreadboardControl extends HBox
             throw new RuntimeException(e);
         }
 
+        rowConnectedLeftSocketControlsWrapper = new ArrayList<List<BreadboardSocketControl>>();
+        rowConnectedRightSocketControlsWrapper = new ArrayList<List<BreadboardSocketControl>>();
+
         eventHandlersSet.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -63,22 +70,22 @@ public class BreadboardControl extends HBox
     @FXML
     private void initialize()
     {
-        setRow(64);
+        setRowCount(64);
     }
 
-    public void setRow(int row)
+    public void setRowCount(int rowCount)
     {
-        this.row.set(row);
+        this.rowCount = rowCount;
     }
 
-    public IntegerProperty rowProperty()
+    public int getRowCount()
     {
-        return row;
+        return rowCount;
     }
 
-    public int getRow()
+    public int getRowConnectedMaxCol()
     {
-        return row.get();
+        return rowConnectedMaxCol;
     }
 
     public void setSocketsMouseClickedHandler(EventHandler<MouseEvent> socketsMouseClickedHandler)
@@ -149,19 +156,19 @@ public class BreadboardControl extends HBox
 
     private void addColumnConnectedHoles(GridPane twoColGroup, boolean inLeft)
     {
-        for (int col = 0; col < 2; col++)
+        for (int col = 0; col < colConnectedMaxCol; col++)
         {
             MetalStrip powerRail1 = new MetalStrip();
             MetalStrip powerRail2 = new MetalStrip();
-            for (int row = 0; row < getRow();)
+            for (int row = 0; row < getRowCount();)
             {
-                if (row == 0 || row == 1 || row == getRow()/2 || row == getRow()-1 || row == getRow()-2)
+                if (row == 0 || row == 1 || row == getRowCount()/2 || row == getRowCount()-1 || row == getRowCount()-2)
                     twoColGroup.add(createSpace(), col, row++);
                 else
                 {
                     for (int r = 0; r < 5; r++)
                     {
-                        if (row < getRow()/2)
+                        if (row < getRowCount()/2)
                             twoColGroup.add(createHole(powerRail1, row, col, false, inLeft), col, row++);
                         else
                             twoColGroup.add(createHole(powerRail2, row, col, false, inLeft), col, row++);
@@ -174,19 +181,28 @@ public class BreadboardControl extends HBox
 
     private void addRowConnectedHoles(GridPane socketControlsGroup, boolean inLeft)
     {
-        for (int row = 0; row < getRow(); row++)
+        for (int row = 0; row < getRowCount(); row++)
         {
+            List<BreadboardSocketControl> connectedSocketControls = new ArrayList<BreadboardSocketControl>();
             MetalStrip terminalStrip = new MetalStrip();
-            for (int col = 0; col < 5; col++)
+            for (int col = 0; col < rowConnectedMaxCol; col++)
             {
                 BreadboardSocketControl socketControl = createHole(terminalStrip, row, col, true, inLeft);
                 socketControlsGroup.add(socketControl, col, row);
+                connectedSocketControls.add(col, socketControl);
             }
+            if (inLeft)
+                rowConnectedLeftSocketControlsWrapper.add(row, connectedSocketControls);
+            else
+                rowConnectedRightSocketControlsWrapper.add(row, connectedSocketControls);
         }
     }
 
-    public void connect(BreadboardSocketControl socketControl)
+    public BreadboardSocketControl getSocketFromRowConnectedGroup(int atRow, int atCol, boolean inLeft)
     {
-        BreadboardSocket socket = socketControl.getSocket();
+        if (inLeft)
+            return rowConnectedLeftSocketControlsWrapper.get(atRow).get(atCol);
+        else
+            return rowConnectedRightSocketControlsWrapper.get(atRow).get(atCol);
     }
 }
