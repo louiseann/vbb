@@ -1,5 +1,14 @@
 package vbb.models.tools.electronic_component;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import vbb.models.Voltage;
+import vbb.models.digital_trainer.Control;
+import vbb.models.digital_trainer.Socket;
+import vbb.models.logic_gates.LogicGate;
+import vbb.models.tools.connectors.Pin;
+import vbb.models.tools.connectors.end_point.EndPoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,56 +17,103 @@ import java.util.List;
  */
 public class IntegratedCircuit extends ElectronicComponent
 {
-    private int pins;
-    private String gate;
-    private List<String> pinsFunctions;
+    private int pinCount;
+    private LogicGate logicGate;
+    private List<Pin> pins;
 
-    public IntegratedCircuit()
-    {
-        super();
-        this.setOverpassesBreadboardRavine(true);
-    }
+    private Socket positiveTerminal;
+    private Socket negativeTerminal;
 
-    public IntegratedCircuit(int pins)
+    public IntegratedCircuit(int pinCount, int colSpan)
     {
-        super();
+        super(pinCount /2, colSpan);
         this.setOverpassesBreadboardRavine(true);
 
-        this.pins = pins;
-        this.pinsFunctions = new ArrayList<String>(pins);
+        this.pinCount = pinCount;
+        this.pins = new ArrayList<Pin>(pinCount);
+
+        setupPowerTerminals();
     }
 
-    public IntegratedCircuit(int pins, int colSpan)
+    public int getPinCount()
     {
-        super(pins/2, colSpan);
-        this.setOverpassesBreadboardRavine(true);
-
-        this.pins = pins;
-        this.pinsFunctions = new ArrayList<String>(pins);
+        return pinCount;
     }
 
-    public int getPins()
+    public LogicGate getLogicGate()
     {
-        return pins;
+        return logicGate;
     }
 
-    public void setPins(int pins)
+    public void setLogicGate(LogicGate logicGate)
     {
-        this.pins = pins;
+        this.logicGate = logicGate;
     }
 
-    public String getGate()
+    public void set(int index, Pin pin)
     {
-        return gate;
+        pins.add(index, pin);
     }
 
-    public void setGate(String gate)
+    public void setupPowerTerminals()
     {
-        this.gate = gate;
+        positiveTerminal = new Socket();
+        negativeTerminal = new Socket();
+
+        ChangeListener<Boolean> powerTerminalsVoltageChangeListener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                Voltage positiveTerminalVoltage = positiveTerminal.getVoltage();
+                Voltage negativeTerminalVoltage = negativeTerminal.getVoltage();
+                if (positiveTerminalVoltage != null && positiveTerminalVoltage.equals(Voltage.HIGH) &&
+                        negativeTerminalVoltage != null && negativeTerminalVoltage.equals(Voltage.LOW))
+                    powerUp(true);
+            }
+        };
+
+//        positiveTerminal.getVoltage().addListener(powerTerminalsVoltageChangeListener);
+//        negativeTerminal.getVoltage().addListener(powerTerminalsVoltageChangeListener);
     }
 
-    public void set(int pin, String function)
+    public Socket getPositiveTerminal()
     {
-        pinsFunctions.add(pin, function);
+        return positiveTerminal;
+    }
+
+    public Socket getNegativeTerminal()
+    {
+        return negativeTerminal;
+    }
+
+    public Pin createGndPin()
+    {
+        Pin gnd = new Pin();
+        gnd.getEndPoint2().setControlConnected(this.getNegativeTerminal());
+
+        return gnd;
+    }
+
+    public Pin createVccPin()
+    {
+        Pin vcc = new Pin();
+        vcc.getEndPoint2().setControlConnected(this.getPositiveTerminal());
+
+        return vcc;
+    }
+
+    public Pin createInputPin()
+    {
+        Pin input = new Pin();
+        input.getSenderEndPoint().setControlConnected(new Socket());
+
+        return input;
+    }
+
+    public Pin createOutputPin()
+    {
+        Pin output = new Pin();
+        output.getReceiverEndPoint().setControlConnected(new Socket());
+
+        return output;
     }
 }

@@ -61,6 +61,6 @@ public class PowerSupplyAreaController
     {
         ledControl.getLed().powerUp(highVoltage);
         positiveSocket.getSocket().powerUp(highVoltage);
-        negativeSocket.getSocket().powerUp(highVoltage && Voltage.LOW);
+        negativeSocket.getSocket().powerUp(highVoltage && false);
     }
 }

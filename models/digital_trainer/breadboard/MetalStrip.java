@@ -34,4 +34,9 @@ public class MetalStrip
     {
         connectedSockets.add(socket);
     }
+
+    public Socket getSocket(int index)
+    {
+        return connectedSockets.get(index);
+    }
 }

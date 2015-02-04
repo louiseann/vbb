@@ -77,7 +77,7 @@ public class Switch extends Control
         if (this.isPowered())
             voltage = highVoltage;
         else
-            voltage = Voltage.LOW && highVoltage;
+            voltage = false && highVoltage;
 
         for (Control control : poweredControls)
         {

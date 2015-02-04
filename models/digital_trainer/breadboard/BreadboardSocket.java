@@ -1,9 +1,6 @@
 package vbb.models.digital_trainer.breadboard;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import vbb.models.digital_trainer.Socket;
-import vbb.models.digital_trainer.Voltage;
 
 /**
  * Created by owie on 1/27/15.

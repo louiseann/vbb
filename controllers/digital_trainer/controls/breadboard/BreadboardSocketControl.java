@@ -19,7 +19,6 @@ public class BreadboardSocketControl extends Pane
     private BreadboardSocket socket;
 
     private int row, col;
-    private boolean inColConnectedGroup, inRowConnectedGroup;
     private boolean inLeft, inRight;
 
     public BreadboardSocketControl()
@@ -83,28 +82,6 @@ public class BreadboardSocketControl extends Pane
     public void setCol(int col)
     {
         this.col = col;
-    }
-
-    public void setInColConnectedGroup(boolean inColConnectedGroup)
-    {
-        this.inColConnectedGroup = inColConnectedGroup;
-        this.inRowConnectedGroup = !inColConnectedGroup;
-    }
-
-    public boolean isInColConnectedGroup()
-    {
-        return inColConnectedGroup;
-    }
-
-    public void setInRowConnectedGroup(boolean inRowConnectedGroup)
-    {
-        this.inRowConnectedGroup = inRowConnectedGroup;
-        this.inColConnectedGroup = !inRowConnectedGroup;
-    }
-
-    public boolean isInRowConnectedGroup()
-    {
-        return inRowConnectedGroup;
     }
 
     public void setInLeft(boolean inLeft)

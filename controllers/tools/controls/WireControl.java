@@ -1,7 +1,7 @@
 package vbb.controllers.tools.controls;
 
 import javafx.scene.shape.Line;
-import vbb.models.tools.Wire;
+import vbb.models.tools.connectors.Wire;
 
 /**
  * Created by owie on 1/29/15.

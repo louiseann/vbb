@@ -5,6 +5,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
 import vbb.models.tools.electronic_component.TTL74SeriesIC;
 

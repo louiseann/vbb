@@ -26,7 +26,7 @@ import vbb.controllers.tools.controls.WireControl;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
-import vbb.models.tools.Wire;
+import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
 
 public class MainController
@@ -285,10 +285,10 @@ public class MainController
     private void handleIntegratedCircuitEvent(EventType eventType, BreadboardSocketControl socket)
     {
         IntegratedCircuit chip = (IntegratedCircuit) toolsAreaController.getCurrentTool().getClassification();
-        int maxCol = digitalTrainerController.getBreadBoard().getRowConnectedMaxCol() - 1;
+        int maxCol = digitalTrainerController.getBreadBoard().getBreadboard().getTerminalHoleColumns() - 1;
         int reverseColPosition = Math.abs(socket.getCol() - maxCol - 1);
 
-        if (socket.getRow() + chip.getRowSpan() <= digitalTrainerController.getBreadBoard().getRowCount() &&
+        if (socket.getRow() + chip.getRowSpan() <= digitalTrainerController.getBreadBoard().getBreadboard().getGridRows() &&
                 reverseColPosition < chip.getColSpan() &&
                 reverseColPosition > 0 &&
                 !occupied(socket, chip.getRowSpan(), chip.getColSpan(), reverseColPosition))

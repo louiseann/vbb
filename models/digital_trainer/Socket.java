@@ -4,6 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import vbb.models.Voltage;
 
 /**
  * Created by owie on 11/29/14.
@@ -12,6 +13,8 @@ public class Socket extends Control
 {
     private BooleanProperty occupied;
     private Socket socketConnected;
+
+    private Voltage voltage;
 
     public Socket()
     {
@@ -51,6 +54,16 @@ public class Socket extends Control
     {
         this.socketConnected = socket;
         shareEqualPower();
+    }
+
+    public Voltage getVoltage()
+    {
+        return voltage;
+    }
+
+    public void setVoltage(Voltage voltage)
+    {
+        this.voltage = voltage;
     }
 
     private void shareEqualPower()

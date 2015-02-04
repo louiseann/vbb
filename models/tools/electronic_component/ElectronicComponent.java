@@ -1,9 +1,11 @@
 package vbb.models.tools.electronic_component;
 
+import vbb.models.digital_trainer.Control;
+
 /**
  * Created by owie on 12/20/14.
  */
-public class ElectronicComponent
+public class ElectronicComponent extends Control
 {
     private int colSpan;
     private int rowSpan;

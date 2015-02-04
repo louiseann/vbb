@@ -1,4 +1,4 @@
-package vbb.models.tools;
+package vbb.models.tools.connectors;
 
 import vbb.models.digital_trainer.Socket;
 

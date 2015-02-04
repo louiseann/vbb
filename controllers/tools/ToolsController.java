@@ -6,18 +6,14 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.*;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.tools.controls.ColorPicker;
-import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
 import vbb.models.tools.VBbTool;
-import vbb.models.tools.Wire;
-import vbb.models.tools.electronic_component.IntegratedCircuit;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
