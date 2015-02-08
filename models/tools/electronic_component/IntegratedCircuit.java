@@ -1,13 +1,8 @@
 package vbb.models.tools.electronic_component;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import vbb.models.Voltage;
-import vbb.models.digital_trainer.Control;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.logic_gates.LogicGate;
 import vbb.models.tools.connectors.Pin;
-import vbb.models.tools.connectors.end_point.EndPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,20 +54,6 @@ public class IntegratedCircuit extends ElectronicComponent
     {
         positiveTerminal = new Socket();
         negativeTerminal = new Socket();
-
-        ChangeListener<Boolean> powerTerminalsVoltageChangeListener = new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                Voltage positiveTerminalVoltage = positiveTerminal.getVoltage();
-                Voltage negativeTerminalVoltage = negativeTerminal.getVoltage();
-                if (positiveTerminalVoltage != null && positiveTerminalVoltage.equals(Voltage.HIGH) &&
-                        negativeTerminalVoltage != null && negativeTerminalVoltage.equals(Voltage.LOW))
-                    powerUp(true);
-            }
-        };
-
-//        positiveTerminal.getVoltage().addListener(powerTerminalsVoltageChangeListener);
-//        negativeTerminal.getVoltage().addListener(powerTerminalsVoltageChangeListener);
     }
 
     public Socket getPositiveTerminal()

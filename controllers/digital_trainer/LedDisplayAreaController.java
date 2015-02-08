@@ -1,7 +1,5 @@
 package vbb.controllers.digital_trainer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,9 +7,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import vbb.controllers.digital_trainer.controls.LEDControl;
 import vbb.controllers.digital_trainer.controls.SocketControl;
-import vbb.models.digital_trainer.Control;
 import vbb.models.digital_trainer.LED;
 import vbb.models.digital_trainer.Socket;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by owie on 1/21/15.
@@ -21,35 +21,21 @@ public class LedDisplayAreaController
     @FXML
     private GridPane ledDisplayArea;
 
-    @FXML
-    public void initialize()
+    public void createLedSocketPairControls(Map<LED, Socket> ledSocketPairSouls)
     {
-        connectTerminalsToLEDs();
-    }
-
-    private void connectTerminalsToLEDs()
-    {
-        Node socketNode = null;
-        Node ledNode = null;
-        for (Node node : ledDisplayArea.getChildren())
+        Set<LED> ledSouls = ledSocketPairSouls.keySet();
+        int row = 0;
+        for (LED ledSoul : ledSouls)
         {
-            if (GridPane.getColumnIndex(node) == 0)
-                socketNode = node;
-            else if (GridPane.getColumnIndex(node) == 1)
-                ledNode = node;
+            LEDControl led = new LEDControl();
+            led.setSoul(ledSoul);
 
-            if (socketNode != null && ledNode != null &&
-                GridPane.getRowIndex(socketNode).equals(GridPane.getRowIndex(ledNode)))
-            {
-                Socket socket = ((SocketControl) socketNode).getSocket();
-                final LED led = ((LEDControl) ledNode).getLed();
-                socket.powered().addListener(new ChangeListener<Boolean>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                        led.powerUp(newValue);
-                    }
-                });
-            }
+            Socket socketSoul = ledSocketPairSouls.get(ledSoul);
+            SocketControl socket = new SocketControl();
+            socket.setSoul(socketSoul);
+
+            ledDisplayArea.add(socket, 0, row);
+            ledDisplayArea.add(led, 1, row++);
         }
     }
 

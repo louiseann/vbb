@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import vbb.models.digital_trainer.Socket;
 import vbb.models.digital_trainer.breadboard.Breadboard;
 import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.digital_trainer.breadboard.MetalStrip;
@@ -24,7 +23,7 @@ import java.util.List;
  */
 public class BreadboardControl extends HBox
 {
-    private Breadboard breadboard;
+    private Breadboard soul;
 
     @FXML
     private GridPane colConnectedLeftGroup;
@@ -46,8 +45,6 @@ public class BreadboardControl extends HBox
 
     public BreadboardControl()
     {
-        breadboard = new Breadboard();
-
         String fxmlSourceUrl = "/vbb/views/fxml/digital_trainer/custom_control/breadboard.fxml";
         FXMLLoader breadboardLoader = new FXMLLoader(getClass().getResource(fxmlSourceUrl));
         breadboardLoader.setRoot(this);
@@ -75,9 +72,14 @@ public class BreadboardControl extends HBox
         });
     }
 
-    public Breadboard getBreadboard()
+    public Breadboard getSoul()
     {
-        return breadboard;
+        return soul;
+    }
+
+    public void setSoul(Breadboard soul)
+    {
+        this.soul = soul;
     }
 
     public void setSocketsMouseClickedHandler(EventHandler<MouseEvent> socketsMouseClickedHandler)
@@ -123,13 +125,13 @@ public class BreadboardControl extends HBox
 
     private void addColumnConnectedHoles(GridPane colConnectedGroup, boolean inLeft)
     {
-        for (int col = 0; col < breadboard.getPowerRailsColumns(); col++)
+        for (int col = 0; col < soul.getPowerRailsColumns(); col++)
         {
-            MetalStrip firstHalfPowerRail = breadboard.getPowerRail(inLeft, true)[col];
-            MetalStrip secondHalfPowerRail = breadboard.getPowerRail(inLeft, false)[col];
+            MetalStrip firstHalfPowerRail = soul.getPowerRail(inLeft, true)[col];
+            MetalStrip secondHalfPowerRail = soul.getPowerRail(inLeft, false)[col];
 
-            createPowerRailHoles(col, firstHalfPowerRail, 0, breadboard.getGridRows()/2, colConnectedGroup, inLeft);
-            createPowerRailHoles(col, secondHalfPowerRail, breadboard.getGridRows()/2, breadboard.getGridRows(),
+            createPowerRailHoles(col, firstHalfPowerRail, 0, soul.getGridRows()/2, colConnectedGroup, inLeft);
+            createPowerRailHoles(col, secondHalfPowerRail, soul.getGridRows()/2, soul.getGridRows(),
                                  colConnectedGroup, inLeft);
         }
     }
@@ -140,8 +142,8 @@ public class BreadboardControl extends HBox
         int socketIndex = 0;
         for (int row = startRow; row < endRow;)
         {
-            if (row == 0 || row == 1 || row == breadboard.getGridRows()/2 ||
-                row == breadboard.getGridRows()-1 || row == breadboard.getGridRows()-2)
+            if (row == 0 || row == 1 || row == soul.getGridRows()/2 ||
+                row == soul.getGridRows()-1 || row == soul.getGridRows()-2)
                 socketGroup.add(createSpace(), col, row++);
             else
             {
@@ -157,13 +159,13 @@ public class BreadboardControl extends HBox
 
     private void addRowConnectedHoles(GridPane rowConnectedGroup, boolean inLeft)
     {
-        MetalStrip[] terminalStrips = breadboard.getTerminalStrip(inLeft);
+        MetalStrip[] terminalStrips = soul.getTerminalStrip(inLeft);
 
-        for (int row = 0; row < breadboard.getGridRows(); row++)
+        for (int row = 0; row < soul.getGridRows(); row++)
         {
             List<BreadboardSocketControl> connectedSocketControls = new ArrayList<BreadboardSocketControl>();
             MetalStrip terminalStrip = terminalStrips[row];
-            for (int col = 0; col < breadboard.getTerminalHoleColumns(); col++)
+            for (int col = 0; col < soul.getTerminalHoleColumns(); col++)
             {
                 BreadboardSocketControl socketControl = createHole(terminalStrip, col, row, col, inLeft);
                 rowConnectedGroup.add(socketControl, col, row);
@@ -178,7 +180,7 @@ public class BreadboardControl extends HBox
 
     private BreadboardSocketControl createHole(MetalStrip metalStrip, int socketIndex, int row, int col, boolean inLeft)
     {
-        BreadboardSocket socket = (BreadboardSocket) metalStrip.getSocket(socketIndex);
+        BreadboardSocket socket = metalStrip.getSocket(socketIndex);
 
         BreadboardSocketControl socketControl = new BreadboardSocketControl(socket, row, col);
         socketControl.setInLeft(inLeft);

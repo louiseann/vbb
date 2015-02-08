@@ -45,9 +45,14 @@ public class Tool
         return classification;
     }
 
-    public String getClassificationClassName()
+    public String getClassName()
     {
         return classification.getClass().getSimpleName();
+    }
+
+    public String getSuperClassName()
+    {
+        return classification.getClass().getSuperclass().getSimpleName();
     }
 
     public void setView(Node view)

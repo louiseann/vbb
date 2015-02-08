@@ -1,7 +1,5 @@
 package vbb.controllers.digital_trainer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,11 +7,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import vbb.controllers.digital_trainer.controls.SocketControl;
 import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
-import vbb.models.digital_trainer.Control;
+import vbb.controllers.digital_trainer.controls.switch_control.SwitchControl;
+import vbb.models.digital_trainer.switches.DataSwitch;
 import vbb.models.digital_trainer.Socket;
-import vbb.models.digital_trainer.Switch;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by owie on 1/21/15.
@@ -25,21 +24,20 @@ public class DataSwitchesAreaController
     @FXML
     private VBox dataSwitchesWrapper;
 
-    @FXML
-    public void initialize()
+    public void createSwitchSocketPairControls(Map<DataSwitch, Socket> switchSocketPairSouls)
     {
-        addSwitchesPoweredControl();
-    }
-
-    public void addSwitchesPoweredControl()
-    {
-        List<Node> switchControls = dataSwitchesWrapper.getChildren();
-        List<Node> socketControls = socketsWrapper.getChildren();
-        for (int i = 0; i < switchControls.size() && i < socketControls.size(); i++)
+        Set<DataSwitch> switchSouls = switchSocketPairSouls.keySet();
+        for (DataSwitch switchSoul : switchSouls)
         {
-            Switch dataSwitch = ((DataSwitchControl) switchControls.get(i)).getSwitchInstance();
-            Socket socket = ((SocketControl) socketControls.get(i)).getSocket();
-            dataSwitch.addPoweredControls(socket);
+            SwitchControl dataSwitchControl = new DataSwitchControl();
+            dataSwitchControl.setSoul(switchSoul);
+
+            Socket socketSoul = switchSocketPairSouls.get(switchSoul);
+            SocketControl socket = new SocketControl();
+            socket.setSoul(socketSoul);
+
+            dataSwitchesWrapper.getChildren().add(dataSwitchControl);
+            socketsWrapper.getChildren().add(socket);
         }
     }
 
@@ -76,15 +74,6 @@ public class DataSwitchesAreaController
         {
             DataSwitchControl dataSwitch = (DataSwitchControl) switchNode;
             dataSwitch.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
-        }
-    }
-
-    public void powerUpSwitches(boolean highVoltage)
-    {
-        for (Node switchNode : dataSwitchesWrapper.getChildren())
-        {
-            Switch dataSwitch = ((DataSwitchControl) switchNode).getSwitchInstance();
-            dataSwitch.powerUp(highVoltage);
         }
     }
 }

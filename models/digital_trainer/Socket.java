@@ -1,89 +1,41 @@
 package vbb.models.digital_trainer;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import vbb.models.Voltage;
+import vbb.models.Control;
+import vbb.models.connection.Connection;
 
 /**
  * Created by owie on 11/29/14.
  */
 public class Socket extends Control
 {
-    private BooleanProperty occupied;
-    private Socket socketConnected;
-
-    private Voltage voltage;
+    private boolean occupied;
+    private Connection outerConnection;
 
     public Socket()
     {
         super();
-        occupied = new SimpleBooleanProperty(false);
-
-        this.powered().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (socketConnected != null)
-                    changePower(newValue);
-            }
-        });
-    }
-
-    public BooleanProperty occupied()
-    {
-        return occupied;
+        occupied = false;
+        outerConnection = new Connection();
     }
 
     public boolean isOccupied()
     {
-        return occupied.get();
+        return occupied;
     }
 
     public void setOccupied(boolean occupied)
     {
-        this.occupied.set(occupied);
+        this.occupied = occupied;
     }
 
-    public Socket getSocketConnected()
+    public Connection getOuterConnection()
     {
-        return socketConnected;
+        return outerConnection;
     }
 
-    public void setSocketConnected(Socket socket)
+    public void setOuterConnection(boolean canCurrentEnter, boolean canCurrentExit)
     {
-        this.socketConnected = socket;
-        shareEqualPower();
-    }
-
-    public Voltage getVoltage()
-    {
-        return voltage;
-    }
-
-    public void setVoltage(Voltage voltage)
-    {
-        this.voltage = voltage;
-    }
-
-    private void shareEqualPower()
-    {
-        System.out.println(this.isPowered() + " " + socketConnected.isPowered());
-        boolean voltage = this.isPowered() || socketConnected.isPowered();
-        if (voltage != this.isPowered())
-        {
-            this.powerUp(voltage);
-            socketConnected.powerUp(voltage);
-        }
-        else
-            socketConnected.powerUp(voltage);
-    }
-
-    private void changePower(boolean highVoltage)
-    {
-        //something wrong here
-        System.out.println("here");
-        this.powerUp(highVoltage);
-        socketConnected.powerUp(highVoltage);
+        outerConnection.setEnter(canCurrentEnter);
+        outerConnection.setExit(canCurrentExit);
     }
 }

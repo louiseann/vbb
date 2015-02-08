@@ -1,6 +1,6 @@
 package vbb.models.tools.electronic_component;
 
-import vbb.models.digital_trainer.Control;
+import vbb.models.Control;
 
 /**
  * Created by owie on 12/20/14.

@@ -5,6 +5,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
 import vbb.models.tools.electronic_component.TTL74SeriesIC;
@@ -142,7 +143,7 @@ public final class VBbTool
     {
         Image wirePointer = new Image("/vbb/views/images/tools/wire_pointer.png");
         ImageCursor wireCursor = new ImageCursor(wirePointer, 0, wirePointer.getHeight());
-        Wire wireTool = new Wire();
+        Wire wireTool = new TwoWayConnector();
         wire = createTool("wire", wireTool, wireCursor);
 
         double yHotSpot = ImageCursor.getBestSize(wirePointer.getWidth(), wirePointer.getHeight()).getHeight();

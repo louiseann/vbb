@@ -1,6 +1,7 @@
 package vbb.models.digital_trainer.breadboard;
 
-import vbb.models.digital_trainer.Socket;
+import vbb.models.connection.connector.Connector;
+import vbb.models.connection.connector.TwoWayConnector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,32 +11,39 @@ import java.util.List;
  */
 public class MetalStrip
 {
-    List<Socket> connectedSockets;
+    List<BreadboardSocket> connectedSockets;
 
     public MetalStrip()
     {
-        connectedSockets = new ArrayList<Socket>();
+        connectedSockets = new ArrayList<BreadboardSocket>();
     }
 
-    public void powerConnectedSockets(Socket source)
+    public List<Connector> connectOccupiedSockets(BreadboardSocket source)
     {
-        for (Socket socket : connectedSockets)
+        List<Connector> connections = new ArrayList<Connector>(5);
+        for (BreadboardSocket socket : connectedSockets)
         {
-            if (socket != source)
+            if (socket != source && socket.isOccupied())
             {
-                socket.powered().set(source.isPowered());
-                System.out.println("fire! " + source.isPowered());
+                System.out.println("fire!");
+
+                Connector connection = new TwoWayConnector();
+                connection.getEndPoint1().setControlConnected(source);
+                connection.getEndPoint2().setControlConnected(socket);
+
+                connections.add(connection);
             }
         }
         System.out.println();
+        return connections;
     }
 
-    public void addSocket(Socket socket)
+    public void addSocket(BreadboardSocket socket)
     {
         connectedSockets.add(socket);
     }
 
-    public Socket getSocket(int index)
+    public BreadboardSocket getSocket(int index)
     {
         return connectedSockets.get(index);
     }

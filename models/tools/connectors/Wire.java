@@ -1,48 +1,44 @@
 package vbb.models.tools.connectors;
 
+import vbb.models.connection.connector.Connector;
+import vbb.models.connection.connector.OneWayConnector;
 import vbb.models.digital_trainer.Socket;
 
 /**
  * Created by owie on 1/13/15.
  */
-public class Wire
+public abstract class Wire extends Connector
 {
-    private Socket socketAtEndPoint;
-    private Socket socketAtOtherEndPoint;
-
-    public Socket getSocketAtEndPoint()
+    public static Wire finalize(Wire wire)
     {
-        return socketAtEndPoint;
-    }
+        Socket point1Control = (Socket) wire.getEndPoint1().getControlConnected();
+        Socket point2Control = (Socket) wire.getEndPoint2().getControlConnected();
 
-    private void setSocketAtEndPoint(Socket socket)
-    {
-        this.socketAtEndPoint = socket;
-    }
+        if (point1Control.getOuterConnection().canEnter() != point1Control.getOuterConnection().canExit())
+            return createOneWayWire(point1Control, point2Control);
 
-    public Socket getSocketAtOtherEndPoint()
-    {
-        return socketAtOtherEndPoint;
-    }
+        else if (point2Control.getOuterConnection().canEnter() != point2Control.getOuterConnection().canExit())
+            return createOneWayWire(point2Control, point1Control);
 
-    private void setSocketAtOtherEndPoint(Socket socket)
-    {
-        this.socketAtOtherEndPoint = socket;
-    }
-
-    public void plug(Socket atSocket)
-    {
-        if (socketAtEndPoint == null)
-            setSocketAtEndPoint(atSocket);
         else
-        {
-            setSocketAtOtherEndPoint(atSocket);
-            setConnection();
-        }
+            return wire;
     }
 
-    private void setConnection()
+    private static Wire createOneWayWire(Socket referenceControl, Socket otherControl)
     {
-        socketAtEndPoint.setSocketConnected(socketAtOtherEndPoint);
+        Wire wire = new OneWayConnector();
+
+        if (referenceControl.getOuterConnection().canExit())
+            setEndPointControls(wire, referenceControl, otherControl);
+        else
+            setEndPointControls(wire, otherControl, referenceControl);
+
+        return wire;
+    }
+
+    private static void setEndPointControls(Wire wire, Socket point1Control, Socket point2Control)
+    {
+        wire.getEndPoint1().setControlConnected(point1Control);
+        wire.getEndPoint2().setControlConnected(point2Control);
     }
 }

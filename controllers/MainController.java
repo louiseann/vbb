@@ -23,7 +23,9 @@ import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
 import vbb.controllers.tools.ToolsController;
 import vbb.controllers.tools.controls.WireControl;
+import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.digital_trainer.Socket;
+import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
 import vbb.models.tools.connectors.Wire;
@@ -80,8 +82,8 @@ public class MainController
             public void handle(MouseEvent event) {
                 Point2D hotSpot = toolsAreaController.getCurrentTool().getViewHotSpot();
                 moveTool(event.getX() + hotSpot.getX(), event.getY() + hotSpot.getY());
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
-                if (currentToolClass.equals("Wire"))
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                 {
                     if (WireControl.isStartSet())
                     {
@@ -121,33 +123,33 @@ public class MainController
         final EventHandler<MouseEvent> clickedHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(final MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 BreadboardSocketControl socketControl = (BreadboardSocketControl) event.getSource();
-                if (currentToolClass.equals(IntegratedCircuit.class.getSimpleName()))
+                if (currentTool.getClassName().equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socketControl);
-                else if (currentToolClass.equals(Wire.class.getSimpleName()))
+                else if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                     handleWireToolClicked(socketControl, socketControl.getSocket());
             }
         };
         final EventHandler<MouseEvent> enteredHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 BreadboardSocketControl socket = (BreadboardSocketControl) event.getSource();
-                if (currentToolClass.equals(IntegratedCircuit.class.getSimpleName()))
+                if (currentTool.getClassName().equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socket);
-                else if (currentToolClass.equals(Wire.class.getSimpleName()))
+                else if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                     onEnteredOnSocket(socket.getSocket(), socket.getHoleBox());
             }
         };
         final EventHandler<MouseEvent> exitedHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 BreadboardSocketControl socket = (BreadboardSocketControl) event.getSource();
-                if (currentToolClass.equals(IntegratedCircuit.class.getSimpleName()))
+                if (currentTool.getClassName().equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socket);
-                else if (currentToolClass.equals(Wire.class.getSimpleName()))
+                else if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                     onExitedOnSocket(socket.getHoleBox());
             }
         };
@@ -156,28 +158,28 @@ public class MainController
         final EventHandler<MouseEvent> clickedOnSocketHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(final MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 SocketControl socketControl = (SocketControl) ((Circle) event.getSource()).getParent();
-                if (currentToolClass.equals(Wire.class.getSimpleName()))
-                    handleWireToolClicked(socketControl, socketControl.getSocket());
+                if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
+                    handleWireToolClicked(socketControl, socketControl.getSoul());
             }
         };
         final EventHandler<MouseEvent> enteredOnSocketHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String toolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 Circle socketCircle = (Circle) event.getSource();
                 SocketControl socketControl = (SocketControl) socketCircle.getParent();
-                if (toolClass.equals(Wire.class.getSimpleName()))
-                    onEnteredOnSocket(socketControl.getSocket(), socketCircle);
+                if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
+                    onEnteredOnSocket(socketControl.getSoul(), socketCircle);
             }
         };
         final EventHandler<MouseEvent> exitedOnSocketHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String toolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
+                Tool currentTool = toolsAreaController.getCurrentTool();
                 Circle socketCircle = (Circle) event.getSource();
-                if (toolClass.equals(Wire.class.getSimpleName()))
+                if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                     onExitedOnSocket(socketCircle);
             }
         };
@@ -187,8 +189,8 @@ public class MainController
         final EventHandler<MouseEvent> clickedOnPowerSwitch = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
-                if (currentToolClass.equals(Select.class.getSimpleName()))
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
                 {
                     PowerSwitchControl powerSwitch = (PowerSwitchControl) event.getSource();
                     powerSwitch.toggleSwitch();
@@ -200,8 +202,8 @@ public class MainController
         final EventHandler<MouseEvent> clickedOnDataSwitch = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
-                if (currentToolClass.equals(Select.class.getSimpleName()))
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
                 {
                     DataSwitchControl dataSwitch = (DataSwitchControl) event.getSource();
                     dataSwitch.toggleSwitch();
@@ -213,16 +215,16 @@ public class MainController
         final EventHandler<MouseEvent> enteredOnPluggedTool = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
-                if (currentToolClass.equals(Select.class.getSimpleName()))
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
                     System.out.println("hovered");
             }
         };
         final EventHandler<MouseEvent> exitedOnPluggedTool = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String currentToolClass = toolsAreaController.getCurrentTool().getClassificationClassName();
-                if (currentToolClass.equals(Select.class.getSimpleName()))
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
                     System.out.println("exited");
             }
         };
@@ -232,17 +234,23 @@ public class MainController
     {
         if (!socket.isOccupied())
         {
-            Wire wire = WireControl.isStartSet() ? wireControl.getWire() : new Wire();
-            plug(wire, socket);
+            Wire wire;
+            if (!WireControl.isStartSet())
+            {
+                wire = new TwoWayConnector();
+                wire.getEndPoint1().setControlConnected(socket);
+            }
+            else
+            {
+                wire = wireControl.getWire();
+                wire.getEndPoint2().setControlConnected(socket);
+
+                wire = Wire.finalize(wire);
+                digitalTrainerController.getSoul().getCircuit().add(wire);
+            }
 
             setWireControlOnBoard(nodeSocket, wire);
         }
-    }
-
-    private void plug(Wire wire, Socket atSocket)
-    {
-        wire.plug(atSocket);
-        atSocket.setOccupied(true);
     }
 
     private void setWireControlOnBoard(Node socketNode, Wire wire)
@@ -285,10 +293,10 @@ public class MainController
     private void handleIntegratedCircuitEvent(EventType eventType, BreadboardSocketControl socket)
     {
         IntegratedCircuit chip = (IntegratedCircuit) toolsAreaController.getCurrentTool().getClassification();
-        int maxCol = digitalTrainerController.getBreadBoard().getBreadboard().getTerminalHoleColumns() - 1;
+        int maxCol = digitalTrainerController.getBreadBoard().getSoul().getTerminalHoleColumns() - 1;
         int reverseColPosition = Math.abs(socket.getCol() - maxCol - 1);
 
-        if (socket.getRow() + chip.getRowSpan() <= digitalTrainerController.getBreadBoard().getBreadboard().getGridRows() &&
+        if (socket.getRow() + chip.getRowSpan() <= digitalTrainerController.getBreadBoard().getSoul().getGridRows() &&
                 reverseColPosition < chip.getColSpan() &&
                 reverseColPosition > 0 &&
                 !occupied(socket, chip.getRowSpan(), chip.getColSpan(), reverseColPosition))

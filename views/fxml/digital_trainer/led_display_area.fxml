@@ -6,13 +6,14 @@
 <GridPane xmlns:fx="http://javafx.com/javafx"
           fx:controller="vbb.controllers.digital_trainer.LedDisplayAreaController"
           fx:id="ledDisplayArea"
-          hgap="35" vgap="0"
+          hgap="28" vgap="0"
           styleClass="area">
 
     <padding>
         <Insets top="7" right="30" bottom="7" left="45"/>
     </padding>
 
+    <!-- added dynamically
     <SocketControl GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <LEDControl GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     <SocketControl GridPane.rowIndex="1" GridPane.columnIndex="0"/>
@@ -29,5 +30,6 @@
     <LEDControl GridPane.rowIndex="6" GridPane.columnIndex="1"/>
     <SocketControl GridPane.rowIndex="7" GridPane.columnIndex="0"/>
     <LEDControl GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    -->
 
 </GridPane>

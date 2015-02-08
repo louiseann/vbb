@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
-import vbb.controllers.tools.ToolsController;
 import vbb.models.digital_trainer.Socket;
 
 import java.io.IOException;
@@ -19,11 +18,12 @@ public class SocketControl extends StackPane
     @FXML
     private Circle socketCircle;
 
-    private Socket socket;
+    private Socket soul;
 
     public SocketControl()
     {
-        FXMLLoader connectorLoader = new FXMLLoader(getClass().getResource("/vbb/views/fxml/digital_trainer/custom_control/socket.fxml"));
+        String fxmlUrl = "/vbb/views/fxml/digital_trainer/custom_control/socket.fxml";
+        FXMLLoader connectorLoader = new FXMLLoader(getClass().getResource(fxmlUrl));
         connectorLoader.setRoot(this);
         connectorLoader.setController(this);
 
@@ -32,13 +32,16 @@ public class SocketControl extends StackPane
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        socket = new Socket();
     }
 
-    public Socket getSocket()
+    public Socket getSoul()
     {
-        return socket;
+        return soul;
+    }
+
+    public void setSoul(Socket soul)
+    {
+        this.soul = soul;
     }
 
     public void addMouseClickedHandler(EventHandler<MouseEvent> handler)

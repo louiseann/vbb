@@ -1,6 +1,6 @@
-package vbb.models.tools.connectors.end_point;
+package vbb.models.connection.end_point;
 
-import vbb.models.digital_trainer.Control;
+import vbb.models.Control;
 
 /**
  * Created by owie on 2/3/15.

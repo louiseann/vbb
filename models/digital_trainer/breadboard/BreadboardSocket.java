@@ -7,18 +7,18 @@ import vbb.models.digital_trainer.Socket;
  */
 public class BreadboardSocket extends Socket
 {
-    private MetalStrip mediator;
+    private MetalStrip metalStrip;
 
-    public BreadboardSocket(MetalStrip mediator)
+    public BreadboardSocket(MetalStrip metalStrip)
     {
         super();
-        this.mediator = mediator;
+        this.metalStrip = metalStrip;
+        setInnerConnection(true, true);
+        setOuterConnection(true, true);
     }
 
-    @Override
-    public void powerUp(boolean highVoltage)
+    public MetalStrip getMetalStrip()
     {
-        powered().set(highVoltage);
-        mediator.powerConnectedSockets(this);
+        return metalStrip;
     }
 }

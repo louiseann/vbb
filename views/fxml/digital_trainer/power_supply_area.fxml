@@ -25,6 +25,6 @@
             </padding>
             <PowerSwitchControl fx:id="powerSwitch"/>
         </VBox>
-        <LEDControl fx:id="ledControl"/>
+        <LEDControl fx:id="led"/>
     </VBox>
 </HBox>

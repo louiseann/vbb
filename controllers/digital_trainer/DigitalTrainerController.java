@@ -1,7 +1,5 @@
 package vbb.controllers.digital_trainer;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,10 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Shape;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
 import vbb.models.digital_trainer.DigitalTrainer;
-import vbb.models.digital_trainer.Socket;
 
 /**
  * Created by owie on 1/19/15.
@@ -42,7 +38,7 @@ public class DigitalTrainerController
     @FXML
     private Pane pluggedWires;
 
-    private DigitalTrainer digitalTrainer;
+    private DigitalTrainer soul;
 
     private EventHandler<MouseEvent> enteredOnPluggedToolHandler;
     private EventHandler<MouseEvent> exitedOnPluggedToolHandler;
@@ -50,18 +46,16 @@ public class DigitalTrainerController
     @FXML
     public void initialize()
     {
-        digitalTrainer = DigitalTrainer.getInstance();
+        soul = DigitalTrainer.getInstance();
 
-        powerSupplyAreaController.getPowerSwitch().addPoweredControls(digitalTrainer);
+        powerSupplyAreaController.putSoulToControls(soul.getPowerSwitch(), soul.getPositiveTerminal(),
+                                                    soul.getNegativeTerminal(), soul.getPowerIndicatorLED());
 
-        digitalTrainer.powered().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable,
-                                Boolean oldPowerState, Boolean newPowerState) {
-                powerSupplyAreaController.powerUpControls(newPowerState);
-                dataSwitchesAreaController.powerUpSwitches(newPowerState);
-            }
-        });
+        dataSwitchesAreaController.createSwitchSocketPairControls(soul.getSwitchTerminalPairs());
+
+        ledDisplayAreaController.createLedSocketPairControls(soul.getLedTerminalPairs());
+
+        breadboard.setSoul(soul.getBreadboard());
 
         enteredOnPluggedToolHandler = new EventHandler<MouseEvent>() {
             @Override
@@ -75,6 +69,11 @@ public class DigitalTrainerController
                 System.out.println("exited");
             }
         };
+    }
+
+    public DigitalTrainer getSoul()
+    {
+        return soul;
     }
 
     public BreadboardControl getBreadBoard()

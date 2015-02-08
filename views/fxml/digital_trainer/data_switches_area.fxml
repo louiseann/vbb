@@ -1,5 +1,3 @@
-<?import vbb.controllers.digital_trainer.controls.SocketControl?>
-<?import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
@@ -17,6 +15,7 @@
         <padding>
             <Insets top="10" bottom="10"/>
         </padding>
+        <!-- added dynamically
         <SocketControl/>
         <SocketControl/>
         <SocketControl/>
@@ -25,12 +24,14 @@
         <SocketControl/>
         <SocketControl/>
         <SocketControl/>
+        -->
     </VBox>
 
     <VBox fx:id="dataSwitchesWrapper" spacing="24" styleClass="switch_box">
         <padding>
             <Insets top="10" right="15" bottom="10" left="15"/>
         </padding>
+        <!-- added dynamically
         <DataSwitchControl/>
         <DataSwitchControl/>
         <DataSwitchControl/>
@@ -39,6 +40,7 @@
         <DataSwitchControl/>
         <DataSwitchControl/>
         <DataSwitchControl/>
+        -->
     </VBox>
 
 </HBox>
