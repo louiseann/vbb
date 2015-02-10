@@ -30,12 +30,12 @@ public class Circuit
         Control point1Control = point1.getControlConnected();
         Control point2Control = point2.getControlConnected();
 
-        if (!connections.containsKey(point1Control) && point1.canSend())
+        if (!connections.containsKey(point1Control) && point1.canReceive())
             connections.put(point1Control, new ArrayList<Control>());
-        if (!connections.containsKey(point2Control) && point2.canSend())
+        if (!connections.containsKey(point2Control) && point2.canReceive())
             connections.put(point2Control, new ArrayList<Control>());
 
-        if (point1.canSend() && point2.canReceive())
+        if (point1.canReceive() && point2.canSend())
         {
             connections.get(point1Control).add(point2Control);
             if (point1Control.runningVoltage().equals(Voltage.HIGH) &&
@@ -47,7 +47,7 @@ public class Circuit
             else if (point1Control.runningVoltage().equals(point2Control.runningVoltage()))
                 run(point1Control.runningVoltage(), point2Control);
         }
-        if (point2.canSend() && point1.canReceive())
+        if (point2.canReceive() && point1.canSend())
         {
             connections.get(point2Control).add(point1Control);
             if (point2Control.runningVoltage().equals(Voltage.HIGH) &&

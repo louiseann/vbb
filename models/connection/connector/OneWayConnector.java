@@ -12,11 +12,11 @@ public class OneWayConnector extends Wire
     {
         super();
 
-        getEndPoint1().setCanReceive(false);
-        getEndPoint1().setCanSend(true);
+        getEndPoint1().setCanReceive(true);
+        getEndPoint1().setCanSend(false);
 
-        getEndPoint2().setCanReceive(true);
-        getEndPoint2().setCanSend(false);
+        getEndPoint2().setCanReceive(false);
+        getEndPoint2().setCanSend(true);
     }
 
     public EndPoint getReceiverEndPoint()

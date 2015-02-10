@@ -37,9 +37,9 @@ public abstract class Wire extends Connector
         return wire;
     }
 
-    private static void setEndPointControls(Wire wire, Socket point1Control, Socket point2Control)
+    private static void setEndPointControls(Wire wire, Socket controlAtReceiverPoint, Socket controlAtSenderPoint)
     {
-        wire.getEndPoint1().setControlConnected(point1Control);
-        wire.getEndPoint2().setControlConnected(point2Control);
+        wire.getEndPoint1().setControlConnected(controlAtReceiverPoint);
+        wire.getEndPoint2().setControlConnected(controlAtSenderPoint);
     }
 }
