@@ -2,6 +2,8 @@ package vbb.models.logic_gates;
 
 import vbb.models.Voltage;
 
+import java.util.List;
+
 /**
  * Created by owie on 2/3/15.
  */
@@ -19,17 +21,29 @@ public final class XnorGate implements LogicGate
     @Override
     public Voltage getOutput(Voltage input)
     {
-        return null;
+        return Voltage.NONE;
     }
 
     public Voltage getOutput(Voltage input1, Voltage input2)
     {
-        return null;
+        Voltage xorOutput = XorGate.getInstance().getOutput(input1, input2);
+
+        return NotGate.getInstance().getOutput(xorOutput);
     }
 
     @Override
-    public Voltage getOutput(Voltage... voltages)
+    public Voltage getOutput(Voltage... inputs)
     {
-        return null;
+        Voltage xorOutput = XorGate.getInstance().getOutput(inputs);
+
+        return NotGate.getInstance().getOutput(xorOutput);
+    }
+
+    @Override
+    public Voltage getOutput(List<Voltage> inputList)
+    {
+        Voltage xorOutput = XorGate.getInstance().getOutput(inputList);
+
+        return NotGate.getInstance().getOutput(xorOutput);
     }
 }

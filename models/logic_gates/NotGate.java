@@ -2,6 +2,8 @@ package vbb.models.logic_gates;
 
 import vbb.models.Voltage;
 
+import java.util.List;
+
 /**
  * Created by owie on 2/3/15.
  */
@@ -18,18 +20,29 @@ public final class NotGate implements LogicGate
 
     public Voltage getOutput(Voltage input)
     {
-        return null;
+        if (input.equals(Voltage.HIGH))
+            return Voltage.LOW;
+        else if (input.equals(Voltage.LOW))
+            return Voltage.HIGH;
+        else
+            return Voltage.NONE;
     }
 
     @Override
     public Voltage getOutput(Voltage input1, Voltage input2)
     {
-        return null;
+        return Voltage.NONE;
     }
 
     @Override
-    public Voltage getOutput(Voltage... voltages)
+    public Voltage getOutput(Voltage... inputs)
     {
-        return null;
+        return Voltage.NONE;
+    }
+
+    @Override
+    public Voltage getOutput(List<Voltage> inputList)
+    {
+        return Voltage.NONE;
     }
 }

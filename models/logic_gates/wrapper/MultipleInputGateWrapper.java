@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import vbb.models.Voltage;
 import vbb.models.digital_trainer.Socket;
+import vbb.models.logic_gates.LogicGate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +16,37 @@ public class MultipleInputGateWrapper extends GateWrapper
 {
     private List<Socket> inputSockets;
 
-    private static ChangeListener<Number> voltageListener;
+    private static ChangeListener<Boolean> voltageChanged;
 
-    public MultipleInputGateWrapper()
+    public MultipleInputGateWrapper(LogicGate logicGate)
     {
-        super();
+        super(logicGate);
         inputSockets = new ArrayList<Socket>();
-        voltageListener = new ChangeListener<Number>() {
+        voltageChanged = new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (areInputSocketsVoltagesSet()) {
-                    Voltage outputVoltage = getLogicGate().getOutput(getInputVoltages());
-                    getOutputSocket().setRunningVoltage(outputVoltage);
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println("input voltage changed");
+                if (getChip().isPowered())
+                {
+                    if (areInputSocketsVoltagesSet())
+                    {
+                        System.out.println("input voltages set");
+                        Voltage output = getLogicGate().getOutput(getInputVoltages());
+                        getOutputSocket().run(output);
+                    }
+                    else
+                        getOutputSocket().run(Voltage.NONE);
                 }
+                else
+                    getOutputSocket().run(Voltage.NONE             );
             }
         };
     }
 
-    public void add(Socket... sockets)
+    public void add(Socket socket)
     {
-        for (Socket socket : sockets)
-        {
-            inputSockets.add(socket);
-        }
+        socket.runningVoltageChanged().addListener(voltageChanged);
+        inputSockets.add(socket);
     }
 
     public List<Socket> getInputSockets()
@@ -57,7 +66,7 @@ public class MultipleInputGateWrapper extends GateWrapper
         return set;
     }
 
-    private Voltage[] getInputVoltages()
+    private List<Voltage> getInputVoltages()
     {
         List<Voltage> voltages = new ArrayList<Voltage>();
         for (Socket socket : inputSockets)
@@ -65,6 +74,6 @@ public class MultipleInputGateWrapper extends GateWrapper
             voltages.add(socket.runningVoltage());
         }
 
-        return (Voltage[]) voltages.toArray();
+        return voltages;
     }
 }

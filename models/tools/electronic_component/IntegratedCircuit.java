@@ -1,5 +1,8 @@
 package vbb.models.tools.electronic_component;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import vbb.models.Voltage;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.logic_gates.LogicGate;
 import vbb.models.tools.connectors.Pin;
@@ -30,6 +33,12 @@ public class IntegratedCircuit extends ElectronicComponent
         setupPowerTerminals();
     }
 
+    public IntegratedCircuit(LogicGate logicGate)
+    {
+        super();
+        setLogicGate(logicGate);
+    }
+
     public int getPinCount()
     {
         return pinCount;
@@ -50,10 +59,35 @@ public class IntegratedCircuit extends ElectronicComponent
         pins.add(index, pin);
     }
 
+    public Pin getPin(int index)
+    {
+        return pins.get(index);
+    }
+
     public void setupPowerTerminals()
     {
         positiveTerminal = new Socket();
+        positiveTerminal.setPowerTrigger(Voltage.HIGH);
         negativeTerminal = new Socket();
+        negativeTerminal.setPowerTrigger(Voltage.LOW);
+
+        ChangeListener<Boolean> terminalPowerListener = new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println("power terminal power changed");
+                if (positiveTerminal.runningVoltage().equals(Voltage.HIGH) &&
+                        negativeTerminal.runningVoltage().equals(Voltage.LOW))
+                {
+                    powerUp(true);
+                    System.out.println("power up chip!");
+                }
+                else
+                    powerUp(false);
+            }
+        };
+
+        positiveTerminal.powered().addListener(terminalPowerListener);
+        negativeTerminal.powered().addListener(terminalPowerListener);
     }
 
     public Socket getPositiveTerminal()
@@ -69,7 +103,7 @@ public class IntegratedCircuit extends ElectronicComponent
     public Pin createGndPin()
     {
         Pin gnd = new Pin();
-        gnd.getEndPoint2().setControlConnected(this.getNegativeTerminal());
+        gnd.getSenderEndPoint().setControlConnected(this.getNegativeTerminal());
 
         return gnd;
     }
@@ -77,7 +111,7 @@ public class IntegratedCircuit extends ElectronicComponent
     public Pin createVccPin()
     {
         Pin vcc = new Pin();
-        vcc.getEndPoint2().setControlConnected(this.getPositiveTerminal());
+        vcc.getSenderEndPoint().setControlConnected(this.getPositiveTerminal());
 
         return vcc;
     }

@@ -16,7 +16,7 @@ public class BreadboardSocketControl extends Pane
     @FXML
     private Rectangle holeBox;
 
-    private BreadboardSocket socket;
+    private BreadboardSocket soul;
 
     private int row, col;
     private boolean inLeft, inRight;
@@ -26,9 +26,9 @@ public class BreadboardSocketControl extends Pane
         loadFXML();
     }
 
-    public BreadboardSocketControl(BreadboardSocket socket, int row, int col)
+    public BreadboardSocketControl(BreadboardSocket soul, int row, int col)
     {
-        setSocket(socket);
+        setSoul(soul);
 
         setRow(row);
         setCol(col);
@@ -54,14 +54,14 @@ public class BreadboardSocketControl extends Pane
         return holeBox;
     }
 
-    public BreadboardSocket getSocket()
+    public BreadboardSocket getSoul()
     {
-        return socket;
+        return soul;
     }
 
-    public void setSocket(BreadboardSocket socket)
+    public void setSoul(BreadboardSocket soul)
     {
-        this.socket = socket;
+        this.soul = soul;
     }
 
     public int getRow()

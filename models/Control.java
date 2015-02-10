@@ -12,12 +12,15 @@ public abstract class Control
 {
     private BooleanProperty powered;
     private Voltage runningVoltage;
+    private BooleanProperty runningVoltageChanged;
     private Connection innerConnection;
+    private Voltage powerTrigger;
 
     public Control()
     {
         powered = new SimpleBooleanProperty(false);
         runningVoltage = Voltage.NONE;
+        runningVoltageChanged = new SimpleBooleanProperty(false);
         innerConnection = new Connection();
     }
 
@@ -38,12 +41,26 @@ public abstract class Control
 
     public void run(Voltage voltage)
     {
-        this.runningVoltage = voltage;
+        Voltage prevVoltage = runningVoltage;
+        runningVoltage = voltage;
 
-        if (!voltage.equals(Voltage.NONE))
-            powerUp(true);
+        if (!runningVoltage.equals(prevVoltage))
+            changedRunningVoltage();
+
+        if (powerTrigger != null)
+        {
+            if (powerTrigger.equals(voltage))
+                powerUp(true);
+            else
+                powerUp(false);
+        }
         else
-            powerUp(false);
+        {
+            if (!voltage.equals(Voltage.NONE))
+                powerUp(true);
+            else
+                powerUp(false);
+        }
     }
 
     public Voltage runningVoltage()
@@ -65,5 +82,20 @@ public abstract class Control
     {
         innerConnection.setEnter(canCurrentEnter);
         innerConnection.setExit(canCurrentExit);
+    }
+
+    public void setPowerTrigger(Voltage trigger)
+    {
+        this.powerTrigger = trigger;
+    }
+
+    public BooleanProperty runningVoltageChanged()
+    {
+        return runningVoltageChanged;
+    }
+
+    private void changedRunningVoltage()
+    {
+        runningVoltageChanged.set(!runningVoltageChanged.get());
     }
 }

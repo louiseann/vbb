@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import vbb.models.connection.connector.TwoWayConnector;
+import vbb.models.logic_gates.*;
 import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
 import vbb.models.tools.electronic_component.TTL74SeriesIC;
@@ -58,7 +59,7 @@ public final class VBbTool
     private static void createAndChip()
     {
         ImageView andToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/and_tool.png"));
-        IntegratedCircuit andIC = TTL74SeriesIC.AND_7408();
+        IntegratedCircuit andIC = new IntegratedCircuit(AndGate.getInstance());
         andChip = createTool("and", andIC, andToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -70,7 +71,7 @@ public final class VBbTool
     private static void createOrChip()
     {
         ImageView orToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/or_tool.png"));
-        IntegratedCircuit orIC = TTL74SeriesIC.OR_7432();
+        IntegratedCircuit orIC = new IntegratedCircuit(OrGate.getInstance());
         orChip = createTool("or", orIC, orToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -82,7 +83,7 @@ public final class VBbTool
     private static void createNotChip()
     {
         ImageView notToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/not_tool.png"));
-        IntegratedCircuit notIC = TTL74SeriesIC.NOT_7404();
+        IntegratedCircuit notIC = new IntegratedCircuit(NotGate.getInstance());
         notChip = createTool("or", notIC, notToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -94,7 +95,7 @@ public final class VBbTool
     private static void createNandChip()
     {
         ImageView nandToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nand_tool.png"));
-        IntegratedCircuit nandIC = TTL74SeriesIC.NAND_7400();
+        IntegratedCircuit nandIC = new IntegratedCircuit(NandGate.getInstance());
         nandChip = createTool("or", nandIC, nandToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -106,7 +107,7 @@ public final class VBbTool
     private static void createNorChip()
     {
         ImageView norToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nor_tool.png"));
-        IntegratedCircuit norIC = TTL74SeriesIC.NOR_7402();
+        IntegratedCircuit norIC = new IntegratedCircuit(NorGate.getInstance());
         norChip = createTool("or", norIC, norToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -118,7 +119,7 @@ public final class VBbTool
     private static void createXorChip()
     {
         ImageView xorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xor_tool.png"));
-        IntegratedCircuit xorIC = TTL74SeriesIC.XOR_7486();
+        IntegratedCircuit xorIC = new IntegratedCircuit(XorGate.getInstance());
         xorChip = createTool("or", xorIC, xorToolImage, -3, -3.5, Cursor.NONE);
     }
 
@@ -130,7 +131,7 @@ public final class VBbTool
     private static void createXnorChip()
     {
         ImageView xnorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xor_tool.png"));
-        IntegratedCircuit xnorIC = TTL74SeriesIC.XNOR_747266();
+        IntegratedCircuit xnorIC = new IntegratedCircuit(XnorGate.getInstance());
         xnorChip = createTool("or", xnorIC, xnorToolImage, -3, -3.5, Cursor.NONE);
     }
 

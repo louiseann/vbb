@@ -2,6 +2,8 @@ package vbb.models.logic_gates;
 
 import vbb.models.Voltage;
 
+import java.util.List;
+
 /**
  * Created by owie on 2/3/15.
  */
@@ -17,19 +19,32 @@ public final class NandGate implements LogicGate
     }
 
     @Override
-    public Voltage getOutput(Voltage input) {
-        return null;
+    public Voltage getOutput(Voltage input)
+    {
+        return Voltage.NONE;
     }
 
     @Override
     public Voltage getOutput(Voltage input1, Voltage input2)
     {
-        return null;
+        Voltage andOutput = AndGate.getInstance().getOutput(input1, input2);
+
+        return NotGate.getInstance().getOutput(andOutput);
     }
 
     @Override
-    public Voltage getOutput(Voltage... voltages)
+    public Voltage getOutput(Voltage... inputs)
     {
-        return null;
+        Voltage andOutput = AndGate.getInstance().getOutput(inputs);
+
+        return NotGate.getInstance().getOutput(andOutput);
+    }
+
+    @Override
+    public Voltage getOutput(List<Voltage> inputList)
+    {
+        Voltage andOutput = AndGate.getInstance().getOutput(inputList);
+
+        return NotGate.getInstance().getOutput(andOutput);
     }
 }

@@ -23,18 +23,17 @@ import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
 import vbb.controllers.tools.ToolsController;
 import vbb.controllers.tools.controls.WireControl;
+import vbb.models.Circuit;
 import vbb.models.Control;
-import vbb.models.connection.connector.Connector;
 import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.digital_trainer.Socket;
-import vbb.models.digital_trainer.breadboard.Breadboard;
 import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
+import vbb.models.tools.connectors.Pin;
 import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
-
-import java.util.List;
+import vbb.models.tools.electronic_component.TTL74SeriesIC;
 
 public class MainController
 {
@@ -133,7 +132,7 @@ public class MainController
                 if (currentTool.getClassName().equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socketControl);
                 else if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
-                    handleWireToolClicked(socketControl, socketControl.getSocket());
+                    handleWireToolClicked(socketControl, socketControl.getSoul());
             }
         };
         final EventHandler<MouseEvent> enteredHandler = new EventHandler<MouseEvent>() {
@@ -144,7 +143,7 @@ public class MainController
                 if (currentTool.getClassName().equals(IntegratedCircuit.class.getSimpleName()))
                     handleIntegratedCircuitEvent(event.getEventType(), socket);
                 else if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
-                    onEnteredOnSocket(socket.getSocket(), socket.getHoleBox());
+                    onEnteredOnSocket(socket.getSoul(), socket.getHoleBox());
             }
         };
         final EventHandler<MouseEvent> exitedHandler = new EventHandler<MouseEvent>() {
@@ -312,7 +311,11 @@ public class MainController
 
     private void handleIntegratedCircuitEvent(EventType eventType, BreadboardSocketControl socket)
     {
-        IntegratedCircuit chip = (IntegratedCircuit) toolsAreaController.getCurrentTool().getClassification();
+        IntegratedCircuit toolChip = (IntegratedCircuit) toolsAreaController.getCurrentTool().getClassification();
+
+        Circuit circuit = digitalTrainerController.getSoul().getCircuit();
+        IntegratedCircuit chip = TTL74SeriesIC.createChip(toolChip.getLogicGate(), circuit);
+
         int maxCol = digitalTrainerController.getBreadBoard().getSoul().getTerminalHoleColumns() - 1;
         int reverseColPosition = Math.abs(socket.getCol() - maxCol - 1);
 
@@ -323,7 +326,7 @@ public class MainController
         {
             if (eventType.equals(MouseEvent.MOUSE_CLICKED))
             {
-                plugChip(socket, chip.getColSpan()-reverseColPosition);
+                plug(chip, socket, chip.getColSpan() - reverseColPosition);
                 int remainingChipColSpan = chip.getColSpan()-reverseColPosition;
                 hoverChipOnSockets(socket, chip.getRowSpan(), remainingChipColSpan, MouseEvent.MOUSE_EXITED);
             }
@@ -351,18 +354,18 @@ public class MainController
                             .getSocketFromRowConnectedGroup(row, chipRemainingColSpan-1,
                                     !pointedSocketControl.isInLeft());
 
-            if (socketControl.getSocket().isOccupied() || otherSideSocketControl.getSocket().isOccupied())
+            if (socketControl.getSoul().isOccupied() || otherSideSocketControl.getSoul().isOccupied())
                 return true;
         }
 
         return false;
     }
 
-    private void plugChip(BreadboardSocketControl pointedSocketControl, int chipRemainingColSpan)
+    private void plug(IntegratedCircuit chip, BreadboardSocketControl pointedSocketControl, int chipRemainingColSpan)
     {
         Tool currentTool = toolsAreaController.getCurrentTool();
 
-        occupySockets(pointedSocketControl, (IntegratedCircuit) currentTool.getClassification(), chipRemainingColSpan);
+        occupySockets(pointedSocketControl, chip, chipRemainingColSpan);
         setChipOnBoard(pointedSocketControl, currentTool.getViewImage(), currentTool.getViewHotSpot());
     }
 
@@ -372,18 +375,30 @@ public class MainController
         int rowBegin = pointedSocketControl.getRow();
         int rowEnd = pointedSocketControl.getRow() + chip.getRowSpan();
 
-        for (int row = rowBegin; row < rowEnd; row++)
+        for (int row = rowBegin, leftColPin = 0, rightColPin = 7; row < rowEnd; row++)
         {
             BreadboardSocketControl socketControl =
             digitalTrainerController.getBreadBoard()
                                     .getSocketFromRowConnectedGroup(row, pointedSocketControl.getCol(),
                                                                     pointedSocketControl.isInLeft());
+            Pin leftPin = chip.getPin(leftColPin++);
+            leftPin.getHangingPoint().setControlConnected(socketControl.getSoul());
+            digitalTrainerController.getSoul().getCircuit().add(leftPin);
+            socketControl.getSoul().getMetalStrip().connectOccupiedSockets(socketControl.getSoul(),
+                    digitalTrainerController.getSoul().getCircuit());
+
             BreadboardSocketControl otherSideSocketControl =
             digitalTrainerController.getBreadBoard()
                                     .getSocketFromRowConnectedGroup(row, chipRemainingColSpan-1,
                                                                     !pointedSocketControl.isInLeft());
-            socketControl.getSocket().setOccupied(true);
-            otherSideSocketControl.getSocket().setOccupied(true);
+            Pin rightPin = chip.getPin(rightColPin++);
+            rightPin.getHangingPoint().setControlConnected(otherSideSocketControl.getSoul());
+            digitalTrainerController.getSoul().getCircuit().add(rightPin);
+            socketControl.getSoul().getMetalStrip().connectOccupiedSockets(otherSideSocketControl.getSoul(),
+                    digitalTrainerController.getSoul().getCircuit());
+
+            socketControl.getSoul().setOccupied(true);
+            otherSideSocketControl.getSoul().setOccupied(true);
         }
     }
 
@@ -405,8 +420,8 @@ public class MainController
                                                                     !pointedSocketControl.isInLeft());
             if (eventType.equals(MouseEvent.MOUSE_ENTERED))
             {
-                onEnteredOnSocket(socketControl.getSocket(), socketControl.getHoleBox());
-                onEnteredOnSocket(otherSideSocketControl.getSocket(), otherSideSocketControl.getHoleBox());
+                onEnteredOnSocket(socketControl.getSoul(), socketControl.getHoleBox());
+                onEnteredOnSocket(otherSideSocketControl.getSoul(), otherSideSocketControl.getHoleBox());
             }
             else
             {
