@@ -74,13 +74,9 @@ public class IntegratedCircuit extends ElectronicComponent
         ChangeListener<Boolean> terminalPowerListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                System.out.println("power terminal power changed");
                 if (positiveTerminal.runningVoltage().equals(Voltage.HIGH) &&
                         negativeTerminal.runningVoltage().equals(Voltage.LOW))
-                {
                     powerUp(true);
-                    System.out.println("power up chip!");
-                }
                 else
                     powerUp(false);
             }

@@ -25,33 +25,32 @@ public class MultipleInputGateWrapper extends GateWrapper
         voltageChanged = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                System.out.println("input voltage changed");
-                if (getChip().isPowered())
-                {
-                    if (areInputSocketsVoltagesSet())
-                    {
-                        System.out.println("input voltages set");
-                        Voltage output = getLogicGate().getOutput(getInputVoltages());
-                        getOutputSocket().run(output);
-                    }
-                    else
-                        getOutputSocket().run(Voltage.NONE);
-                }
-                else
-                    getOutputSocket().run(Voltage.NONE             );
+                handleVoltageChanged();
             }
         };
+    }
+
+    @Override
+    public void handleVoltageChanged()
+    {
+        if (getChip().isPowered())
+        {
+            if (areInputSocketsVoltagesSet())
+            {
+                Voltage output = getLogicGate().getOutput(getInputVoltages());
+                getOutputSocket().run(output);
+            }
+            else
+                getOutputSocket().run(Voltage.NONE);
+        }
+        else
+            getOutputSocket().run(Voltage.NONE);
     }
 
     public void add(Socket socket)
     {
         socket.runningVoltageChanged().addListener(voltageChanged);
         inputSockets.add(socket);
-    }
-
-    public List<Socket> getInputSockets()
-    {
-        return inputSockets;
     }
 
     public boolean areInputSocketsVoltagesSet()

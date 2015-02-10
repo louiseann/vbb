@@ -50,7 +50,6 @@ public abstract class GateWrapper
         outputSocket.runningVoltageChanged().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                System.out.println("output socket voltage changed");
                 getCircuit().run(outputSocket.runningVoltage(), outputSocket);
             }
         });
@@ -64,10 +63,18 @@ public abstract class GateWrapper
     public void setChip(IntegratedCircuit chip)
     {
         this.chip = chip;
+        this.chip.powered().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                handleVoltageChanged();
+            }
+        });
     }
 
     private Circuit getCircuit()
     {
         return circuit;
     }
+
+    public abstract void handleVoltageChanged();
 }

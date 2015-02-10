@@ -26,7 +26,6 @@ public class MetalStrip
         {
             if (socket != source && socket.isOccupied())
             {
-                System.out.println("fire mediator");
                 Connector connection = new TwoWayConnector();
                 connection.getEndPoint1().setControlConnected(source);
                 connection.getEndPoint2().setControlConnected(socket);
