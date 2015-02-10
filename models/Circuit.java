@@ -38,12 +38,26 @@ public class Circuit
         if (point1.canSend() && point2.canReceive())
         {
             connections.get(point1Control).add(point2Control);
-            run(point1Control.runningVoltage(), point1Control);
+            if (point1Control.runningVoltage().equals(Voltage.HIGH) &&
+                    !point2Control.runningVoltage().equals(Voltage.HIGH))
+                run(point1Control.runningVoltage(), point2Control);
+            else if (point1Control.runningVoltage().equals(Voltage.LOW) &&
+                    point2Control.runningVoltage().equals(Voltage.NONE))
+                run(point1Control.runningVoltage(), point2Control);
+            else if (point1Control.runningVoltage().equals(point2Control.runningVoltage()))
+                run(point1Control.runningVoltage(), point2Control);
         }
         if (point2.canSend() && point1.canReceive())
         {
             connections.get(point2Control).add(point1Control);
-            run(point2Control.runningVoltage(), point1Control);
+            if (point2Control.runningVoltage().equals(Voltage.HIGH) &&
+                    !point1Control.runningVoltage().equals(Voltage.HIGH))
+                run(point2Control.runningVoltage(), point1Control);
+            else if (point2Control.runningVoltage().equals(Voltage.LOW) &&
+                    point1Control.runningVoltage().equals(Voltage.NONE))
+                run(point2Control.runningVoltage(), point1Control);
+            else if (point2Control.runningVoltage().equals(point1Control.runningVoltage()))
+                run(point2Control.runningVoltage(), point1Control);
         }
     }
 

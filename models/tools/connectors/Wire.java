@@ -3,6 +3,7 @@ package vbb.models.tools.connectors;
 import vbb.models.connection.connector.Connector;
 import vbb.models.connection.connector.OneWayConnector;
 import vbb.models.digital_trainer.Socket;
+import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 
 /**
  * Created by owie on 1/13/15.

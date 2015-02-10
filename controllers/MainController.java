@@ -23,13 +23,18 @@ import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
 import vbb.controllers.tools.ToolsController;
 import vbb.controllers.tools.controls.WireControl;
+import vbb.models.Control;
+import vbb.models.connection.connector.Connector;
 import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.digital_trainer.Socket;
+import vbb.models.digital_trainer.breadboard.Breadboard;
 import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
 import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
+
+import java.util.List;
 
 public class MainController
 {
@@ -247,7 +252,22 @@ public class MainController
 
                 wire = Wire.finalize(wire);
                 digitalTrainerController.getSoul().getCircuit().add(wire);
+
+                Control point1Control = wire.getEndPoint1().getControlConnected();
+                if (point1Control instanceof BreadboardSocket)
+                {
+                    BreadboardSocket breadboardSocket = (BreadboardSocket) point1Control;
+                    breadboardSocket.getMetalStrip().connectOccupiedSockets(breadboardSocket, digitalTrainerController.getSoul().getCircuit());
+                }
+
+                Control point2Control = wire.getEndPoint2().getControlConnected();
+                if (point2Control instanceof BreadboardSocket)
+                {
+                    BreadboardSocket breadboardSocket = (BreadboardSocket) point2Control;
+                    breadboardSocket.getMetalStrip().connectOccupiedSockets(breadboardSocket, digitalTrainerController.getSoul().getCircuit());
+                }
             }
+            socket.setOccupied(true);
 
             setWireControlOnBoard(nodeSocket, wire);
         }
