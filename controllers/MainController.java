@@ -440,12 +440,18 @@ public class MainController
 
         ImageView chipView = new ImageView(chipImage);
         chipView.relocate(xPosition, yPosition);
-        chipView.setMouseTransparent(false);
 
         EventHandler<MouseEvent> enteredHandler = digitalTrainerController.getEnteredOnPluggedToolHandler();
         EventHandler<MouseEvent> exitedHandler = digitalTrainerController.getExitedOnPluggedToolHandler();
         chipView.addEventHandler(MouseEvent.MOUSE_ENTERED, enteredHandler);
         chipView.addEventHandler(MouseEvent.MOUSE_EXITED, exitedHandler);
+
+        chipView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("clicked!");
+            }
+        });
 
         digitalTrainerController.plugChip(chipView);
     }

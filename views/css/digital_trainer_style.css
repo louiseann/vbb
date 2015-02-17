@@ -28,6 +28,10 @@
     -fx-fill: #212121;
 }
 
+.power_voltage {
+    -fx-font-weight: bold;
+}
+
 .switch_box {
     -fx-background-color: #032f55;
 }
@@ -35,6 +39,10 @@
 .switch_toggle {
     -fx-fill: #ffffff;
     -fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);
+}
+
+.switch_state {
+    -fx-font-size: 8px;
 }
 
 .switch_toggle_box {
