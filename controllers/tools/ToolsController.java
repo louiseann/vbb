@@ -6,7 +6,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.*;
 import javafx.fxml.FXML;
+import javafx.geometry.Dimension2D;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -100,7 +104,13 @@ public class ToolsController
         wireToolViewCopy = new Rectangle(5, 25, wireToolView.getFill());
         wireToolViewCopy.setRotate(45);
 
-        return new StackPane(wireBG, wireToolViewCopy);
+        Image pointer = new Image("/vbb/views/images/tools/wire_pointer.png");
+        ImageView pointerView = new ImageView(pointer);
+        Dimension2D cursorDimension = ImageCursor.getBestSize(pointer.getWidth(), pointer.getHeight());
+        pointerView.setFitWidth(cursorDimension.getWidth());
+        pointerView.setFitHeight(cursorDimension.getHeight());
+
+        return new StackPane(wireBG, pointerView, wireToolViewCopy);
     }
 
     private void changeWireColor(Color color)

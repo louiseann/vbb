@@ -143,13 +143,13 @@ public final class VBbTool
 
     private static void createWire()
     {
-        Image wirePointer = new Image("/vbb/views/images/tools/wire_pointer.png");
+        Image wirePointer = new Image("/vbb/views/images/tools/no_cursor.png");
         ImageCursor wireCursor = new ImageCursor(wirePointer, 0, wirePointer.getHeight());
         Wire wireTool = new TwoWayConnector();
         wire = createTool("wire", wireTool, wireCursor);
 
         double yHotSpot = ImageCursor.getBestSize(wirePointer.getWidth(), wirePointer.getHeight()).getHeight();
-        wire.setViewHotSpot(3, -yHotSpot);
+        wire.setViewHotSpot(0, -yHotSpot);
     }
 
     public static Tool Wire()
