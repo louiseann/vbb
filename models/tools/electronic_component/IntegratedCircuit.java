@@ -72,23 +72,28 @@ public class IntegratedCircuit extends ElectronicComponent
     public void setupPowerTerminals()
     {
         positiveTerminal = new Socket();
-        positiveTerminal.setPowerTrigger(Voltage.HIGH);
         negativeTerminal = new Socket();
-        negativeTerminal.setPowerTrigger(Voltage.LOW);
 
-        ChangeListener<Boolean> terminalPowerListener = new ChangeListener<Boolean>() {
+        ChangeListener<Boolean> voltageChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println("voltage changed");
+                System.out.println("positive terminal " + positiveTerminal.runningVoltage());
+                System.out.println("negative terminal " + negativeTerminal.runningVoltage());
                 if (positiveTerminal.runningVoltage().equals(Voltage.HIGH) &&
                         negativeTerminal.runningVoltage().equals(Voltage.LOW))
+                {
                     powerUp(true);
+                    System.out.println("power up chip!");
+                }
+
                 else
                     powerUp(false);
             }
         };
 
-        positiveTerminal.powered().addListener(terminalPowerListener);
-        negativeTerminal.powered().addListener(terminalPowerListener);
+        positiveTerminal.runningVoltageChanged().addListener(voltageChangeListener);
+        negativeTerminal.runningVoltageChanged().addListener(voltageChangeListener);
     }
 
     public Socket getPositiveTerminal()

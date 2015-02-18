@@ -22,10 +22,15 @@ public class MetalStrip
 
     public void connectOccupiedSockets(BreadboardSocket source, Circuit circuit)
     {
+        Voltage highestVoltage = getHighestVoltage();
+
         for (BreadboardSocket socket : connectedSockets)
         {
             if (socket != source && socket.isOccupied())
             {
+                if (!socket.runningVoltage().equals(highestVoltage))
+                    socket.setRunningVoltage(highestVoltage);
+
                 Connector connection = new TwoWayConnector();
                 connection.getEndPoint1().setControlConnected(source);
                 connection.getEndPoint2().setControlConnected(socket);
@@ -43,5 +48,22 @@ public class MetalStrip
     public BreadboardSocket getSocket(int index)
     {
         return connectedSockets.get(index);
+    }
+
+    private Voltage getHighestVoltage()
+    {
+        Voltage notHigh = Voltage.NONE;
+        for (BreadboardSocket socket : connectedSockets)
+        {
+            if (socket.isOccupied())
+            {
+                if (socket.runningVoltage().equals(Voltage.HIGH))
+                    return Voltage.HIGH;
+                else if (socket.runningVoltage().equals(Voltage.LOW))
+                    notHigh = Voltage.LOW;
+            }
+        }
+
+        return notHigh;
     }
 }

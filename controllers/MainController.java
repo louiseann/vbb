@@ -17,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import vbb.controllers.digital_trainer.DigitalTrainerController;
 import vbb.controllers.digital_trainer.controls.SocketControl;
+import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardSocketControl;
 import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
@@ -407,25 +408,26 @@ public class MainController
 
         for (int row = rowBegin, leftColPin = 0, rightColPin = 7; row < rowEnd; row++)
         {
-            BreadboardSocketControl socketControl =
-            digitalTrainerController.getBreadBoard()
-                                    .getSocketFromRowConnectedGroup(row, pointedSocketControl.getCol(),
-                                                                    pointedSocketControl.isInLeft());
+            BreadboardControl breadboardControl = digitalTrainerController.getBreadBoard();
+            Circuit circuit = digitalTrainerController.getSoul().getCircuit();
+
+            BreadboardSocketControl socketControl = breadboardControl
+                                                    .getSocketFromRowConnectedGroup(row, pointedSocketControl.getCol(),
+                                                                                    pointedSocketControl.isInLeft());
+            socketControl.getSoul().getMetalStrip()
+                                   .connectOccupiedSockets(socketControl.getSoul(), circuit);
             Pin leftPin = chip.getPin(leftColPin++);
             leftPin.getHangingPoint().setControlConnected(socketControl.getSoul());
-            digitalTrainerController.getSoul().getCircuit().add(leftPin);
-            socketControl.getSoul().getMetalStrip().connectOccupiedSockets(socketControl.getSoul(),
-                    digitalTrainerController.getSoul().getCircuit());
+            circuit.add(leftPin);
 
             BreadboardSocketControl otherSideSocketControl =
-            digitalTrainerController.getBreadBoard()
-                                    .getSocketFromRowConnectedGroup(row, chipRemainingColSpan-1,
-                                                                    !pointedSocketControl.isInLeft());
+                    breadboardControl.getSocketFromRowConnectedGroup(row, chipRemainingColSpan-1,
+                                                                     !pointedSocketControl.isInLeft());
+            otherSideSocketControl.getSoul().getMetalStrip()
+                                   .connectOccupiedSockets(otherSideSocketControl.getSoul(), circuit);
             Pin rightPin = chip.getPin(rightColPin++);
             rightPin.getHangingPoint().setControlConnected(otherSideSocketControl.getSoul());
-            digitalTrainerController.getSoul().getCircuit().add(rightPin);
-            socketControl.getSoul().getMetalStrip().connectOccupiedSockets(otherSideSocketControl.getSoul(),
-                    digitalTrainerController.getSoul().getCircuit());
+            circuit.add(rightPin);
 
             socketControl.getSoul().setOccupied(occupy);
             otherSideSocketControl.getSoul().setOccupied(occupy);
