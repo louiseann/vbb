@@ -61,18 +61,32 @@ public class Circuit
         }
     }
 
-    public void deleteConnection(EndPoint point1, EndPoint point2)
+    public void deleteConnection(Connector connection)
     {
+        EndPoint point1 = connection.getEndPoint1();
+        EndPoint point2 = connection.getEndPoint2();
+
         Control point1Control = point1.getControlConnected();
         Control point2Control = point2.getControlConnected();
 
-        deleteConnection(point1Control, point2Control);
-        deleteConnection(point2Control, point1Control);
+        if (point1.canReceive() && point2.canSend())
+        {
+            deleteConnection(point1Control, point2Control);
+            run(Voltage.NONE, point2Control);
+        }
+
+        if (point2.canReceive() && point1.canSend())
+        {
+            deleteConnection(point2Control, point1Control);
+            run(Voltage.NONE, point1Control);
+        }
+
+        runVoltageFromSources();
     }
 
     private void deleteConnection(Control fromControl, Control toControl)
     {
-        if (!connections.containsKey(fromControl))
+        if (connections.containsKey(fromControl))
         {
             if (connections.get(fromControl).contains(toControl))
                 connections.get(fromControl).remove(toControl);
@@ -128,6 +142,14 @@ public class Circuit
         for (Control voltageSource : voltageSources)
         {
             voltageSource.powerUp(powerUp);
+        }
+    }
+
+    private void runVoltageFromSources()
+    {
+        for (Control voltageSource : voltageSources)
+        {
+            run(voltageSource.runningVoltage(), voltageSource);
         }
     }
 }

@@ -64,6 +64,11 @@ public class IntegratedCircuit extends ElectronicComponent
         return pins.get(index);
     }
 
+    public List<Pin> getPins()
+    {
+        return pins;
+    }
+
     public void setupPowerTerminals()
     {
         positiveTerminal = new Socket();

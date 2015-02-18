@@ -5,6 +5,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import vbb.controllers.tools.controls.IntegratedCircuitControl;
 import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.logic_gates.*;
 import vbb.models.tools.connectors.Wire;

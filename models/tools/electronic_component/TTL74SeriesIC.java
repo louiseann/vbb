@@ -20,9 +20,7 @@ public final class TTL74SeriesIC
     private static final int pins = 14;
     private static final int colSpan = 2;
 
-    private TTL74SeriesIC()
-    {
-    }
+    private TTL74SeriesIC() {}
 
     public static IntegratedCircuit AND_7408(Circuit circuit)
     {

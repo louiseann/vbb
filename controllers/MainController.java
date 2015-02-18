@@ -8,8 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -22,6 +21,7 @@ import vbb.controllers.digital_trainer.controls.breadboard.BreadboardSocketContr
 import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
 import vbb.controllers.tools.ToolsController;
+import vbb.controllers.tools.controls.IntegratedCircuitControl;
 import vbb.controllers.tools.controls.WireControl;
 import vbb.models.Circuit;
 import vbb.models.Control;
@@ -48,7 +48,7 @@ public class MainController
     @FXML
     private DigitalTrainerController digitalTrainerController;
     @FXML
-    private StackPane digitalTrainer;
+    private Pane digitalTrainer;
 
     private Pane toolCursor;
 
@@ -216,22 +216,52 @@ public class MainController
         };
         digitalTrainerController.setDataSwitchesClickedHandler(clickedOnDataSwitch);
 
-        final EventHandler<MouseEvent> enteredOnPluggedTool = new EventHandler<MouseEvent>() {
+        digitalTrainerController.setEnteredOnPluggedToolHandler(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Tool currentTool = toolsAreaController.getCurrentTool();
                 if (currentTool.getClassName().equals(Select.class.getSimpleName()))
-                    System.out.println("hovered");
+                {
+                    Node source = (Node) event.getSource();
+                    final Glow glow = new Glow(.8);
+                    source.setEffect(null);
+                    source.setEffect(glow);
+                }
             }
-        };
-        final EventHandler<MouseEvent> exitedOnPluggedTool = new EventHandler<MouseEvent>() {
+        });
+        digitalTrainerController.setExitedOnPluggedToolHandler(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Tool currentTool = toolsAreaController.getCurrentTool();
                 if (currentTool.getClassName().equals(Select.class.getSimpleName()))
-                    System.out.println("exited");
+                {
+                    Node source = (Node) event.getSource();
+                    source.setEffect(null);
+                }
             }
-        };
+        });
+        digitalTrainerController.setClickedOnWireHandler(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
+                {
+                    WireControl control = (WireControl) event.getSource();
+                    digitalTrainerController.handleClickOnPluggedWire(control);
+                }
+            }
+        });
+        digitalTrainerController.setClickedOnChipHandler(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
+                {
+                    IntegratedCircuitControl control = (IntegratedCircuitControl) event.getSource();
+                    digitalTrainerController.handleClickOnPluggedChip(control);
+                }
+            }
+        });
     }
 
     private void handleWireToolClicked(Node nodeSocket, Socket socket)
@@ -283,18 +313,13 @@ public class MainController
             wireControl.setWire(wire);
             wireControl.setStroke(toolsAreaController.getWireColor());
             wireControl.setStrokeWidth(4);
-            wireControl.setMouseTransparent(false);
+            wireControl.setMouseTransparent(true);
 
             wireControl.setStartX(position.getX());
             wireControl.setStartY(position.getY());
 
             wireControl.setEndX(position.getX());
             wireControl.setEndY(position.getY());
-
-            EventHandler<MouseEvent> enteredHandler = digitalTrainerController.getEnteredOnPluggedToolHandler();
-            EventHandler<MouseEvent> exitedHandler = digitalTrainerController.getExitedOnPluggedToolHandler();
-            wireControl.addEventHandler(MouseEvent.MOUSE_ENTERED, enteredHandler);
-            wireControl.addEventHandler(MouseEvent.MOUSE_EXITED, exitedHandler);
 
             WireControl.startSet(true);
 
@@ -305,6 +330,7 @@ public class MainController
             wireControl.setEndX(position.getX());
             wireControl.setEndY(position.getY());
 
+            wireControl.setMouseTransparent(false);
             WireControl.startSet(false);
         }
     }
@@ -322,7 +348,8 @@ public class MainController
         if (socket.getRow() + chip.getRowSpan() <= digitalTrainerController.getBreadBoard().getSoul().getGridRows() &&
                 reverseColPosition < chip.getColSpan() &&
                 reverseColPosition > 0 &&
-                !occupied(socket, chip.getRowSpan(), chip.getColSpan(), reverseColPosition))
+                !occupied(socket, chip.getRowSpan(), chip.getColSpan(), reverseColPosition) &&
+                socket.isInLeft())
         {
             if (eventType.equals(MouseEvent.MOUSE_CLICKED))
             {
@@ -365,11 +392,14 @@ public class MainController
     {
         Tool currentTool = toolsAreaController.getCurrentTool();
 
-        occupySockets(pointedSocketControl, chip, chipRemainingColSpan);
-        setChipOnBoard(pointedSocketControl, currentTool.getViewImage(), currentTool.getViewHotSpot());
+        occupySockets(true, pointedSocketControl, chip, chipRemainingColSpan);
+
+        IntegratedCircuitControl chipControl = new IntegratedCircuitControl(currentTool.getViewImage());
+        chipControl.setSoul(chip);
+        setChipOnBoard(pointedSocketControl, chipControl, currentTool.getViewHotSpot());
     }
 
-    private void occupySockets(BreadboardSocketControl pointedSocketControl, IntegratedCircuit chip,
+    private void occupySockets(boolean occupy, BreadboardSocketControl pointedSocketControl, IntegratedCircuit chip,
                                int chipRemainingColSpan)
     {
         int rowBegin = pointedSocketControl.getRow();
@@ -397,8 +427,8 @@ public class MainController
             socketControl.getSoul().getMetalStrip().connectOccupiedSockets(otherSideSocketControl.getSoul(),
                     digitalTrainerController.getSoul().getCircuit());
 
-            socketControl.getSoul().setOccupied(true);
-            otherSideSocketControl.getSoul().setOccupied(true);
+            socketControl.getSoul().setOccupied(occupy);
+            otherSideSocketControl.getSoul().setOccupied(occupy);
         }
     }
 
@@ -431,36 +461,24 @@ public class MainController
         }
     }
 
-    private void setChipOnBoard(BreadboardSocketControl pointedSocketControl, Image chipImage, Point2D chipViewHotSpot)
+    private void setChipOnBoard(BreadboardSocketControl pointedSocketControl, IntegratedCircuitControl control,
+                                Point2D chipViewHotSpot)
     {
         final Bounds nodeBounds = pointedSocketControl.localToScene(pointedSocketControl.getBoundsInLocal());
         Point2D position = getPointAtCenterPane(nodeBounds);
         double xPosition = position.getX() + chipViewHotSpot.getX() + 2;
         double yPosition = position.getY() + chipViewHotSpot.getY() - 1;
 
-        ImageView chipView = new ImageView(chipImage);
-        chipView.relocate(xPosition, yPosition);
+        control.relocate(xPosition, yPosition);
 
-        EventHandler<MouseEvent> enteredHandler = digitalTrainerController.getEnteredOnPluggedToolHandler();
-        EventHandler<MouseEvent> exitedHandler = digitalTrainerController.getExitedOnPluggedToolHandler();
-        chipView.addEventHandler(MouseEvent.MOUSE_ENTERED, enteredHandler);
-        chipView.addEventHandler(MouseEvent.MOUSE_EXITED, exitedHandler);
-
-        chipView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("clicked!");
-            }
-        });
-
-        digitalTrainerController.plugChip(chipView);
+        digitalTrainerController.plugChip(control);
     }
 
     public void onEnteredOnSocket(Socket socket, Shape socketShape)
     {
         if (!socket.isOccupied())
             socketShape.setStyle("-fx-stroke: red;" +
-                    "-fx-stroke-type: inside;");
+                                 "-fx-stroke-type: inside;");
     }
 
     public void onExitedOnSocket(Shape socketShape)
@@ -473,7 +491,7 @@ public class MainController
         double toolsAreaWidth = toolsArea.getWidth();
 
         double x = (nodeBounds.getMinX() + nodeBounds.getMaxX()) / 2 - toolsAreaWidth;
-        double y = (nodeBounds.getMinY()+nodeBounds.getMaxY())/2;
+        double y = (nodeBounds.getMinY()+nodeBounds.getMaxY()) / 2;
 
         return new Point2D(x, y);
     }
