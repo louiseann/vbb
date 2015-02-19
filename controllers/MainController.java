@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import vbb.controllers.digital_trainer.DigitalTrainerController;
@@ -56,6 +58,8 @@ public class MainController
 
     private WireControl wireControl;
 
+    private Label hoverMessage;
+
     @FXML
     public void initialize()
     {
@@ -86,15 +90,23 @@ public class MainController
         centerPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Point2D hotSpot = toolsAreaController.getCurrentTool().getViewHotSpot();
-                moveTool(event.getX() + hotSpot.getX(), event.getY() + hotSpot.getY());
                 Tool currentTool = toolsAreaController.getCurrentTool();
+                Point2D hotSpot = currentTool.getViewHotSpot();
+                moveTool(event.getX() + hotSpot.getX(), event.getY() + hotSpot.getY());
                 if (currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
                 {
                     if (WireControl.isStartSet())
                     {
                         wireControl.setEndX(event.getX());
                         wireControl.setEndY(event.getY());
+                    }
+                }
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
+                {
+                    if (hoverMessage != null)
+                    {
+                        //hoverMessage.setTranslateX(event.getX() + hotSpot.getX());
+                        //hoverMessage.setTranslateY(event.getY() + hotSpot.getY());
                     }
                 }
             }
@@ -228,6 +240,15 @@ public class MainController
                     final Glow glow = new Glow(.8);
                     source.setEffect(null);
                     source.setEffect(glow);
+
+                    hoverMessage = new Label("click to remove");
+                    hoverMessage.setStyle("-fx-font-size: 10px;" +
+                                          "-fx-text-fill: #ffffff;" +
+                                          "-fx-background-color: #000000;" +
+                                          "-fx-label-padding: 2px;");
+                    toolCursor.getChildren().add(hoverMessage);
+                    hoverMessage.relocate(15, 0);
+
                 }
             }
         });
@@ -239,6 +260,8 @@ public class MainController
                 {
                     Node source = (Node) event.getSource();
                     source.setEffect(null);
+                    toolCursor.getChildren().remove(hoverMessage);
+                    hoverMessage = null;
                 }
             }
         });
