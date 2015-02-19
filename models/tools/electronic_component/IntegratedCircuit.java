@@ -2,6 +2,7 @@ package vbb.models.tools.electronic_component;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import vbb.models.Circuit;
 import vbb.models.Voltage;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.logic_gates.LogicGate;
@@ -77,15 +78,9 @@ public class IntegratedCircuit extends ElectronicComponent
         ChangeListener<Boolean> voltageChangeListener = new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                System.out.println("voltage changed");
-                System.out.println("positive terminal " + positiveTerminal.runningVoltage());
-                System.out.println("negative terminal " + negativeTerminal.runningVoltage());
                 if (positiveTerminal.runningVoltage().equals(Voltage.HIGH) &&
                         negativeTerminal.runningVoltage().equals(Voltage.LOW))
-                {
                     powerUp(true);
-                    System.out.println("power up chip!");
-                }
 
                 else
                     powerUp(false);

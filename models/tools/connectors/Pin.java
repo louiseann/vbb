@@ -1,7 +1,12 @@
 package vbb.models.tools.connectors;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import vbb.models.Circuit;
+import vbb.models.Voltage;
 import vbb.models.connection.connector.OneWayConnector;
 import vbb.models.connection.end_point.EndPoint;
+import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 
 /**
  * Created by owie on 2/3/15.

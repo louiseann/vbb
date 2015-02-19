@@ -30,8 +30,6 @@ public class Circuit
         Control point1Control = point1.getControlConnected();
         Control point2Control = point2.getControlConnected();
 
-        System.out.println(point1Control);
-        System.out.println(point2Control);
         if (!connections.containsKey(point1Control) && point1.canReceive())
             connections.put(point1Control, new ArrayList<Control>());
         if (!connections.containsKey(point2Control) && point2.canReceive())
@@ -39,8 +37,6 @@ public class Circuit
 
         if (point1.canReceive() && point2.canSend())
         {
-            System.out.println("point1 is " + point1Control.runningVoltage() + " and point2 is " + point2Control.runningVoltage());
-            System.out.println();
             connections.get(point1Control).add(point2Control);
             if (point1Control.runningVoltage().equals(Voltage.HIGH) &&
                     !point2Control.runningVoltage().equals(Voltage.HIGH))
@@ -53,8 +49,6 @@ public class Circuit
         }
         if (point2.canReceive() && point1.canSend())
         {
-            System.out.println("point2 is " + point2Control.runningVoltage() + " and point1 is " + point1Control.runningVoltage());
-            System.out.println();
             connections.get(point2Control).add(point1Control);
             if (point2Control.runningVoltage().equals(Voltage.HIGH) &&
                     !point1Control.runningVoltage().equals(Voltage.HIGH))
@@ -77,17 +71,18 @@ public class Circuit
 
         if (point1.canReceive() && point2.canSend())
         {
-            deleteConnection(point1Control, point2Control);
             run(Voltage.NONE, point2Control);
+            deleteConnection(point1Control, point2Control);
         }
 
         if (point2.canReceive() && point1.canSend())
         {
-            deleteConnection(point2Control, point1Control);
             run(Voltage.NONE, point1Control);
+            deleteConnection(point2Control, point1Control);
         }
 
-        runVoltageFromSources();
+        breaker.powerUp(false);
+        breaker.powerUp(true);
     }
 
     private void deleteConnection(Control fromControl, Control toControl)

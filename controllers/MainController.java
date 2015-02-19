@@ -26,6 +26,7 @@ import vbb.controllers.tools.controls.IntegratedCircuitControl;
 import vbb.controllers.tools.controls.WireControl;
 import vbb.models.Circuit;
 import vbb.models.Control;
+import vbb.models.Voltage;
 import vbb.models.connection.connector.TwoWayConnector;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.digital_trainer.breadboard.BreadboardSocket;
@@ -413,7 +414,7 @@ public class MainController
 
             BreadboardSocketControl socketControl = breadboardControl
                                                     .getSocketFromRowConnectedGroup(row, pointedSocketControl.getCol(),
-                                                                                    pointedSocketControl.isInLeft());
+                                                            pointedSocketControl.isInLeft());
             socketControl.getSoul().getMetalStrip()
                                    .connectOccupiedSockets(socketControl.getSoul(), circuit);
             Pin leftPin = chip.getPin(leftColPin++);
@@ -421,13 +422,14 @@ public class MainController
             circuit.add(leftPin);
 
             BreadboardSocketControl otherSideSocketControl =
-                    breadboardControl.getSocketFromRowConnectedGroup(row, chipRemainingColSpan-1,
-                                                                     !pointedSocketControl.isInLeft());
+                    breadboardControl.getSocketFromRowConnectedGroup(row, chipRemainingColSpan - 1,
+                            !pointedSocketControl.isInLeft());
             otherSideSocketControl.getSoul().getMetalStrip()
                                    .connectOccupiedSockets(otherSideSocketControl.getSoul(), circuit);
             Pin rightPin = chip.getPin(rightColPin++);
             rightPin.getHangingPoint().setControlConnected(otherSideSocketControl.getSoul());
             circuit.add(rightPin);
+
 
             socketControl.getSoul().setOccupied(occupy);
             otherSideSocketControl.getSoul().setOccupied(occupy);
