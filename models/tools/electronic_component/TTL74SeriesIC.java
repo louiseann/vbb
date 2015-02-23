@@ -14,17 +14,17 @@ public final class TTL74SeriesIC
 {
     private static TTL74SeriesIC instance = new TTL74SeriesIC();
 
-    private static final int vccPin = 7;
-    private static final int gndPin = 6;
+    private static final int vccPin = 0;
+    private static final int gndPin = 13;
 
     private static final int pins = 14;
-    private static final int colSpan = 2;
+    private static final int rowSpan = 2;
 
     private TTL74SeriesIC() {}
 
     public static IntegratedCircuit AND_7408(Circuit circuit)
     {
-        IntegratedCircuit and7408 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit and7408 = new IntegratedCircuit(pins, rowSpan, circuit);
         and7408.setLogicGate(AndGate.getInstance());
         setPinsFunctions(and7408, 2, circuit);
 
@@ -33,7 +33,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit OR_7432(Circuit circuit)
     {
-        IntegratedCircuit or7432 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit or7432 = new IntegratedCircuit(pins, rowSpan, circuit);
         or7432.setLogicGate(OrGate.getInstance());
         setPinsFunctions(or7432, 2, circuit);
 
@@ -42,7 +42,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit NOT_7404(Circuit circuit)
     {
-        IntegratedCircuit not7404 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit not7404 = new IntegratedCircuit(pins, rowSpan, circuit);
         not7404.setLogicGate(NotGate.getInstance());
         setPinsFunctions(not7404, 1, circuit);
 
@@ -51,7 +51,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit NAND_7400(Circuit circuit)
     {
-        IntegratedCircuit nand7400 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit nand7400 = new IntegratedCircuit(pins, rowSpan, circuit);
         nand7400.setLogicGate(NandGate.getInstance());
         setPinsFunctions(nand7400, 2, circuit);
 
@@ -60,7 +60,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit NOR_7402(Circuit circuit)
     {
-        IntegratedCircuit nor7402 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit nor7402 = new IntegratedCircuit(pins, rowSpan, circuit);
         nor7402.setLogicGate(NorGate.getInstance());
         setPinsFunctions(nor7402, 2, circuit);
 
@@ -69,7 +69,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit XOR_7486(Circuit circuit)
     {
-        IntegratedCircuit xor7486 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit xor7486 = new IntegratedCircuit(pins, rowSpan, circuit);
         xor7486.setLogicGate(XorGate.getInstance());
         setPinsFunctions(xor7486, 2, circuit);
 
@@ -78,7 +78,7 @@ public final class TTL74SeriesIC
 
     public static IntegratedCircuit XNOR_747266(Circuit circuit)
     {
-        IntegratedCircuit xnor747266 = new IntegratedCircuit(pins, colSpan);
+        IntegratedCircuit xnor747266 = new IntegratedCircuit(pins, rowSpan, circuit);
         xnor747266.setLogicGate(XnorGate.getInstance());
         setPinsFunctions(xnor747266, 2, circuit);
 
@@ -87,7 +87,7 @@ public final class TTL74SeriesIC
 
     private static void setPinsFunctions(IntegratedCircuit chip, int inputs, Circuit circuit)
     {
-        for (int pin = 0; pin < chip.getPinCount()-1; pin++)
+        for (int pin = 0; pin < chip.getPinCount(); pin++)
         {
             if (pin == gndPin)
                 chip.set(pin, chip.createGndPin());

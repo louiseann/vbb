@@ -81,8 +81,11 @@ public class Circuit
             deleteConnection(point2Control, point1Control);
         }
 
-        breaker.powerUp(false);
-        breaker.powerUp(true);
+        if (breaker.isPowered())
+        {
+            breaker.powerUp(false);
+            breaker.powerUp(true);
+        }
     }
 
     private void deleteConnection(Control fromControl, Control toControl)

@@ -40,6 +40,16 @@ public class MultipleInputGateWrapper extends GateWrapper
                 Voltage output = getLogicGate().getOutput(getInputVoltages());
                 getOutputSocket().run(output);
             }
+            else if (isOneInputSocketVoltageSet())
+            {
+                for (Socket inputSocket : inputSockets)
+                {
+                    if (inputSocket.runningVoltage().equals(Voltage.NONE))
+                        inputSocket.setRunningVoltage(Voltage.LOW);
+                }
+                Voltage output = getLogicGate().getOutput(getInputVoltages());
+                getOutputSocket().run(output);
+            }
             else
                 getOutputSocket().run(Voltage.NONE);
         }
@@ -63,6 +73,16 @@ public class MultipleInputGateWrapper extends GateWrapper
                 return false;
         }
         return set;
+    }
+
+    public boolean isOneInputSocketVoltageSet()
+    {
+        for (Socket socket : inputSockets)
+        {
+            if (!socket.runningVoltage().equals(Voltage.NONE))
+                return true;
+        }
+        return false;
     }
 
     private List<Voltage> getInputVoltages()

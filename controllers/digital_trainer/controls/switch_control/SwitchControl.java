@@ -47,16 +47,16 @@ public class SwitchControl extends StackPane
     {
         if(soul.isOn())
         {
-            double xPosition = toggleHandle.getLayoutX() - (toggleHandle.getLayoutX() - box.getLayoutX());
-            moveToggleHandle(xPosition, 0);
-            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);");
+            double yPostion = toggleHandle.getLayoutY() - (toggleHandle.getLayoutY() - box.getLayoutY());
+            moveToggleHandle(0, yPostion);
+            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, 0, 1);");
         }
 
         else
         {
-            double xPosition = box.getLayoutX() - (box.getWidth() - toggleHandle.getWidth());
-            moveToggleHandle(xPosition, 0);
-            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, 1, 0);");
+            double yPosition = box.getLayoutY() + (box.getHeight() - toggleHandle.getHeight());
+            moveToggleHandle(0, yPosition);
+            toggleHandle.setStyle("-fx-effect: dropshadow(gaussian, #000000, 2, 0, 0, -1);");
         }
 
         soul.toggle();

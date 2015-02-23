@@ -26,17 +26,17 @@
 }
 
 .chip {
-    -fx-pref-width: 44px;
-    -fx-pref-height: 62px;
-    -fx-min-width: 44px;
-    -fx-min-height: 62px;
-    -fx-max-width: 44px;
-    -fx-max-height: 62px;
+    -fx-pref-width: 62px;
+    -fx-pref-height: 44px;
+    -fx-min-width: 62px;
+    -fx-min-height: 44px;
+    -fx-max-width: 62px;
+    -fx-max-height: 44px;
 }
 
 .chip_label {
-    -fx-alignment: top-right;
-    -fx-padding: 6px 0 0 0;
+    -fx-alignment: center;
+    -fx-padding: 3px 0 3px 0;
 }
 
 .gate_label {

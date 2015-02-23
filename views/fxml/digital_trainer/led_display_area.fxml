@@ -1,16 +1,14 @@
 <?import javafx.scene.layout.GridPane?>
-<?import vbb.controllers.digital_trainer.controls.SocketControl?>
-<?import vbb.controllers.digital_trainer.controls.LEDControl?>
 <?import javafx.geometry.Insets?>
 
 <GridPane xmlns:fx="http://javafx.com/javafx"
           fx:controller="vbb.controllers.digital_trainer.LedDisplayAreaController"
           fx:id="ledDisplayArea"
-          hgap="28" vgap="0"
+          hgap="0" vgap="28"
           styleClass="area">
 
     <padding>
-        <Insets top="7" right="30" bottom="7" left="45"/>
+        <Insets top="30" right="12" bottom="45" left="12"/>
     </padding>
 
     <!-- added dynamically

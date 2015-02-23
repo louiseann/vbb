@@ -14,7 +14,4 @@
             <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer.fxml"/>
         </StackPane>
     </center>
-    <right>
-        <fx:include source="truth_table_generator/truth_table_generator.fxml" />
-    </right>
 </BorderPane>

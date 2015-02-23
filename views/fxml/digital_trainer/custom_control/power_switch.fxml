@@ -1,15 +1,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/javafx" alignment="CENTER_RIGHT">
-    <Rectangle fx:id="box" width="39" height="18" styleClass="switch_toggle_box"/>
-    <StackPane alignment="CENTER_RIGHT">
-        <HBox spacing="3" alignment="CENTER">
-            <Label text="ON" styleClass="switch_state"/>
+<?import javafx.scene.layout.VBox?>
+<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/javafx" alignment="TOP_CENTER">
+    <Rectangle fx:id="box" width="24" height="45" styleClass="switch_toggle_box"/>
+    <StackPane alignment="TOP_CENTER">
+        <VBox spacing="5" alignment="CENTER">
             <Label text="OFF" styleClass="switch_state"/>
-        </HBox>
-        <Rectangle fx:id="toggleHandle" width="18" height="18" styleClass="switch_toggle"
+            <Label text="ON" styleClass="switch_state"/>
+        </VBox>
+        <Rectangle fx:id="toggleHandle" width="24" height="20" styleClass="switch_toggle"
                    mouseTransparent="true"/>
     </StackPane>
 </fx:root>

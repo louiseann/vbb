@@ -6,49 +6,49 @@ package vbb.models.digital_trainer.breadboard;
  */
 public class Breadboard
 {
-    private final int gridRows;
-    private final int powerRailsColumns;
-    private final int terminalHoleColumns;
+    private final int gridCols;
+    private final int powerRailsRows;
+    private final int terminalHoleRows;
 
-    private MetalStrip[] firstHalfLeftPowerRail;
-    private MetalStrip[] secondHalfLeftPowerRail;
+    private MetalStrip[] firstHalfTopPowerRail;
+    private MetalStrip[] secondHalfTopPowerRail;
 
     private MetalStrip[] leftTerminalStrip;
     private MetalStrip[] rightTerminalStrip;
 
-    private MetalStrip[] firstHalfRightPowerRail;
-    private MetalStrip[] secondHalfRightPowerRail;
+    private MetalStrip[] firstHalfBottomPowerRail;
+    private MetalStrip[] secondHalfBottomPowerRail;
 
     public Breadboard()
     {
-        gridRows = 64;
-        powerRailsColumns = 2;
-        terminalHoleColumns = 5;
+        gridCols = 64;
+        powerRailsRows = 2;
+        terminalHoleRows = 5;
 
-        final int powerRailRows = 25;
-        final int terminalStripsRows = gridRows;
+        final int powerRailCols = 25;
+        final int terminalStripsCols = gridCols;
 
-        firstHalfLeftPowerRail = createMetalStrips(powerRailsColumns, powerRailRows);
-        secondHalfLeftPowerRail = createMetalStrips(powerRailsColumns, powerRailRows);
-        leftTerminalStrip = createMetalStrips(terminalStripsRows, terminalHoleColumns);
-        rightTerminalStrip = createMetalStrips(terminalStripsRows, terminalHoleColumns);
-        firstHalfRightPowerRail = createMetalStrips(powerRailsColumns, powerRailRows);
-        secondHalfRightPowerRail = createMetalStrips(powerRailsColumns, powerRailRows);
+        firstHalfTopPowerRail = createMetalStrips(powerRailsRows, powerRailCols);
+        secondHalfTopPowerRail = createMetalStrips(powerRailsRows, powerRailCols);
+        leftTerminalStrip = createMetalStrips(terminalStripsCols, terminalHoleRows);
+        rightTerminalStrip = createMetalStrips(terminalStripsCols, terminalHoleRows);
+        firstHalfBottomPowerRail = createMetalStrips(powerRailsRows, powerRailCols);
+        secondHalfBottomPowerRail = createMetalStrips(powerRailsRows, powerRailCols);
     }
 
-    public int getGridRows()
+    public int getGridCols()
     {
-        return gridRows;
+        return gridCols;
     }
 
-    public int getPowerRailsColumns()
+    public int getPowerRailsRows()
     {
-        return powerRailsColumns;
+        return powerRailsRows;
     }
 
-    public int getTerminalHoleColumns()
+    public int getTerminalHoleRows()
     {
-        return terminalHoleColumns;
+        return terminalHoleRows;
     }
 
     private MetalStrip[] createMetalStrips(int rowCount, int colCount)
@@ -68,16 +68,16 @@ public class Breadboard
         return metalStrips;
     }
 
-    public MetalStrip[] getPowerRail(boolean left, boolean firstHalf)
+    public MetalStrip[] getPowerRail(boolean top, boolean firstHalf)
     {
-        if (left)
-            return firstHalf ? firstHalfLeftPowerRail : secondHalfLeftPowerRail;
+        if (top)
+            return firstHalf ? firstHalfTopPowerRail : secondHalfTopPowerRail;
         else
-            return firstHalf ? firstHalfRightPowerRail : secondHalfRightPowerRail;
+            return firstHalf ? firstHalfBottomPowerRail : secondHalfBottomPowerRail;
     }
 
-    public MetalStrip[] getTerminalStrip(boolean left)
+    public MetalStrip[] getTerminalStrip(boolean top)
     {
-        return  left ? leftTerminalStrip : rightTerminalStrip;
+        return  top ? leftTerminalStrip : rightTerminalStrip;
     }
 }

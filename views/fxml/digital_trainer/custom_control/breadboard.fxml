@@ -4,17 +4,18 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <?import javafx.geometry.Insets?>
-<fx:root type="javafx.scene.layout.HBox"
+<fx:root type="javafx.scene.layout.VBox"
          xmlns:fx="http://javafx.com.javafx"
-         prefWidth="233" prefHeight="660"
-         minWidth="233" minHeight="660"
-         maxWidth="233" maxHeight="660"
          id="breadboard">
 
-    <GridPane fx:id="colConnectedLeftGroup"
-              hgap="4" vgap="4">
+    <!--prefWidth="660" prefHeight="233"
+         minWidth="660" minHeight="233"
+         maxWidth="660" maxHeight="233"-->
+
+    <GridPane fx:id="rowConnectedTopGroup"
+              hgap="6" vgap="6">
         <padding>
-            <Insets top="12" right="12" bottom="12" left="12"/>
+            <Insets top="16" right="16" bottom="16" left="16"/>
         </padding>
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -22,28 +23,12 @@
         -->
     </GridPane>
 
-    <Rectangle width="2" height="660" styleClass="breadboard_divider"/>
+    <Rectangle width="922" height="2" styleClass="breadboard_divider"/>
 
-    <GridPane fx:id="rowConnectedLeftGroup"
-              hgap="4" vgap="4">
+    <GridPane fx:id="colConnectedTopGroup"
+              hgap="6" vgap="6">
         <padding>
-            <Insets top="12" right="12" bottom="12" left="12"/>
-        </padding>
-        <!-- rows added dynamically
-        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
-        -->
-    </GridPane>
-
-    <Rectangle width="9" height="660" styleClass="breadboard_divider"/>
-
-    <GridPane fx:id="rowConnectedRightGroup"
-              hgap="4" vgap="4">
-        <padding>
-            <Insets top="12" right="12" bottom="12" left="12"/>
+            <Insets top="16" right="16" bottom="16" left="16"/>
         </padding>
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
@@ -54,12 +39,28 @@
         -->
     </GridPane>
 
-    <Rectangle width="2" height="660" styleClass="breadboard_divider"/>
+    <Rectangle width="922" height="9" styleClass="breadboard_divider"/>
 
-    <GridPane fx:id="colConnectedRightGroup"
-              hgap="4" vgap="4">
+    <GridPane fx:id="colConnectedBottomGroup"
+              hgap="6" vgap="6">
         <padding>
-            <Insets top="12" right="12" bottom="12" left="12"/>
+            <Insets top="16" right="16" bottom="16" left="16"/>
+        </padding>
+        <!-- rows added dynamically
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+        <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+        -->
+    </GridPane>
+
+    <Rectangle width="922" height="2" styleClass="breadboard_divider"/>
+
+    <GridPane fx:id="rowConnectedBottomGroup"
+              hgap="6" vgap="6">
+        <padding>
+            <Insets top="16" right="16" bottom="16" left="16"/>
         </padding>
         <!-- rows added dynamically
         <Rectangle width="7" height="7" GridPane.rowIndex="0" GridPane.columnIndex="0"/>

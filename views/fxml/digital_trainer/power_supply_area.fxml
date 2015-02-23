@@ -6,32 +6,29 @@
 
 <?import vbb.controllers.digital_trainer.controls.LEDControl?>
 <?import javafx.scene.control.Label?>
-<HBox xmlns:fx="http://javafx.com/javafx"
+<VBox xmlns:fx="http://javafx.com/javafx"
       fx:controller="vbb.controllers.digital_trainer.PowerSupplyAreaController"
       spacing="7">
-    <VBox spacing="24" styleClass="area">
-        <padding>
-            <Insets top="17" right="7" bottom="17" left="45"/>
-        </padding>
-        <HBox alignment="CENTER_RIGHT" spacing="6">
-            <SocketControl fx:id="positiveSocket"/>
-            <Label text="+" styleClass="power_voltage"/>
-        </HBox>
-        <HBox alignment="CENTER_RIGHT" spacing="6">
-            <SocketControl fx:id="negativeSocket"/>
-            <Label text="−" styleClass="power_voltage"/>
-        </HBox>
-    </VBox>
-    <VBox alignment="CENTER" spacing="3">
-        <padding>
-            <Insets top="17"/>
-        </padding>
-        <VBox styleClass="switch_box">
+    <HBox alignment="CENTER" spacing="3">
+        <HBox styleClass="switch_box">
             <padding>
-                <Insets top="7" right="7" bottom="7" left="7"/>
+                <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <PowerSwitchControl fx:id="powerSwitch"/>
-        </VBox>
+        </HBox>
         <LEDControl fx:id="led"/>
-    </VBox>
-</HBox>
+    </HBox>
+    <HBox spacing="30" styleClass="area">
+        <padding>
+            <Insets top="7" right="22" bottom="45" left="22"/>
+        </padding>
+        <VBox alignment="CENTER_RIGHT" spacing="6">
+            <Label text="+" styleClass="power_voltage"/>
+            <SocketControl fx:id="positiveSocket"/>
+        </VBox>
+        <VBox alignment="CENTER_RIGHT" spacing="6">
+            <Label text="−" styleClass="power_voltage"/>
+            <SocketControl fx:id="negativeSocket"/>
+        </VBox>
+    </HBox>
+</VBox>

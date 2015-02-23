@@ -24,7 +24,7 @@ public class LedDisplayAreaController
     public void createLedSocketPairControls(Map<LED, Socket> ledSocketPairSouls)
     {
         Set<LED> ledSouls = ledSocketPairSouls.keySet();
-        int row = 0;
+        int col = 0;
         for (LED ledSoul : ledSouls)
         {
             LEDControl led = new LEDControl();
@@ -34,8 +34,8 @@ public class LedDisplayAreaController
             SocketControl socket = new SocketControl();
             socket.setSoul(socketSoul);
 
-            ledDisplayArea.add(socket, 0, row);
-            ledDisplayArea.add(led, 1, row++);
+            ledDisplayArea.add(led, col, 0);
+            ledDisplayArea.add(socket, col++, 1);
         }
     }
 
@@ -43,7 +43,7 @@ public class LedDisplayAreaController
     {
         for (Node nodeSocket : ledDisplayArea.getChildren())
         {
-            if (GridPane.getColumnIndex(nodeSocket) == 0)
+            if (GridPane.getRowIndex(nodeSocket) == 1)
             {
                 SocketControl socket = (SocketControl) nodeSocket;
                 socket.addMouseClickedHandler(handler);
@@ -55,7 +55,7 @@ public class LedDisplayAreaController
     {
         for (Node nodeSocket : ledDisplayArea.getChildren())
         {
-            if (GridPane.getColumnIndex(nodeSocket) == 0)
+            if (GridPane.getRowIndex(nodeSocket) == 1)
             {
                 SocketControl socket = (SocketControl) nodeSocket;
                 socket.addMouseEnteredHandler(handler);
@@ -67,7 +67,7 @@ public class LedDisplayAreaController
     {
         for (Node nodeSocket : ledDisplayArea.getChildren())
         {
-            if (GridPane.getColumnIndex(nodeSocket) == 0)
+            if (GridPane.getRowIndex(nodeSocket) == 1)
             {
                 SocketControl socket = (SocketControl) nodeSocket;
                 socket.addMouseExitedHandler(handler);

@@ -1,6 +1,6 @@
 <?import javafx.scene.shape.Circle?>
 <fx:root type="javafx.scene.layout.StackPane"
          xmlns:fx="http://javafx.com/fxml">
-    <Circle fx:id="socketCircle" radius="5" fill="black" styleClass="connector_outer_circle"/>
-    <Circle radius="2" fill="white" mouseTransparent="true" styleClass="connector_inner_circle"/>
+    <Circle fx:id="socketCircle" radius="6" fill="black" styleClass="connector_outer_circle"/>
+    <Circle radius="3" fill="white" mouseTransparent="true" styleClass="connector_inner_circle"/>
 </fx:root>

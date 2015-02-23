@@ -43,116 +43,118 @@
               alignment="CENTER">
 
         <VBox GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="AND" styleClass="gate_label"/>
+            <Button fx:id="andChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="0" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/and_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="AND" styleClass="gate_label"/>-->
             <Label text="7408" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="andChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="0" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/and.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
 
         <VBox GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="OR" styleClass="gate_label"/>
+            <Button fx:id="orChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="1" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/or_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="OR" styleClass="gate_label"/>-->
             <Label text="7432" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="orChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="1" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/or.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
 
         <VBox GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="NOT" styleClass="gate_label"/>
+            <Button fx:id="notChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="2" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/not_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="NOT" styleClass="gate_label"/>-->
             <Label text="7404" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="notChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="2" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/not.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
+
 
         <VBox GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="NAND" styleClass="gate_label"/>
+            <Button fx:id="nandChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="3" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/nand_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="NAND" styleClass="gate_label"/>-->
             <Label text="7400" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="nandChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="3" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/nand.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
 
         <VBox GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="NOR" styleClass="gate_label"/>
+            <Button fx:id="norChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="4" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/nor_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="NOR" styleClass="gate_label"/>-->
             <Label text="7402" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="norChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="4" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/nor.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
 
         <VBox GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="XOR" styleClass="gate_label"/>
+            <Button fx:id="xorChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="5" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/xor_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="XOR" styleClass="gate_label"/>-->
             <Label text="7486" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="xorChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="5" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/xor.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
+
 
         <VBox GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="chip_label">
-            <Label text="XNOR" styleClass="gate_label"/>
+            <Button fx:id="xnorChipButton" styleClass="chip"
+                    onAction="#handleToolSelection"
+                    GridPane.rowIndex="6" GridPane.columnIndex="1">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/vbb/views/images/tools/chips/xnor_icon.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <!--<Label text="XNOR" styleClass="gate_label"/>-->
             <Label text="747266" styleClass="ic_number_label"/>
         </VBox>
-        <Button fx:id="xnorChipButton" styleClass="chip"
-                onAction="#handleToolSelection"
-                GridPane.rowIndex="6" GridPane.columnIndex="1">
-            <graphic>
-                <ImageView>
-                    <image>
-                        <Image url="@/vbb/views/images/tools/chips/xnor.png"/>
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
 
     </GridPane>
 

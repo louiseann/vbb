@@ -38,16 +38,17 @@
 
 .switch_toggle {
     -fx-fill: #ffffff;
-    -fx-effect: dropshadow(gaussian, #000000, 2, 0, -1, 0);
+    -fx-effect: dropshadow(gaussian, #000000, 2, 0, 0, 1);
 }
 
 .switch_state {
-    -fx-font-size: 8px;
+    -fx-font-size: 11px;
+    -fx-text-fill: #4b4b4b;
 }
 
 .switch_toggle_box {
     -fx-fill: #ffffff;
-    -fx-effect: innershadow(gaussian, #000000, 3, 0, 0, 0);
+    -fx-effect: innershadow(gaussian, #000000, 50, 2, 0, 0);
 }
 
 .led {

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import vbb.controllers.digital_trainer.controls.SocketControl;
 import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
@@ -20,9 +21,9 @@ import java.util.Set;
 public class DataSwitchesAreaController
 {
     @FXML
-    private VBox socketsWrapper;
+    private HBox socketsWrapper;
     @FXML
-    private VBox dataSwitchesWrapper;
+    private HBox dataSwitchesWrapper;
 
     public void createSwitchSocketPairControls(Map<DataSwitch, Socket> switchSocketPairSouls)
     {

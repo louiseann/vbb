@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import vbb.models.Circuit;
 import vbb.models.Voltage;
+import vbb.models.connection.end_point.EndPoint;
 import vbb.models.digital_trainer.Socket;
 import vbb.models.logic_gates.LogicGate;
 import vbb.models.tools.connectors.Pin;
@@ -23,14 +24,17 @@ public class IntegratedCircuit extends ElectronicComponent
     private Socket positiveTerminal;
     private Socket negativeTerminal;
 
-    public IntegratedCircuit(int pinCount, int colSpan)
+    private Circuit circuit;
+
+    public IntegratedCircuit(int pinCount, int rowSpan, Circuit circuit)
     {
-        super(pinCount /2, colSpan);
+        super(rowSpan, pinCount/2);
         this.setOverpassesBreadboardRavine(true);
 
         this.pinCount = pinCount;
         this.pins = new ArrayList<Pin>(pinCount);
 
+        this.circuit = circuit;
         setupPowerTerminals();
     }
 
@@ -81,7 +85,6 @@ public class IntegratedCircuit extends ElectronicComponent
                 if (positiveTerminal.runningVoltage().equals(Voltage.HIGH) &&
                         negativeTerminal.runningVoltage().equals(Voltage.LOW))
                     powerUp(true);
-
                 else
                     powerUp(false);
             }

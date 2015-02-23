@@ -1,6 +1,6 @@
 <?import javafx.scene.shape.Circle?>
 <fx:root type="javafx.scene.layout.StackPane"
          xmlns:fx="http://javafx.com/javafx">
-    <Circle fx:id="light" radius="17" styleClass="led_light"/>
-    <Circle fx:id="bulb" radius="10" styleClass="led"/>
+    <Circle fx:id="light" radius="21" styleClass="led_light"/>
+    <Circle fx:id="bulb" radius="12" styleClass="led"/>
 </fx:root>

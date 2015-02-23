@@ -59,9 +59,9 @@ public final class VBbTool
 
     private static void createAndChip()
     {
-        ImageView andToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/and_tool.png"));
+        ImageView andToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/and_h.png"));
         IntegratedCircuit andIC = new IntegratedCircuit(AndGate.getInstance());
-        andChip = createTool("and", andIC, andToolImage, -3, -3.5, Cursor.NONE);
+        andChip = createTool("and", andIC, andToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool AndChip()
@@ -71,9 +71,9 @@ public final class VBbTool
 
     private static void createOrChip()
     {
-        ImageView orToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/or_tool.png"));
+        ImageView orToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/or_h.png"));
         IntegratedCircuit orIC = new IntegratedCircuit(OrGate.getInstance());
-        orChip = createTool("or", orIC, orToolImage, -3, -3.5, Cursor.NONE);
+        orChip = createTool("or", orIC, orToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool OrChip()
@@ -83,9 +83,9 @@ public final class VBbTool
 
     private static void createNotChip()
     {
-        ImageView notToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/not_tool.png"));
+        ImageView notToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/not_h.png"));
         IntegratedCircuit notIC = new IntegratedCircuit(NotGate.getInstance());
-        notChip = createTool("or", notIC, notToolImage, -3, -3.5, Cursor.NONE);
+        notChip = createTool("or", notIC, notToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool NotChip()
@@ -95,9 +95,9 @@ public final class VBbTool
 
     private static void createNandChip()
     {
-        ImageView nandToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nand_tool.png"));
+        ImageView nandToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nand_h.png"));
         IntegratedCircuit nandIC = new IntegratedCircuit(NandGate.getInstance());
-        nandChip = createTool("or", nandIC, nandToolImage, -3, -3.5, Cursor.NONE);
+        nandChip = createTool("or", nandIC, nandToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool NandChip()
@@ -107,9 +107,9 @@ public final class VBbTool
 
     private static void createNorChip()
     {
-        ImageView norToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nor_tool.png"));
+        ImageView norToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/nor_h.png"));
         IntegratedCircuit norIC = new IntegratedCircuit(NorGate.getInstance());
-        norChip = createTool("or", norIC, norToolImage, -3, -3.5, Cursor.NONE);
+        norChip = createTool("or", norIC, norToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool NorChip()
@@ -119,9 +119,9 @@ public final class VBbTool
 
     private static void createXorChip()
     {
-        ImageView xorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xor_tool.png"));
+        ImageView xorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xor_h.png"));
         IntegratedCircuit xorIC = new IntegratedCircuit(XorGate.getInstance());
-        xorChip = createTool("or", xorIC, xorToolImage, -3, -3.5, Cursor.NONE);
+        xorChip = createTool("or", xorIC, xorToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool XorChip()
@@ -131,9 +131,9 @@ public final class VBbTool
 
     private static void createXnorChip()
     {
-        ImageView xnorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xor_tool.png"));
+        ImageView xnorToolImage = new ImageView(new Image("/vbb/views/images/tools/chips/xnor_h.png"));
         IntegratedCircuit xnorIC = new IntegratedCircuit(XnorGate.getInstance());
-        xnorChip = createTool("or", xnorIC, xnorToolImage, -3, -3.5, Cursor.NONE);
+        xnorChip = createTool("or", xnorIC, xnorToolImage, -6, -1, Cursor.NONE);
     }
 
     public static Tool XnorChip()

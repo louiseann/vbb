@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
@@ -36,18 +37,18 @@ public class DigitalTrainerController
     private Pane digitalTrainerArea;
 
     @FXML
-    private HBox board;
+    private VBox board;
 
     @FXML
     private BreadboardControl breadboard;
     @FXML
     private PowerSupplyAreaController powerSupplyAreaController;
     @FXML
-    private HBox powerSupplyArea;
+    private VBox powerSupplyArea;
     @FXML
     private DataSwitchesAreaController dataSwitchesAreaController;
     @FXML
-    private HBox dataSwitchesArea;
+    private VBox dataSwitchesArea;
     @FXML
     private LedDisplayAreaController ledDisplayAreaController;
     @FXML
@@ -63,6 +64,9 @@ public class DigitalTrainerController
 
     private Map<Integer, Boolean> chip_zIndex;
     private int wire_zIndex;
+
+    private final double xPosition = 76;
+    private final double yPosition = 42;
 
     @FXML
     public void initialize()
@@ -80,16 +84,24 @@ public class DigitalTrainerController
 
         initializeChipZIndex();
         wire_zIndex = 10;
+
+        digitalTrainerArea.setTranslateX(76);
+        digitalTrainerArea.setTranslateY(42);
+    }
+
+    public double getxPosition()
+    {
+        return xPosition;
+    }
+
+    public double getyPosition()
+    {
+        return yPosition;
     }
 
     public DigitalTrainer getSoul()
     {
         return soul;
-    }
-
-    public HBox getBoard()
-    {
-        return board;
     }
 
     public BreadboardControl getBreadBoard()

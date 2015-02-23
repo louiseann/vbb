@@ -2,34 +2,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
-<HBox xmlns:fx="http://javafx.com/javafx"
+<VBox xmlns:fx="http://javafx.com/javafx"
       fx:controller="vbb.controllers.digital_trainer.DataSwitchesAreaController"
-      spacing="19"
+      spacing="8"
       styleClass="area" stylesheets="/vbb/views/css/digital_trainer_style.css">
 
     <padding>
-        <Insets top="10" right="14" bottom="10" left="45"/>
+        <Insets top="14" right="14" bottom="45" left="14"/>
     </padding>
 
-    <VBox fx:id="socketsWrapper" spacing="24">
+    <HBox fx:id="dataSwitchesWrapper" spacing="24" styleClass="switch_box">
         <padding>
-            <Insets top="10" bottom="10"/>
-        </padding>
-        <!-- added dynamically
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        <SocketControl/>
-        -->
-    </VBox>
-
-    <VBox fx:id="dataSwitchesWrapper" spacing="24" styleClass="switch_box">
-        <padding>
-            <Insets top="10" right="15" bottom="10" left="15"/>
+            <Insets top="15" right="10" bottom="15" left="10"/>
         </padding>
         <!-- added dynamically
         <DataSwitchControl/>
@@ -41,6 +25,22 @@
         <DataSwitchControl/>
         <DataSwitchControl/>
         -->
-    </VBox>
+    </HBox>
 
-</HBox>
+    <HBox fx:id="socketsWrapper" spacing="30">
+        <padding>
+            <Insets top="10" right="6" bottom="0" left="13"/>
+        </padding>
+        <!-- added dynamically
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        <SocketControl/>
+        -->
+    </HBox>
+
+</VBox>

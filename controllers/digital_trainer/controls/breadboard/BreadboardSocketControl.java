@@ -19,7 +19,7 @@ public class BreadboardSocketControl extends Pane
     private BreadboardSocket soul;
 
     private int row, col;
-    private boolean inLeft, inRight;
+    private boolean topGroupElement, inRight;
 
     public BreadboardSocketControl()
     {
@@ -84,20 +84,20 @@ public class BreadboardSocketControl extends Pane
         this.col = col;
     }
 
-    public void setInLeft(boolean inLeft)
+    public void setTopGroupElement(boolean topGroupElement)
     {
-        this.inLeft = inLeft;
-        this.inRight = !inLeft;
+        this.topGroupElement = topGroupElement;
+        this.inRight = !topGroupElement;
     }
 
-    public boolean isInLeft()
+    public boolean isTopGroupElement()
     {
-        return inLeft;
+        return topGroupElement;
     }
 
     public void setInRight(boolean inRight)
     {
         this.inRight = inRight;
-        this.inLeft = !inRight;
+        this.topGroupElement = !inRight;
     }
 }
