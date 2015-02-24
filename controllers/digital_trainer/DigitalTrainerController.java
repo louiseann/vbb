@@ -59,6 +59,8 @@ public class DigitalTrainerController
     private EventHandler<MouseEvent> enteredOnPluggedToolHandler;
     private EventHandler<MouseEvent> exitedOnPluggedToolHandler;
 
+    private EventHandler<MouseEvent> movedOnWireHandler;
+
     private EventHandler<MouseEvent> clickedOnWireHandler;
     private EventHandler<MouseEvent> clickedOnChipHandler;
 
@@ -85,16 +87,16 @@ public class DigitalTrainerController
         initializeChipZIndex();
         wire_zIndex = 10;
 
-        digitalTrainerArea.setTranslateX(76);
-        digitalTrainerArea.setTranslateY(42);
+        digitalTrainerArea.setTranslateX(xPosition);
+        digitalTrainerArea.setTranslateY(yPosition);
     }
 
-    public double getxPosition()
+    public double getXPosition()
     {
         return xPosition;
     }
 
-    public double getyPosition()
+    public double getYPosition()
     {
         return yPosition;
     }
@@ -155,6 +157,11 @@ public class DigitalTrainerController
         exitedOnPluggedToolHandler = handler;
     }
 
+    public void setMovedOnWireHandler(EventHandler<MouseEvent> handler)
+    {
+        movedOnWireHandler = handler;
+    }
+
     public void setClickedOnWireHandler(EventHandler<MouseEvent> handler)
     {
         clickedOnWireHandler = handler;
@@ -177,6 +184,7 @@ public class DigitalTrainerController
     public void plugWire(Node wire)
     {
         addOnHoverHandlers(wire);
+        wire.addEventHandler(MouseEvent.MOUSE_MOVED, movedOnWireHandler);
         wire.addEventHandler(MouseEvent.MOUSE_CLICKED, clickedOnWireHandler);
         digitalTrainerArea.getChildren().add(wire_zIndex++, wire);
     }

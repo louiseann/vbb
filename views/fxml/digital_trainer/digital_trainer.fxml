@@ -10,6 +10,9 @@
 <Pane xmlns:fx="http://javafx.com/javafx"
       fx:controller="vbb.controllers.digital_trainer.DigitalTrainerController"
       fx:id="digitalTrainerArea">
+    <padding>
+        <Insets left="76" right="76"/>
+    </padding>
     <VBox fx:id="board"
           id="digital_trainer_board"
           stylesheets="/vbb/views/css/digital_trainer_style.css">

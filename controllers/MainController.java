@@ -2,6 +2,7 @@ package vbb.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -11,11 +12,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import truth_table_generator.CalcInterfaceController;
+import truth_table_generator.toggle.ToggleAreaController;
 import vbb.controllers.digital_trainer.DigitalTrainerController;
 import vbb.controllers.digital_trainer.controls.SocketControl;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
@@ -52,6 +53,16 @@ public class MainController
     @FXML
     private Pane digitalTrainer;
 
+    @FXML
+    private ToggleAreaController generatorToggleAreaController;
+    @FXML
+    private BorderPane generatorToggleArea;
+
+    @FXML
+    CalcInterfaceController generatorPaneController;
+    @FXML
+    private VBox generatorPane;
+
     private Pane toolCursor;
 
     private WireControl wireControl;
@@ -64,6 +75,15 @@ public class MainController
         setUpToolCursorImage();
 
         setDigitalTrainerEventHandlers();
+
+        generatorPaneController.toggleVisibility();
+
+        generatorToggleAreaController.setGeneratorToggleActionHandler(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                generatorPaneController.toggleVisibility();
+            }
+        });
 
         centerPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -95,8 +115,8 @@ public class MainController
                 {
                     if (WireControl.isStartSet())
                     {
-                        wireControl.setEndX(event.getX()-digitalTrainerController.getxPosition());
-                        wireControl.setEndY(event.getY()-digitalTrainerController.getyPosition());
+                        wireControl.setEndX(event.getX()-digitalTrainerController.getXPosition());
+                        wireControl.setEndY(event.getY()-digitalTrainerController.getYPosition());
                     }
                 }
             }
@@ -246,12 +266,21 @@ public class MainController
             @Override
             public void handle(MouseEvent event) {
                 Tool currentTool = toolsAreaController.getCurrentTool();
-                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
-                {
+                if (currentTool.getClassName().equals(Select.class.getSimpleName())) {
                     Node source = (Node) event.getSource();
                     source.setEffect(null);
                     toolCursor.getChildren().remove(hoverMessage);
                     hoverMessage = null;
+                }
+            }
+        });
+        digitalTrainerController.setMovedOnWireHandler(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()))
+                {
+                    System.out.println("on wire " + event.getX() + " " + event.getY());
                 }
             }
         });
@@ -491,6 +520,12 @@ public class MainController
         digitalTrainerController.plugChip(control);
     }
 
+    private void showConnectedSockets(BreadboardSocketControl socketControl)
+    {
+        BreadboardSocket socket = socketControl.getSoul();
+
+    }
+
     public void onEnteredOnSocket(Socket socket, Shape socketShape)
     {
         if (!socket.isOccupied())
@@ -507,8 +542,9 @@ public class MainController
     {
         double toolsAreaWidth = toolsArea.getWidth();
 
-        double x = (nodeBounds.getMinX() + nodeBounds.getMaxX()) / 2 - toolsAreaWidth - digitalTrainerController.getxPosition();
-        double y = (nodeBounds.getMinY()+nodeBounds.getMaxY()) / 2 - digitalTrainerController.getyPosition();
+
+        double x = (nodeBounds.getMinX() + nodeBounds.getMaxX()) / 2 - toolsAreaWidth - digitalTrainerController.getXPosition();
+        double y = (nodeBounds.getMinY()+nodeBounds.getMaxY()) / 2 - digitalTrainerController.getYPosition() - generatorToggleArea.getHeight();
 
         return new Point2D(x, y);
     }

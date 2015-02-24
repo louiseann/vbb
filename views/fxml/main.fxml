@@ -2,16 +2,21 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/javafx"
+<HBox xmlns:fx="http://javafx.com/javafx"
             fx:controller="vbb.controllers.MainController"
             id="main" stylesheets="/vbb/views/css/main.css">
-    <left>
-        <fx:include fx:id="toolsArea" source="tools/tools.fxml"/>
-    </left>
-    <center>
-        <StackPane fx:id="centerPane">
-            <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer.fxml"/>
-        </StackPane>
-    </center>
-</BorderPane>
+    <fx:include fx:id="toolsArea" source="tools/tools.fxml"/>
+    <BorderPane>
+        <top>
+            <fx:include fx:id="generatorToggleArea" source="/truth_table_generator/toggle/toggle_area.fxml"/>
+        </top>
+        <left>
+            <StackPane fx:id="centerPane" alignment="TOP_RIGHT">
+                <fx:include fx:id="digitalTrainer" source="digital_trainer/digital_trainer.fxml"/>
+                <fx:include fx:id="generatorPane" source="/truth_table_generator/calc_interface.fxml"/>
+            </StackPane>
+        </left>
+    </BorderPane>
+</HBox>
