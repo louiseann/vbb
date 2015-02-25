@@ -1,5 +1,6 @@
 package vbb.models.tools.connectors;
 
+import vbb.models.Control;
 import vbb.models.connection.connector.Connector;
 import vbb.models.connection.connector.OneWayConnector;
 import vbb.models.digital_trainer.Socket;
@@ -10,6 +11,29 @@ import vbb.models.digital_trainer.breadboard.BreadboardSocket;
  */
 public abstract class Wire extends Connector
 {
+    private Control atStartPoint;
+    private Control atEndPoint;
+
+    public Control getAtStartPoint()
+    {
+        return atStartPoint;
+    }
+
+    public void setAtStartPoint(Control control)
+    {
+        atStartPoint = control;
+    }
+
+    public Control getAtEndPoint()
+    {
+        return atEndPoint;
+    }
+
+    public void setAtEndPoint(Control control)
+    {
+        atEndPoint = control;
+    }
+
     public static Wire finalize(Wire wire)
     {
         Socket point1Control = (Socket) wire.getEndPoint1().getControlConnected();

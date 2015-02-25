@@ -1,6 +1,7 @@
 package vbb.controllers.tools.controls;
 
 import javafx.scene.shape.Line;
+import vbb.controllers.digital_trainer.controls.SocketControl;
 import vbb.models.tools.connectors.Wire;
 
 /**
@@ -9,6 +10,7 @@ import vbb.models.tools.connectors.Wire;
 public class WireControl extends Line
 {
     private static boolean startSet = false;
+    private static boolean endSet = false;
 
     private Wire wire;
 
@@ -25,6 +27,16 @@ public class WireControl extends Line
     public static void startSet(boolean started)
     {
         startSet = started;
+    }
+
+    public static boolean isEndSet()
+    {
+        return endSet;
+    }
+
+    public static void endSet(boolean ended)
+    {
+        endSet = ended;
     }
 
     public Wire getWire()

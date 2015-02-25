@@ -21,9 +21,12 @@ public class BreadboardSocketControl extends Pane
     private int row, col;
     private boolean topGroupElement;
 
+    public final double side;
+
     public BreadboardSocketControl()
     {
         loadFXML();
+        side = holeBox.getWidth();
     }
 
     public BreadboardSocketControl(BreadboardSocket soul, int row, int col)
@@ -34,11 +37,13 @@ public class BreadboardSocketControl extends Pane
         setCol(col);
 
         loadFXML();
+        side = holeBox.getWidth();
     }
 
     private void loadFXML()
     {
-        FXMLLoader breadboardHoleLoader = new FXMLLoader(getClass().getResource("/vbb/views/fxml/digital_trainer/custom_control/breadboard_socket.fxml"));
+        String fxmlSourceUrl = "/vbb/views/fxml/digital_trainer/custom_control/breadboard_socket.fxml";
+        FXMLLoader breadboardHoleLoader = new FXMLLoader(getClass().getResource(fxmlSourceUrl));
         breadboardHoleLoader.setRoot(this);
         breadboardHoleLoader.setController(this);
 

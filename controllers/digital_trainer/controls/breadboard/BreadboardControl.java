@@ -43,6 +43,8 @@ public class BreadboardControl extends VBox
 
     private static BooleanProperty eventHandlersSet = new SimpleBooleanProperty(false);
 
+    private double socketSide = 0;
+
     public BreadboardControl()
     {
         String fxmlSourceUrl = "/vbb/views/fxml/digital_trainer/custom_control/breadboard.fxml";
@@ -70,6 +72,11 @@ public class BreadboardControl extends VBox
                     createSocketHoles();
             }
         });
+    }
+
+    public double socketSide()
+    {
+        return socketSide;
     }
 
     public Breadboard getSoul()
@@ -190,6 +197,10 @@ public class BreadboardControl extends VBox
         socketControl.addEventHandler(MouseEvent.MOUSE_EXITED, socketsMouseExitedHandler);
 
         socketControl.getHoleBox().setStyle("-fx-fill: #212121;");
+
+        if (socketSide == 0)
+            socketSide = socketControl.side;
+
         return socketControl;
     }
 
