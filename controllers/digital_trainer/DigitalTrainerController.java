@@ -76,9 +76,6 @@ public class DigitalTrainerController
     private Map<Integer, Boolean> chip_zIndex;
     private int wire_zIndex;
 
-    private final double xPosition = 76;
-    private final double yPosition = 42;
-
     private WireControl processingWireControl;
 
     @FXML
@@ -98,8 +95,8 @@ public class DigitalTrainerController
         initializeChipZIndex();
         wire_zIndex = 10;
 
-        board.setTranslateX(xPosition);
-        board.setTranslateY(yPosition);
+        board.setTranslateX(76);
+        board.setTranslateY(42);
     }
 
     private void initializeChipZIndex()
@@ -112,24 +109,21 @@ public class DigitalTrainerController
         }
     }
 
-    public double getXPosition()
+    public void handleOnExitedOnArea()
     {
-        return xPosition;
-    }
+        if (processingWireControl != null)
+        {
+            if (WireControl.isStartSet() && !WireControl.isEndSet())
+                ((Socket) processingWireControl.getWire().getAtStartPoint()).setOccupied(false);
+            else if (!WireControl.isStartSet() && WireControl.isEndSet())
+                ((Socket) processingWireControl.getWire().getAtEndPoint()).setOccupied(false);
 
-    public double getYPosition()
-    {
-        return yPosition;
-    }
-
-    public DigitalTrainer getSoul()
-    {
-        return soul;
-    }
-
-    public BreadboardControl getBreadBoard()
-    {
-        return breadboard;
+            unplugTool(processingWireControl);
+            wire_zIndex--;
+            processingWireControl = null;
+            WireControl.startSet(false);
+            WireControl.endSet(false);
+        }
     }
 
     /* set event handlers for components
@@ -406,7 +400,7 @@ public class DigitalTrainerController
 
                 connectedControl = wire.getAtEndPoint();
                 wire.setAtEndPoint(socket);
-                
+
                 WireControl.startSet(false);
             }
 
@@ -536,19 +530,44 @@ public class DigitalTrainerController
     /* -end- removing plugged tools
      * */
 
+    /* tool movement handling
+     * */
+    public void handleOnSelectToolMove(double xPosition, double yPosition)
+    {
+        if (!WireControl.isStartSet() && WireControl.isEndSet() && processingWireControl != null)
+        {
+            processingWireControl.setStartX(xPosition);
+            processingWireControl.setStartY(yPosition);
+        }
+        else if (!WireControl.isEndSet() && WireControl.isStartSet() && processingWireControl != null)
+        {
+            processingWireControl.setEndX(xPosition);
+            processingWireControl.setEndY(yPosition);
+        }
+    }
+
+    public void handleOnWireToolMove(double xPosition, double yPosition)
+    {
+        if (WireControl.isStartSet() && !WireControl.isEndSet() && processingWireControl != null)
+        {
+            processingWireControl.setEndX(xPosition);
+            processingWireControl.setEndY(yPosition);
+        }
+    }
+
     public void handleMoveOnPluggedWire(WireControl wireControl, double xPosition, double yPosition)
     {
         double halfSocket = breadboard.socketSide() / 2;
 
         boolean nearStartPoint = ((wireControl.getStartX() <= xPosition && wireControl.getStartX()+halfSocket >= xPosition) ||
-                                 (wireControl.getStartX() >= xPosition && wireControl.getStartX()-halfSocket <= xPosition)) &&
-                                 ((wireControl.getStartY() <= yPosition && wireControl.getStartY()+halfSocket >= yPosition) ||
-                                 (wireControl.getStartY() >= yPosition && wireControl.getStartY()-halfSocket <= yPosition));
+                (wireControl.getStartX() >= xPosition && wireControl.getStartX()-halfSocket <= xPosition)) &&
+                ((wireControl.getStartY() <= yPosition && wireControl.getStartY()+halfSocket >= yPosition) ||
+                        (wireControl.getStartY() >= yPosition && wireControl.getStartY()-halfSocket <= yPosition));
 
         boolean nearEndPoint = ((wireControl.getEndX() <= xPosition && wireControl.getEndX()+halfSocket >= xPosition) ||
-                               (wireControl.getEndX() >= xPosition && wireControl.getEndX()-halfSocket <= xPosition)) &&
-                               ((wireControl.getEndY() <= yPosition && wireControl.getEndY()+halfSocket >= yPosition) ||
-                               (wireControl.getEndY() >= yPosition && wireControl.getEndY()-halfSocket <= yPosition));
+                (wireControl.getEndX() >= xPosition && wireControl.getEndX()-halfSocket <= xPosition)) &&
+                ((wireControl.getEndY() <= yPosition && wireControl.getEndY()+halfSocket >= yPosition) ||
+                        (wireControl.getEndY() >= yPosition && wireControl.getEndY()-halfSocket <= yPosition));
 
         if (nearStartPoint)
             createCircle(breadboard.socketSide(), true, wireControl);
@@ -617,29 +636,8 @@ public class DigitalTrainerController
         circle.setTranslateX(xPosition);
         circle.setTranslateY(yPosition);
     }
-
-    public void handleOnSelectToolMove(double xPosition, double yPosition)
-    {
-        if (!WireControl.isStartSet() && WireControl.isEndSet() && processingWireControl != null)
-        {
-            processingWireControl.setStartX(xPosition);
-            processingWireControl.setStartY(yPosition);
-        }
-        else if (!WireControl.isEndSet() && WireControl.isStartSet() && processingWireControl != null)
-        {
-            processingWireControl.setEndX(xPosition);
-            processingWireControl.setEndY(yPosition);
-        }
-    }
-
-    public void handleOnWireToolMove(double xPosition, double yPosition)
-    {
-        if (WireControl.isStartSet() && !WireControl.isEndSet())
-        {
-            processingWireControl.setEndX(xPosition);
-            processingWireControl.setEndY(yPosition);
-        }
-    }
+    /* -end- tool movement handling
+     * */
 
     /* hover on socket
      * */

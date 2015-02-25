@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -19,21 +18,16 @@ import truth_table_generator.CalcInterfaceController;
 import truth_table_generator.toggle.ToggleAreaController;
 import vbb.controllers.digital_trainer.DigitalTrainerController;
 import vbb.controllers.digital_trainer.controls.SocketControl;
-import vbb.controllers.digital_trainer.controls.breadboard.BreadboardControl;
 import vbb.controllers.digital_trainer.controls.breadboard.BreadboardSocketControl;
 import vbb.controllers.digital_trainer.controls.switch_control.DataSwitchControl;
 import vbb.controllers.digital_trainer.controls.switch_control.PowerSwitchControl;
 import vbb.controllers.tools.ToolsController;
 import vbb.controllers.tools.controls.IntegratedCircuitControl;
 import vbb.controllers.tools.controls.WireControl;
-import vbb.models.Circuit;
-import vbb.models.digital_trainer.breadboard.BreadboardSocket;
 import vbb.models.tools.Select;
 import vbb.models.tools.Tool;
-import vbb.models.tools.connectors.Pin;
 import vbb.models.tools.connectors.Wire;
 import vbb.models.tools.electronic_component.IntegratedCircuit;
-import vbb.models.tools.electronic_component.TTL74SeriesIC;
 
 public class MainController
 {
@@ -135,6 +129,11 @@ public class MainController
         digitalTrainer.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Tool currentTool = toolsAreaController.getCurrentTool();
+                if (currentTool.getClassName().equals(Select.class.getSimpleName()) ||
+                        currentTool.getSuperClassName().equals(Wire.class.getSimpleName()))
+                    digitalTrainerController.handleOnExitedOnArea();
+
                 digitalTrainer.getChildren().remove(toolCursor);
             }
         });
