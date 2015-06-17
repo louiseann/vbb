@@ -1,4 +1,3 @@
-vbb
+Virtual Breadboarding (VBb)
 ===
-
-Secret
+A Logic Gate Simulator
